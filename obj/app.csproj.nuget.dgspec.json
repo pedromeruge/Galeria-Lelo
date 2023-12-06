@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/Users/peters/Desktop/ProjetoLI4/app/app.csproj": {}
+    "/Users/peters/Desktop/LI4/app.csproj": {}
   },
   "projects": {
-    "/Users/peters/Desktop/ProjetoLI4/app/app.csproj": {
+    "/Users/peters/Desktop/LI4/app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/peters/Desktop/ProjetoLI4/app/app.csproj",
+        "projectUniqueName": "/Users/peters/Desktop/LI4/app.csproj",
         "projectName": "app",
-        "projectPath": "/Users/peters/Desktop/ProjetoLI4/app/app.csproj",
+        "projectPath": "/Users/peters/Desktop/LI4/app.csproj",
         "packagesPath": "/Users/peters/.nuget/packages/",
-        "outputPath": "/Users/peters/Desktop/ProjetoLI4/app/obj/",
+        "outputPath": "/Users/peters/Desktop/LI4/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/peters/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -35,8 +35,8 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "imports": [
             "net461",
             "net462",
@@ -56,7 +56,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
