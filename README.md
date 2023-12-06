@@ -1,2 +1,1 @@
-# LI4
-Aplicação de leilões
+# App de leilões
