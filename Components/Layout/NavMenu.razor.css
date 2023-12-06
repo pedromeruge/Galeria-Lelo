@@ -82,7 +82,14 @@
 }
 
 .nav-scrollable {
-    display: none;
+	display: contents;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row !important;
+	width: 100vw;
+	justify-content: space-between;
 }
 
 .navbar-toggler:checked ~ .nav-scrollable {
@@ -96,10 +103,10 @@
 
     .nav-scrollable {
         /* Never collapse the sidebar for wide screens */
-        display: block;
+        /* display: block; */
 
         /* Allow sidebar to scroll for tall menus */
-        height: calc(100vh - 3.5rem);
-        overflow-y: auto;
+        /* height: calc(100vh - 3.5rem); */
+        /* overflow-y: auto; */
     }
 }
