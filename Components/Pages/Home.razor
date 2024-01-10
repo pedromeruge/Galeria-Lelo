@@ -1,7 +1,49 @@
 ﻿@page "/"
+@using app.BusinessLayer.Classes
+@using System.Text.Json
+@inject HttpClient Http
+@inject NavigationManager NavigationManager;
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Home page</h1>
 
-Welcome to your new app.
+@if (cards == null) {
+    <p>Loading home page...</p>
+}
+else {
+    <div class="grid">
+        @foreach (var card in cards) {
+            <div class="card shadow" style="width: 18rem;">
+                <img src="@card.image" class="card-img-top" alt="@card.image">
+                <div class="card-body">
+                    <h5 class="card-title">@card.prod_nome</h5>
+                    <h6 class="card-subtitle mb-3 text-muted">
+                        <span class="oi oi-map-marker"></span>
+                        @card.prod_nome
+                    </h6>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private IEnumerable<AuctionCard>? cards;
+        protected override async Task OnInitializedAsync() {
+            try {
+                Http.BaseAddress = new Uri(NavigationManager.BaseUri);
+                @* string domainName = NavigationManager.Uri; *@
+                string jsonUrl = "/AuctionCards.json";
+                var response = await Http.GetFromJsonAsync<IEnumerable<AuctionCard>>(jsonUrl);
+
+                // Print the JSON response (for debugging purposes)
+                @* Console.WriteLine($"JSON Response: {JsonSerializer.Serialize(response)}"); *@
+
+                cards = response;
+            }
+            catch (HttpRequestException ex) {
+                Console.WriteLine($"There was a problem loading auction cards data: {ex.Message}");
+            }
+        }
+}

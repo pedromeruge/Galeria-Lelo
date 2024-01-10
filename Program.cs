@@ -1,10 +1,16 @@
+using Microsoft.Extensions.DependencyInjection;
 using app.Components;
+using Microsoft.AspNetCore.Components.Server;
+using Microsoft.AspNetCore.Components.Server.Circuits;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddServerSideBlazor();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
