@@ -4,10 +4,12 @@
 
 .card-component {
   width: 235px; /* Adjust width as needed */
-  height: 430px; /* Adjust height as needed */
-  margin: 10px;
+  height: 400px; /* Adjust height as needed */
+  margin: 30px;
   position: relative;
-  border: 1px solid red;
+
+  /* border: 1px solid red; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 img {
@@ -28,21 +30,19 @@ img {
 
 .info-names {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   text-align: center;
   top:280px;
-  height: 60px;
-  border: 1px solid blue;
+  height: 50px;
+  /* border: 1px solid blue; */
 }
 
 .author {
   color: #000000;
   font-family: "Lato-Bold", sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 510;
 }
 
 .name {
@@ -51,16 +51,14 @@ img {
   font-family: "Lato-Medium", sans-serif;
   font-size: 16px;
   font-weight: 400;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .info-bids{
-  top: 340px;
-  height: 50px;
+  top: 330px;
+  height: 40px;
   line-height: 15px;
   padding: 10px;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 }
 
 .left-bid-text {
@@ -96,13 +94,15 @@ img {
 .time {
   bottom: 0;
   color: #3b80ba;
-  text-align: left;
+  text-align: center;
   font-family: "Lato-Medium", sans-serif;
   font-size: 18px;
   width: 235px;
-  height: 40px;
-  border: 1px solid blue;
-  font-weight: 500;
+  top: 370px;
+  height: 30px;
+  /* border: 1px solid blue; */
+  font-weight: 450;
+  padding: 5px;
 }
 
 
