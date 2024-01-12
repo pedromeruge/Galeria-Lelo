@@ -1,4 +1,4 @@
-namespace app.BusinessLayer.Enums
+namespace app.Components.ClassBlocks.AuctionCard
 {
     public enum AuctionStatus
     {

@@ -1,4 +1,4 @@
-@using app.BusinessLayer.Classes
+@using app.Components.ClassBlocks.AuctionCard;
 
 @inherits ComponentBase
 
@@ -6,8 +6,6 @@
     [Parameter, EditorRequired]
     public AuctionCard Card { get; set; } = default!;
 }
-
-<link rel="stylesheet" href="/Components/ClassBlocks/AuctionCardComponent.razor.css" />
 
 <div class="card-component">
     <img src="@Card.Image" class="card-img-top" alt="@Card.Image">

@@ -1,8 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
-using app.BusinessLayer.Enums;
 
-namespace app.BusinessLayer.Classes;
+namespace app.Components.ClassBlocks.AuctionCard;
 
 public partial class AuctionCard
 {
