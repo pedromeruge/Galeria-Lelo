@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace app.Components.ClassBlocks.AuctionCard;
 
-public partial class AuctionCard
+public class AuctionCard
 {
     public int IdLeilao { get; }
     public DateTime DataInicio { get; }

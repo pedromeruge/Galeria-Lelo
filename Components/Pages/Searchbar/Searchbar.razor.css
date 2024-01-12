@@ -1,0 +1,74 @@
+.header {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right:10px;
+    position: sticky;
+    height: 4rem;
+    width: 100%;
+    top:0;
+    background-color: white;
+    z-index: 1;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: space-between;
+}
+
+.logo-galeria {
+    display: block;
+    object-fit: contain;
+    padding-left: 10px;
+    padding-right: 3%;
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    padding-left: 18px;
+    padding-right:20px;
+    padding-top:5px;
+    padding-bottom: 5px;
+    background: #f2f2f2;
+    width: 65%;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.lupa {
+    display: block;
+    object-fit: contain;
+    box-sizing: border-box;
+    position: relative;
+}
+
+
+.texto-searchbar {
+    padding: 10px;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 17px;
+    font-weight: 390;
+    position: relative;
+}
+
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 15px;
+    right: 0;
+    margin-right: 4%;
+    margin-left: 4%;
+    float: right;
+    background: #3b80ba;
+    width: 140px;
+    height: 80%;
+}
+
+.text{
+    color: #ffffff;
+    font-family: "Lato-SemiBold", sans-serif;
+    font-size: 16px;
+    font-weight: 390;
+}

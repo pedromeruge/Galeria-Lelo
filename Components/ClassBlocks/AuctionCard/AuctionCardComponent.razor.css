@@ -3,6 +3,7 @@
 }
 
 .card-component {
+  background-color: white;
   width: 235px;
   height: 400px;
   position: relative;

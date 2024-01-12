@@ -8,9 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    <None Update="Components/ClassBlocks/AuctionCard/AuctionCardComponent.razor.css" CopyToOutputDirectory="PreserveNewest" />
-    <None Update="Components/Pages/Header/Header.razor.css" CopyToOutputDirectory="PreserveNewest" />
-    <None Update="Components/Pages/Home/Home.razor.css" CopyToOutputDirectory="PreserveNewest" />
+    <!-- <None Update="Components/ClassBlocks/AuctionCard/AuctionCardComponent.razor.css" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Components/Pages/Searchbar/Searchbar.razor.css" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Components/Pages/Home/Home.razor.css" CopyToOutputDirectory="PreserveNewest" /> -->
   </ItemGroup>
 
 </Project>
