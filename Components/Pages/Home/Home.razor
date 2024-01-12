@@ -1,5 +1,5 @@
 ﻿@page "/"
-@using app.BusinessLayer.Classes
+
 @using System.Text.Json
 @inject HttpClient Http
 @inject NavigationManager NavigationManager;
@@ -14,20 +14,12 @@
 else {
     <div class="grid">
         @foreach (var card in cards) {
-            <div class="card shadow" style="width: 18rem;">
-                <img src="@card.image" class="card-img-top" alt="@card.image">
-                <div class="card-body">
-                    <h5 class="card-title">@card.prod_nome</h5>
-                    <h6 class="card-subtitle mb-3 text-muted">
-                        <span class="oi oi-map-marker"></span>
-                        @card.prod_nome
-                    </h6>
-                </div>
-            </div>
+            <AuctionCardComponent Card="card" />
         }
     </div>
 }
 
+@* NOTA:  IEnumberable é lista final que não pode ser modificada != List em que se pode remover e adicionar elementos*@
 @code {
     private IEnumerable<AuctionCard>? cards;
         protected override async Task OnInitializedAsync() {

@@ -11,6 +11,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
+builder.WebHost.UseStaticWebAssets();
 
 var app = builder.Build();
 
