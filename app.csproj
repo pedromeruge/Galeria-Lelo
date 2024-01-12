@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    <None Update="Components/Pages/Home/AuctionCardComponent.razor.css" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Components/ClassBlocks/AuctionCardComponent.razor.css" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
