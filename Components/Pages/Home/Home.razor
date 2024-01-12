@@ -3,18 +3,26 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager;
 
-<PageTitle>Home</PageTitle>
-
-<h1>Home page</h1>
+<PageTitle>Galeria Lelo</PageTitle>
 
 @if (cards == null) {
     <p>Loading home page...</p>
 }
 else {
-    <div class="grid">
-        @foreach (var card in cards) {
-            <AuctionCardComponent Card="card" />
-        }
+    <div class="bckg-splashart">
+        <img src="pngs/home-bckg-galeria.png" class="home-backg-image" alt="Home background"> 
+        <div class="text-container">
+            <p class="nome-galeria">GALERIA LELO</p>
+            <p class="slogan-galeria">Transforme o belo em seu, e o dinheiro em meu</p>
+        </div>
+    </div>
+    <div class="leiloes">
+        <p class="texto-leiloes">Leilões a decorrer</p>
+        <div class="grid">
+            @foreach (var card in cards) {
+                <AuctionCardComponent Card="card" />
+            }
+        </div>
     </div>
 }
 
@@ -26,12 +34,11 @@ else {
                 Http.BaseAddress = new Uri(NavigationManager.BaseUri);
                 @* string domainName = NavigationManager.Uri; *@
                 string jsonUrl = "/AuctionCards.json";
-                var response = await Http.GetFromJsonAsync<IEnumerable<AuctionCard>>(jsonUrl);
+                cards = await Http.GetFromJsonAsync<IEnumerable<AuctionCard>>(jsonUrl);
 
                 // Print the JSON response (for debugging purposes)
                 @* Console.WriteLine($"JSON Response: {JsonSerializer.Serialize(response)}"); *@
 
-                cards = response;
             }
             catch (HttpRequestException ex) {
                 Console.WriteLine($"There was a problem loading auction cards data: {ex.Message}");

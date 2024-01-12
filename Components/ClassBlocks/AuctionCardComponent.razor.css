@@ -3,11 +3,9 @@
 }
 
 .card-component {
-  width: 235px; /* Adjust width as needed */
-  height: 400px; /* Adjust height as needed */
-  margin: 30px;
+  width: 235px;
+  height: 400px;
   position: relative;
-
   /* border: 1px solid red; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -97,7 +95,6 @@ img {
   text-align: center;
   font-family: "Lato-Medium", sans-serif;
   font-size: 18px;
-  width: 235px;
   top: 370px;
   height: 30px;
   /* border: 1px solid blue; */
