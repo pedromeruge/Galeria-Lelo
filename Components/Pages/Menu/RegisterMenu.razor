@@ -1,0 +1,43 @@
+@inherits ComponentBase
+
+@* <div id="loginMenu" class="login-menu-overlay">
+    <div class="modal-content">
+        <!-- Your login form content goes here -->
+		loginar
+        <form>
+            <!-- Login form fields, labels, etc. -->
+			coisas loginarias
+        </form>
+        <button class="close-button" href="#">Close</button>
+    </div>
+</div> *@
+
+<div id="registerMenu" class="menu-overlay">
+	<div class="menu">
+		<form class="form-container">
+
+			<div class="menu-header">
+				<div class="menu-header-title">Iniciar sessão ou criar uma conta</div>
+				<div class="menu-line"></div>
+				<div class="menu-header-title">Criar conta</div>
+			</div>
+
+
+				<input class="input-container" type="email" id="email" placeholder="Endereço de e-mail"> <!-- @bind="searchQuery"> -->
+
+				<input class="input-container" type="username" id="username" placeholder="Nome de utilizador"> <!-- @bind="searchQuery"> -->
+
+				<input class="input-container" type="password" id="password" placeholder="Palavra-passe"> <!-- @bind="searchQuery"> -->
+
+				<button class="input-button" type="submit">Registar</button>
+		</form>
+	</div>
+</div>
+
+@code {
+
+  private void NavigateToDetalhesLeilao() {
+
+  }
+}
+

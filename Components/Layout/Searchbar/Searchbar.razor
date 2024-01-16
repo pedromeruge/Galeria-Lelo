@@ -14,7 +14,7 @@
   <button class="login-button" @onclick="MostrarMenuLogin" CausesValidation="False">Iniciar Sessão</button>
 	@if (mostrarMenuLogin)
 	{
-		<LoginMenu />
+		<RegisterMenu />
 	}
 </div>
 
@@ -29,6 +29,9 @@
 
   private void MostrarMenuLogin() {
 	mostrarMenuLogin = true;
-	Console.WriteLine("ola");
+  }
+
+  private void FecharMenuLogin() {
+	mostrarMenuLogin = false;
   }
 }
