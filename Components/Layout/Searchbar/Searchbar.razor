@@ -1,15 +1,25 @@
 @inject NavigationManager NavigationManager
+@using app.Components.Pages.Menu
+@rendermode InteractiveServer
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <div class="header">
   <img class="logo-galeria" src="pngs/logo-galeria-horiz.png" />
-  <form id="searchForm" class="searchbar">
+  @* <form id="searchForm" class="searchbar">
       <img class="lupa" src="pngs/searchbar-lupa.png" />
       <input type="search" id="searchInput" placeholder="Pesquisar artigos" @bind="searchQuery">
-  </form>
-  <button class="login-button" @onclick="ShowLoginPopup">Iniciar Sessão</button>
+  </form> *@
+  <button class="login-button" @onclick="MostrarMenuLogin" CausesValidation="False">Iniciar Sessão</button>
+	@if (mostrarMenuLogin)
+	{
+		<LoginMenu />
+	}
 </div>
 
 @code{
+  bool mostrarMenuLogin = false;
   private string searchQuery; // resultado da pesquisa
 
 //interpretar pesquisa
@@ -17,8 +27,8 @@
     NavigationManager.NavigateTo($"searchresults.html?search={Uri.EscapeDataString(searchQuery)}");
   }
 
-  private void ShowLoginPopup()
-  {
-    // fazer cenas somehow
+  private void MostrarMenuLogin() {
+	mostrarMenuLogin = true;
+	Console.WriteLine("ola");
   }
 }
