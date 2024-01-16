@@ -6,7 +6,7 @@
     public AuctionCard Card { get; set; } = default!;
 }
 
-<div class="card-component">
+<div class="card-component" @onclick="NavigateToDetalhesLeilao">
     <img src="@Card.Image" class="card-img-top" alt="@Card.Image">
   <div class="info-names">
     <span>
@@ -27,3 +27,9 @@
   </div>
   <div class="time">Faltam 15min 10seg</div>
 </div>
+
+@code {
+  private void NavigateToDetalhesLeilao() {
+
+  }
+}

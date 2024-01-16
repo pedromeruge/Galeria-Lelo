@@ -18,6 +18,9 @@
     object-fit: contain;
     padding-left: 10px;
     padding-right: 3%;
+    height: 40px;
+    width: auto;
+    
 }
 
 .searchbar {
@@ -38,8 +41,16 @@
     object-fit: contain;
     box-sizing: border-box;
     position: relative;
+    height: 28px;
+    width: auto;
 }
 
+#searchInput {
+    background: #f2f2f2;
+    border: none;
+    outline: none;
+    width: 100%;
+}
 
 .texto-searchbar {
     padding: 10px;
@@ -50,25 +61,33 @@
     position: relative;
 }
 
-
-.login-container {
+.login-button {
     display: flex;
     justify-content: center;
     text-align: center;
     align-items: center;
-    padding: 15px;
+    padding: 5px;
     right: 0;
-    margin-right: 4%;
+    margin-right: 3%;
     margin-left: 4%;
     float: right;
+    width: 130px;
+    height: 75%;
     background: #3b80ba;
-    width: 140px;
-    height: 80%;
-}
-
-.text{
-    color: #ffffff;
+    color: #ffffff; /* cor do texto*/
     font-family: "Lato-SemiBold", sans-serif;
     font-size: 16px;
     font-weight: 390;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+/* active é uma pseudo class !!*/
+.login-button:active {
+    background: #5d94c3;
+}
+
+.login-button:hover{
+    opacity: 92%;
 }

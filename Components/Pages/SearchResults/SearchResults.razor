@@ -1,0 +1,19 @@
+
+@page "/SearchResults"
+
+
+@code {
+    [Parameter]
+    public string Search { get; set; } // string da pesquisa 
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        // Use the 'Title' property in your logic
+        // For example, you can use 'Title' to perform a search or display information
+    }
+}
+
+<h3>Results Page</h3>
+<p>Search Query: @Search</p>
