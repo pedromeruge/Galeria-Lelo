@@ -1,0 +1,45 @@
+@inherits ComponentBase
+@rendermode InteractiveServer
+
+
+@* TODO O CSS DISTO ESTA EXTREMAMENTE CURSED
+tentei organizar mais ou menos, deve dar para aproveitar nos outros menus mas ta
+completamnte incompreensivel ilegivel
+o botao de fechar nem sequer ta centrado *@
+@if (isVisible) {
+	<div class="menu-overlay">
+		<div class="menu">
+			<div class="menu-header">
+				<div class="menu-title">
+					<div class="menu-header-title">Iniciar sessão ou criar uma conta</div>
+					<button class="close-button" @onclick="CloseMenu">X</button>
+				</div>
+				<div class="menu-line"></div>
+				<div class="menu-header-title">Que bom tê-lo de volta!</div>
+			</div>
+
+			<form class="inputs">
+				<input class="input-container" type="email" id="email" placeholder="Endereço de e-mail">
+
+				<input class="input-container" type="password" id="password" placeholder="Palavra-passe">
+
+				<button class="input-button" type="submit">Iniciar sessão</button>
+
+				<button class="register-button" type="submit">Registar conta</button>
+			</form>
+		</div>
+	</div>
+}
+
+@code {
+	[Parameter]
+	public bool isVisible { get; set; }
+	[Parameter]
+    public Action CloseCallback { get; set; }
+
+	public void CloseMenu() {
+		isVisible = false;
+		CloseCallback?.Invoke();
+	}
+}
+
