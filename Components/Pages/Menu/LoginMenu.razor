@@ -6,6 +6,9 @@
 tentei organizar mais ou menos, deve dar para aproveitar nos outros menus mas ta
 completamnte incompreensivel ilegivel
 o botao de fechar nem sequer ta centrado *@
+@if (mostrarRegistar) {
+	<RegisterMenu isVisible=true CloseCallback="FecharMenuRegistarCallback"/>
+}
 @if (isVisible) {
 	<div class="menu-overlay">
 		<div class="menu">
@@ -25,7 +28,7 @@ o botao de fechar nem sequer ta centrado *@
 
 				<button class="input-button" type="submit">Iniciar sessão</button>
 
-				<button class="register-button" type="submit">Registar conta</button>
+				<button class="register-button" type="button" @onclick="ShowMenuRegistar">Registar conta</button>
 			</form>
 		</div>
 	</div>
@@ -34,11 +37,23 @@ o botao de fechar nem sequer ta centrado *@
 @code {
 	[Parameter]
 	public bool isVisible { get; set; }
+	public bool mostrarRegistar = false;
+
 	[Parameter]
     public Action CloseCallback { get; set; }
 
 	public void CloseMenu() {
 		isVisible = false;
+		CloseCallback?.Invoke();
+	}
+
+	public void ShowMenuRegistar() {
+		isVisible = false;
+		mostrarRegistar = true;
+	}
+
+	public void FecharMenuRegistarCallback() {
+		mostrarRegistar = false;
 		CloseCallback?.Invoke();
 	}
 }
