@@ -1,13 +1,14 @@
 @inherits ComponentBase
 @rendermode InteractiveServer
+@using app.Components.Pages.Menu
 
 
 @* TODO O CSS DISTO ESTA EXTREMAMENTE CURSED
 tentei organizar mais ou menos, deve dar para aproveitar nos outros menus mas ta
-completamnte incompreensivel ilegivel
+completamente incompreensivel ilegivel
 o botao de fechar nem sequer ta centrado *@
 @if (mostrarRegistar) {
-	<RegisterMenu isVisible=true CloseCallback="FecharMenuRegistarCallback"/>
+	<RegisterMenuBig isVisible=true CloseCallback="FecharMenuRegistarCallback"/>
 }
 @if (isVisible) {
 	<div class="menu-overlay">
@@ -36,11 +37,11 @@ o botao de fechar nem sequer ta centrado *@
 
 @code {
 	[Parameter]
-	public bool isVisible { get; set; }
+	public bool isVisible { get; set; } = true;
 	public bool mostrarRegistar = false;
 
 	[Parameter]
-    public Action CloseCallback { get; set; }
+    public Action CloseCallback { get; set; } = null;
 
 	public void CloseMenu() {
 		isVisible = false;

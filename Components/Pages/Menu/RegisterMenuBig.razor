@@ -1,0 +1,63 @@
+@inherits ComponentBase
+@rendermode InteractiveServer
+
+
+
+@* TODO O CSS DISTO ESTA EXTREMAMENTE CURSED
+tentei organizar mais ou menos, deve dar para aproveitar nos outros menus mas ta
+completamnte incompreensivel ilegivel
+o botao de fechar nem sequer ta centrado *@
+@if (isVisible) {
+	<div class="menu-overlay">
+		<div class="menu">
+			<div class="menu-header">
+				<div class="menu-title">
+					<div class="menu-header-title">Iniciar sessão ou criar uma conta</div>
+					<button class="close-button" @onclick="CloseMenu">X</button>
+				</div>
+				<div class="menu-line"></div>
+				<div class="menu-header-title-light">Estás quase a acabar de criar a tua conta!</div>
+				<div class="menu-header-title">Diz-nos a tua morada de entrega</div>
+			</div>
+
+			<form class="inputs">
+				<input class="input-container" type="text" id="rua_entrega" placeholder="Rua">
+
+				@* para ficarem lado a lado tive de fazer esta div *@
+				<div class="two-inputs">
+					<input class="input-container-small" type="text" id="cod_entrega" placeholder="Código Postal">
+
+					<input class="input-container-big" type="text" id="cidade_entrega" placeholder="Cidade">
+				</div>
+
+				<div class="menu-header">
+					<div class="menu-header-title">Diz-nos a tua morada fiscal</div>
+				</div>
+
+				<input class="input-container" type="text" id="rua_fiscal" placeholder="Rua">
+
+				@* para ficarem lado a lado tive de fazer esta div *@
+				<div class="two-inputs">
+					<input class="input-container-small" type="text" id="cod_fiscal" placeholder="Código Postal">
+
+					<input class="input-container-big" type="text" id="cidade_fiscal" placeholder="Cidade">
+				</div>
+
+				<button class="input-button" type="submit">Registar</button>
+			</form>
+		</div>
+	</div>
+}
+
+@code {
+	[Parameter]
+	public bool isVisible { get; set; }
+	[Parameter]
+    public Action CloseCallback { get; set; }
+
+	public void CloseMenu() {
+		isVisible = false;
+		CloseCallback?.Invoke();
+	}
+}
+
