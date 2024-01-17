@@ -12,9 +12,10 @@
       <input type="search" id="searchInput" placeholder="Pesquisar artigos" @bind="searchQuery">
   </form> *@
   <button class="login-button" @onclick="MostrarMenuLogin" CausesValidation="False">Iniciar Sessão</button>
+  @* devia haver uma maneira de esta classe so ser criada 1 vez mas isso ultrapassa-me, nao consegui descobrir, entao fiz este if manhoso tanto aqui como no menu *@
 	@if (mostrarMenuLogin)
 	{
-		<RegisterMenu />
+		<RegisterMenu isVisible=true CloseCallback="FecharMenuLogin"/>
 	}
 </div>
 
@@ -23,15 +24,15 @@
   private string searchQuery; // resultado da pesquisa
 
 //interpretar pesquisa
-  private void Search() {
-    NavigationManager.NavigateTo($"searchresults.html?search={Uri.EscapeDataString(searchQuery)}");
-  }
+	private void Search() {
+		NavigationManager.NavigateTo($"searchresults.html?search={Uri.EscapeDataString(searchQuery)}");
+	}
 
-  private void MostrarMenuLogin() {
-	mostrarMenuLogin = true;
-  }
+	private void MostrarMenuLogin() {
+		mostrarMenuLogin = true;
+	}
 
-  private void FecharMenuLogin() {
-	mostrarMenuLogin = false;
-  }
+	private void FecharMenuLogin() {
+		mostrarMenuLogin = false;
+	}
 }

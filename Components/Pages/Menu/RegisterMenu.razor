@@ -1,41 +1,46 @@
 @inherits ComponentBase
+@rendermode InteractiveServer
 
-@* <div id="loginMenu" class="login-menu-overlay">
-    <div class="modal-content">
-        <!-- Your login form content goes here -->
-		loginar
-        <form>
-            <!-- Login form fields, labels, etc. -->
-			coisas loginarias
-        </form>
-        <button class="close-button" href="#">Close</button>
-    </div>
-</div> *@
 
-<div class="menu-overlay">
-	<div class="menu">
-		<div class="menu-header">
-			<div class="menu-header-title">Iniciar sessão ou criar uma conta</div>
-			<div class="menu-line"></div>
-			<div class="menu-header-title">Criar conta</div>
+
+@* TODO O CSS DISTO ESTA EXTREMAMENTE CURSED
+tentei organizar mais ou menos, deve dar para aproveitar nos outros menus mas ta
+completamnte incompreensivel ilegivel
+o botao de fechar nem sequer ta centrado *@
+@if (isVisible) {
+	<div class="menu-overlay">
+		<div class="menu">
+			<div class="menu-header">
+				<div class="menu-title">
+					<div class="menu-header-title">Iniciar sessão ou criar uma conta</div>
+					<button class="close-button" @onclick="CloseMenu">X</button>
+				</div>
+				<div class="menu-line"></div>
+				<div class="menu-header-title">Criar conta</div>
+			</div>
+
+			<form class="inputs">
+				<input class="input-container" type="email" id="email" placeholder="Endereço de e-mail">
+
+				<input class="input-container" type="username" id="username" placeholder="Nome de utilizador">
+
+				<input class="input-container" type="password" id="password" placeholder="Palavra-passe">
+
+				<button class="input-button" type="submit">Registar</button>
+			</form>
 		</div>
-
-		<form class="inputs">
-			<input class="input-container" type="email" id="email" placeholder="Endereço de e-mail"> <!-- @bind="searchQuery"> -->
-
-			<input class="input-container" type="username" id="username" placeholder="Nome de utilizador"> <!-- @bind="searchQuery"> -->
-
-			<input class="input-container" type="password" id="password" placeholder="Palavra-passe"> <!-- @bind="searchQuery"> -->
-
-			<button class="input-button" type="submit">Registar</button>
-		</form>
 	</div>
-</div>
+}
 
 @code {
+	[Parameter]
+	public bool isVisible { get; set; }
+	[Parameter]
+    public Action CloseCallback { get; set; }
 
-  private void NavigateToDetalhesLeilao() {
-
-  }
+	public void CloseMenu() {
+		isVisible = false;
+		CloseCallback?.Invoke();
+	}
 }
 
