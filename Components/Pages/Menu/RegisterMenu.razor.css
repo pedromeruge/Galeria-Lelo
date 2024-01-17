@@ -10,28 +10,22 @@
     justify-content: center;
 }
 
-.register-menu {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
 .menu {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  background: white;
-  border-radius: 40px;
-  width: 30vw;
-  height: 27vw;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: "Lato-SemiBold", sans-serif;
-  font-size: 30px;
-  font-weight: 400;
+	flex-direction: column;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	background: white;
+	border-radius: 40px;
+	width: 30vw;
+	height: 27vw;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: "Lato-SemiBold", sans-serif;
+	font-size: 30px;
+	font-weight: 400;
 }
 
 .menu-header {
@@ -43,6 +37,8 @@
 	color: #000000;
 	text-align: left;
 	padding-left: 10%;
+	padding-top: 2%;
+	padding-bottom: 2%;
 }
 
 .menu-line {
@@ -65,11 +61,7 @@
 	background: #dde2e6;
 	text-align: left;
 	width: 80%;
-	margin-bottom: 10px;
-}
-
-.form-container {
-	display: inline-block;
+	margin-bottom: 4%;
 }
 
 .input-button {
@@ -80,6 +72,11 @@
 	outline: none;
 	text-align: left;
 	width: 80%;
-	height: 10%;
-	/* margin-bottom: 10px; */
+	height: 15%;
+	margin-top: 4%;
+}
+
+.inputs {
+	padding-top: 5%;
+	flex: 1;
 }

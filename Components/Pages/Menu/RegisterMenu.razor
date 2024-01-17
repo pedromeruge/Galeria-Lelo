@@ -12,24 +12,22 @@
     </div>
 </div> *@
 
-<div id="registerMenu" class="menu-overlay">
+<div class="menu-overlay">
 	<div class="menu">
-		<form class="form-container">
+		<div class="menu-header">
+			<div class="menu-header-title">Iniciar sessão ou criar uma conta</div>
+			<div class="menu-line"></div>
+			<div class="menu-header-title">Criar conta</div>
+		</div>
 
-			<div class="menu-header">
-				<div class="menu-header-title">Iniciar sessão ou criar uma conta</div>
-				<div class="menu-line"></div>
-				<div class="menu-header-title">Criar conta</div>
-			</div>
+		<form class="inputs">
+			<input class="input-container" type="email" id="email" placeholder="Endereço de e-mail"> <!-- @bind="searchQuery"> -->
 
+			<input class="input-container" type="username" id="username" placeholder="Nome de utilizador"> <!-- @bind="searchQuery"> -->
 
-				<input class="input-container" type="email" id="email" placeholder="Endereço de e-mail"> <!-- @bind="searchQuery"> -->
+			<input class="input-container" type="password" id="password" placeholder="Palavra-passe"> <!-- @bind="searchQuery"> -->
 
-				<input class="input-container" type="username" id="username" placeholder="Nome de utilizador"> <!-- @bind="searchQuery"> -->
-
-				<input class="input-container" type="password" id="password" placeholder="Palavra-passe"> <!-- @bind="searchQuery"> -->
-
-				<button class="input-button" type="submit">Registar</button>
+			<button class="input-button" type="submit">Registar</button>
 		</form>
 	</div>
 </div>
