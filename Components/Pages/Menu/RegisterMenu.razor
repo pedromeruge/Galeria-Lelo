@@ -1,10 +1,10 @@
 @inherits ComponentBase
 @rendermode InteractiveServer
-
+@using app.Components.ClassBlocks.User
 
 
 @if (showMenuBig) {
-		<RegisterMenuBig isVisible=true CloseCallback="CloseMenu" email=@email username=@username password=@password/>
+		<RegisterMenuBig isVisible=true CloseCallback="CloseMenu" user=@user/>
 }
 @if (isVisible) {
 	<div class="menu-overlay">
@@ -19,11 +19,11 @@
 			</div>
 
 			<form class="inputs" @onsubmit="HandleSubmit">
-				<input class="input-container" type="email" id="email" @bind="email" placeholder="Endereço de e-mail" required>
+				<input class="input-container" type="email" id="email" @bind="user.email" placeholder="Endereço de e-mail" required>
 
-				<input class="input-container" type="username" id="username" @bind="username" placeholder="Nome de utilizador" required>
+				<input class="input-container" type="username" id="username" @bind="user.username" placeholder="Nome de utilizador" required>
 
-				<input class="input-container" type="password" id="password" @bind="password" placeholder="Palavra-passe" required>
+				<input class="input-container" type="password" id="password" @bind="user.password" placeholder="Palavra-passe" required>
 
 				<button class="input-button" type="submit">Registar</button>
 			</form>
@@ -32,9 +32,8 @@
 }
 
 @code {
-	private string email = "";
-	private string username = "";
-	private string password = "";
+	[Parameter]
+	public User user { get; set; } = null;
 
 	[Parameter]
 	public bool isVisible { get; set; }

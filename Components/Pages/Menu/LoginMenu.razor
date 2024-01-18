@@ -1,6 +1,7 @@
 @inherits ComponentBase
 @rendermode InteractiveServer
 @using app.Components.Pages.Menu
+@using app.Components.ClassBlocks.User
 
 
 @* TODO O CSS DISTO ESTA EXTREMAMENTE CURSED
@@ -8,7 +9,7 @@ tentei organizar mais ou menos, deve dar para aproveitar nos outros menus mas ta
 completamente incompreensivel ilegivel
 o botao de fechar nem sequer ta centrado *@
 @if (mostrarRegistar) {
-	<RegisterMenu isVisible=true CloseCallback="FecharMenuRegistarCallback"/>
+	<RegisterMenu isVisible=true CloseCallback="FecharMenuRegistarCallback" user=@user/>
 }
 @if (isVisible) {
 	<div class="menu-overlay">
@@ -23,9 +24,9 @@ o botao de fechar nem sequer ta centrado *@
 			</div>
 
 			<form class="inputs" @onsubmit="HandleSubmit">
-				<input class="input-container" type="email" id="email" @bind="email" placeholder="Endereço de e-mail" required>
+				<input class="input-container" type="email" id="email" @bind="user.email" placeholder="Endereço de e-mail" required>
 
-				<input class="input-container" type="password" id="password" @bind="password" placeholder="Palavra-passe" required>
+				<input class="input-container" type="password" id="password" @bind="user.password" placeholder="Palavra-passe" required>
 
 				<button class="input-button" type="submit">Iniciar sessão</button>
 
@@ -37,9 +38,7 @@ o botao de fechar nem sequer ta centrado *@
 
 @code {
 
-	@* form *@
-	private string email = "";
-	private string password = "";
+	private User user = new User();
 
 	[Parameter]
 	public bool isVisible { get; set; } = true;
@@ -51,6 +50,7 @@ o botao de fechar nem sequer ta centrado *@
 	public void CloseMenu() {
 		isVisible = false;
 		CloseCallback?.Invoke();
+		@* reset user?????? *@
 	}
 
 	public void ShowMenuRegistar() {
@@ -66,9 +66,9 @@ o botao de fechar nem sequer ta centrado *@
 	private async Task HandleSubmit() {
 		@* await JSRuntime.InvokeVoidAsync("alert", $"Submitted: Email - {email}, Password - {password}"); *@
 		Console.WriteLine("email:");
-		Console.WriteLine(email);
+		Console.WriteLine(user.email);
 		Console.WriteLine("password:");
-		Console.WriteLine(password);
+		Console.WriteLine(user.password);
 	}
 }
 
