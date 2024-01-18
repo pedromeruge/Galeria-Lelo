@@ -3,10 +3,9 @@
 
 
 
-@* TODO O CSS DISTO ESTA EXTREMAMENTE CURSED
-tentei organizar mais ou menos, deve dar para aproveitar nos outros menus mas ta
-completamnte incompreensivel ilegivel
-o botao de fechar nem sequer ta centrado *@
+@if (showMenuBig) {
+		<RegisterMenuBig isVisible=true CloseCallback="CloseMenu" email=@email username=@username password=@password/>
+}
 @if (isVisible) {
 	<div class="menu-overlay">
 		<div class="menu">
@@ -19,12 +18,12 @@ o botao de fechar nem sequer ta centrado *@
 				<div class="menu-header-title">Criar conta</div>
 			</div>
 
-			<form class="inputs">
-				<input class="input-container" type="email" id="email" placeholder="Endereço de e-mail">
+			<form class="inputs" @onsubmit="HandleSubmit">
+				<input class="input-container" type="email" id="email" @bind="email" placeholder="Endereço de e-mail" required>
 
-				<input class="input-container" type="username" id="username" placeholder="Nome de utilizador">
+				<input class="input-container" type="username" id="username" @bind="username" placeholder="Nome de utilizador" required>
 
-				<input class="input-container" type="password" id="password" placeholder="Palavra-passe">
+				<input class="input-container" type="password" id="password" @bind="password" placeholder="Palavra-passe" required>
 
 				<button class="input-button" type="submit">Registar</button>
 			</form>
@@ -33,14 +32,28 @@ o botao de fechar nem sequer ta centrado *@
 }
 
 @code {
+	private string email = "";
+	private string username = "";
+	private string password = "";
+
 	[Parameter]
 	public bool isVisible { get; set; }
+
+	private bool showMenuBig = false;
+
 	[Parameter]
     public Action? CloseCallback { get; set; }
 
 	public void CloseMenu() {
 		isVisible = false;
+		showMenuBig = false;
 		CloseCallback?.Invoke();
+	}
+
+	private async Task HandleSubmit() {
+		@* ver na BD se email ja existe........ *@
+		showMenuBig = true;
+		isVisible = false;
 	}
 }
 

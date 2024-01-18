@@ -20,27 +20,27 @@ o botao de fechar nem sequer ta centrado *@
 				<div class="menu-header-title">Diz-nos a tua morada de entrega</div>
 			</div>
 
-			<form class="inputs">
-				<input class="input-container" type="text" id="rua_entrega" placeholder="Rua">
+			<form class="inputs" @onsubmit="HandleSubmit">
+				<input class="input-container" type="text" id="rua_entrega" @bind="rua_entrega" placeholder="Rua" required>
 
 				@* para ficarem lado a lado tive de fazer esta div *@
 				<div class="two-inputs">
-					<input class="input-container-small" type="text" id="cod_entrega" placeholder="Código Postal">
+					<input class="input-container-small" type="text" id="cod_entrega" @bind="cod_entrega" placeholder="Código Postal" required>
 
-					<input class="input-container-big" type="text" id="cidade_entrega" placeholder="Cidade">
+					<input class="input-container-big" type="text" id="cidade_entrega" @bind="cidade_entrega" placeholder="Cidade" required>
 				</div>
 
 				<div class="menu-header">
 					<div class="menu-header-title">Diz-nos a tua morada fiscal</div>
 				</div>
 
-				<input class="input-container" type="text" id="rua_fiscal" placeholder="Rua">
+				<input class="input-container" type="text" id="rua_fiscal" @bind="rua_fiscal" placeholder="Rua" required>
 
 				@* para ficarem lado a lado tive de fazer esta div *@
 				<div class="two-inputs">
-					<input class="input-container-small" type="text" id="cod_fiscal" placeholder="Código Postal">
+					<input class="input-container-small" type="text" id="cod_fiscal" @bind="cod_fiscal" placeholder="Código Postal" required>
 
-					<input class="input-container-big" type="text" id="cidade_fiscal" placeholder="Cidade">
+					<input class="input-container-big" type="text" id="cidade_fiscal" @bind="cidade_fiscal" placeholder="Cidade" required>
 				</div>
 
 				<button class="input-button" type="submit">Registar</button>
@@ -51,13 +51,34 @@ o botao de fechar nem sequer ta centrado *@
 
 @code {
 	[Parameter]
+	public string email { get; set; } = "";
+
+	[Parameter]
+	public string username { get; set; } = "";
+
+	[Parameter]
+	public string password { get; set; } = "";
+
+	[Parameter]
 	public bool isVisible { get; set; }
+
 	[Parameter]
     public Action? CloseCallback { get; set; }
+
+	public string rua_entrega = "";
+	public string cod_entrega = "";
+	public string cidade_entrega = "";
+	public string rua_fiscal = "";
+	public string cod_fiscal = "";
+	public string cidade_fiscal = "";
 
 	public void CloseMenu() {
 		isVisible = false;
 		CloseCallback?.Invoke();
+	}
+
+	private async Task HandleSubmit() {
+		@* ........... *@
 	}
 }
 

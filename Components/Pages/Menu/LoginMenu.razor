@@ -8,7 +8,7 @@ tentei organizar mais ou menos, deve dar para aproveitar nos outros menus mas ta
 completamente incompreensivel ilegivel
 o botao de fechar nem sequer ta centrado *@
 @if (mostrarRegistar) {
-	<RegisterMenuBig isVisible=true CloseCallback="FecharMenuRegistarCallback"/>
+	<RegisterMenu isVisible=true CloseCallback="FecharMenuRegistarCallback"/>
 }
 @if (isVisible) {
 	<div class="menu-overlay">
@@ -22,10 +22,10 @@ o botao de fechar nem sequer ta centrado *@
 				<div class="menu-header-title">Que bom tê-lo de volta!</div>
 			</div>
 
-			<form class="inputs">
-				<input class="input-container" type="email" id="email" placeholder="Endereço de e-mail">
+			<form class="inputs" @onsubmit="HandleSubmit">
+				<input class="input-container" type="email" id="email" @bind="email" placeholder="Endereço de e-mail" required>
 
-				<input class="input-container" type="password" id="password" placeholder="Palavra-passe">
+				<input class="input-container" type="password" id="password" @bind="password" placeholder="Palavra-passe" required>
 
 				<button class="input-button" type="submit">Iniciar sessão</button>
 
@@ -36,6 +36,11 @@ o botao de fechar nem sequer ta centrado *@
 }
 
 @code {
+
+	@* form *@
+	private string email = "";
+	private string password = "";
+
 	[Parameter]
 	public bool isVisible { get; set; } = true;
 	public bool mostrarRegistar = false;
@@ -56,6 +61,14 @@ o botao de fechar nem sequer ta centrado *@
 	public void FecharMenuRegistarCallback() {
 		mostrarRegistar = false;
 		CloseCallback?.Invoke();
+	}
+
+	private async Task HandleSubmit() {
+		@* await JSRuntime.InvokeVoidAsync("alert", $"Submitted: Email - {email}, Password - {password}"); *@
+		Console.WriteLine("email:");
+		Console.WriteLine(email);
+		Console.WriteLine("password:");
+		Console.WriteLine(password);
 	}
 }
 
