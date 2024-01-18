@@ -1,12 +1,9 @@
 @using app.Components.ClassBlocks.AuctionCard;
+@using System;
 @inherits ComponentBase
+@inject NavigationManager NavigationManager
 
-@code {
-    [Parameter, EditorRequired]
-    public AuctionCard Card { get; set; } = default!;
-}
-
-<div class="card-component" @onclick="NavigateToDetalhesLeilao">
+<div class="card-component" @onclick=" () => NavigateToDetalhesLeilao(Card.IdLeilao)">
     <img src="@Card.Image" class="card-img-top" alt="@Card.Image">
   <div class="info-names">
     <span>
@@ -29,7 +26,10 @@
 </div>
 
 @code {
-  private void NavigateToDetalhesLeilao() {
+    [Parameter, EditorRequired]
+    public AuctionCard Card { get; set; } = default!;
 
+  private void NavigateToDetalhesLeilao(int auctionId) {
+    NavigationManager.NavigateTo($"/AuctionDetails/{Card.IdLeilao}"); 
   }
 }

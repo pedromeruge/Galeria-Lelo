@@ -36,7 +36,7 @@ o botao de fechar nem sequer ta centrado *@
 	[Parameter]
 	public bool isVisible { get; set; }
 	[Parameter]
-    public Action CloseCallback { get; set; }
+    public Action? CloseCallback { get; set; }
 
 	public void CloseMenu() {
 		isVisible = false;

@@ -1,0 +1,120 @@
+@page "/AuctionDetails/{IdLeilao:int}"
+@using System.Text.Json
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IWebHostEnvironment WebHostEnvironment
+
+@using app.Components.ClassBlocks.AuctionCard
+
+@if (Leilao != null) {
+<div class="content">
+    <div class="background-rectangle"></div>
+    <div class="left-section">
+        <div class="info-names">
+            <span>
+            <span class="author">
+                @Leilao!.Nome_artista -
+            </span>
+            <span class="name">
+                @Leilao!.Prod_nome
+            </span>
+            </span>
+        </div>
+        <div class="auction-photos-container">
+             @foreach (var foto in fotos) {
+                <div class="auction-photo-wrapper">
+                    <img src=@foto!.Image class="auction-photo" alt="foto">
+                </div>
+            }
+        </div>
+    </div>
+    <div class="right-section">
+        <div class="data-limite">Termina em 1d 22h 53m 42s</div>
+        <div class="auction-rectangle">
+            <div class="text-licitacao">Licitação atual</div>
+            <div class="precos">
+                <div class="preco-atual">@Leilao.Preco_base €</div>
+                <div class="licitacao-min">Min: @Leilao.Preco_base € </div>
+            </div>
+            <button class="licitar-button" @onclick="MostrarMenuLicitar">LICITAR</button>
+            <div class ="parameter-info">
+                <div class="artista-info">
+                    <div class="artista-titulo">Artista</div>
+                    <div class="artista-data">Desconhecido</div>
+                </div>
+                <div class="nome-info">
+                    <div class="nome-titulo">Nome</div>
+                    <div class="nome-data">Mambila, Camarões</div>
+                </div>
+                <div class="tecnica-info">
+                    <div class="tecnica-titulo">Técnica</div>
+                    <div class="tecnica-data">Esculpir madeira</div>
+                </div>
+                <div class="estado-info">
+                    <div class="estado-titulo">Estado</div>
+                    <div class="estado-data">Bom</div>
+                </div>
+                <div class="tipo-info">
+                    <div class="tipo-titulo">Tipo</div>
+                    <div class="tipo-data">Escultura</div>
+                </div>
+                <div class="peso-info">
+                    <div class="peso-titulo">Peso</div>
+                    <div class="peso-data">300 g</div>
+                </div>
+                <div class="dimensoes-info">
+                    <div class="dimensoes-titulo">Dimensões</div>
+                    <div class="dimensoes-data">40,0x20,1x15,2 cm</div>
+                </div>
+                <div class="descricao-info">
+                    <div class="descricao-titulo">Descrição</div>
+                    <div class="descricao-data">Descrição asgnasg</div>
+                </div>
+            </div>
+        </div>
+        <div class="shipping-rectangle">
+            <div class="shipping-info">
+                <img class="truck-img" src="pngs/van.png" />
+                <div class="shipping-text">
+                    <div class="envio-text">Envio</div>
+                    <div class="custo-container">
+                        <div class="custo-text">Custo: </div>
+                        <div class="custo-valor">8,50 €</div>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-types">
+                <img class="MBWay" src="pngs/mbway.png" />
+                <img class="Mastercard" src="pngs/mastercard.png" />
+            </div>
+        </div>
+    </div>
+</div>
+
+} else {
+    <p>Auction not found</p>
+}
+
+@code {
+    public AuctionCard? Leilao { get; set; } = default!;
+    public IEnumerable<AuctionCard?> fotos = Enumerable.Empty<AuctionCard?>();
+    [Parameter]
+    public int IdLeilao { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try {
+            Http.BaseAddress = new Uri(NavigationManager.BaseUri);
+            string jsonPath = "/AuctionCards.json";
+            IEnumerable<AuctionCard>? cards = await Http.GetFromJsonAsync<IEnumerable<AuctionCard>>(jsonPath);
+            Leilao = cards?.FirstOrDefault(auction => auction!.IdLeilao == IdLeilao);
+            fotos = Enumerable.Repeat(Leilao,10);
+        } catch (HttpRequestException ex) {
+            Console.WriteLine($"There was a problem loading auction card data: {ex.Message}");
+        }
+    }
+
+    private void MostrarMenuLicitar() {
+        Console.WriteLine("Licitar bue valores ya");
+  }
+}
