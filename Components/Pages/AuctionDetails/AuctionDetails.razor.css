@@ -7,6 +7,7 @@
   background: #ffffff;
   padding-top: 60px;
   position: relative;
+  z-index: -1;
 }
 
 .background-rectangle {
@@ -16,6 +17,7 @@
   top: 400px;
   bottom: 400px;
   position: absolute;
+  z-index: -1;
 }
 
 .left-section {
@@ -24,7 +26,6 @@
     box-sizing: border-box;
     overflow-y: auto;
     padding: 40px 40px 50px 60px;
-    z-index: 1;
 }
 
 .right-section {
@@ -35,7 +36,6 @@
     min-width: 330px;
     max-width: 450px;
     padding: 0px 20px 30px 20px;
-    z-index: 1;
     text-align: center;
 }
 
