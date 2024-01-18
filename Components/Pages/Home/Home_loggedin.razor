@@ -1,0 +1,49 @@
+@using app.Components.Layout
+@layout LoginLayout
+
+@page "/home"
+@using System.Text.Json
+@inject HttpClient Http
+@inject NavigationManager NavigationManager;
+@rendermode InteractiveServer
+
+<PageTitle>Galeria Lelo</PageTitle>
+
+@if (cards == null) {
+    <p>Loading home page...</p>
+}
+else {
+    <div class="bckg-splashart">
+        <img src="pngs/home-bckg-galeria.png" class="home-backg-image" alt="Home background"> 
+        <div class="text-container">
+            <p class="nome-galeria">GALERIA LELO</p>
+            <p class="slogan-galeria">Transforme o belo em seu, e o dinheiro em meu</p>
+        </div>
+    </div>
+    <div class="leiloes">
+        <p class="texto-leiloes">Leilões a decorrer</p>
+        <div class="grid">
+            @foreach (var card in cards) {
+                <AuctionCardComponent Card="card" />
+            }
+        </div>
+    </div>
+}
+
+@* NOTA:  IEnumberable é lista final que não pode ser modificada != List em que se pode remover e adicionar elementos*@
+@code {
+    private IEnumerable<AuctionCard>? cards;
+        protected override async Task OnInitializedAsync() {
+            try {
+                Http.BaseAddress = new Uri(NavigationManager.BaseUri);
+                @* string domainName = NavigationManager.Uri; *@
+                string jsonUrl = "/AuctionCards.json";
+                cards = await Http.GetFromJsonAsync<IEnumerable<AuctionCard>>(jsonUrl);
+                // Print the JSON response (for debugging purposes)
+                @* Console.WriteLine($"JSON Response: {JsonSerializer.Serialize(response)}"); *@
+            }
+            catch (HttpRequestException ex) {
+                Console.WriteLine($"There was a problem loading auction cards data: {ex.Message}");
+            }
+        }
+}
