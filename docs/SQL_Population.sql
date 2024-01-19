@@ -9,11 +9,12 @@ INSERT INTO Utilizador (
 )
 VALUES
     ('Rua de Cima 180 1ºE', 'Braga', '4700200', 'Rua de Baixo 163', 'Guimaraes', 
-     '4530201', NULL, 'ronnyGamer@gmail.com', 'ronnyGamer12', 0x726F6E6E79, '2024-01-18T13:38:35'
+     '4530201', NULL, 'ronnyGamer@gmail.com', 'ronnyGamer12', 'ronny', '2024-01-18T13:38:35'
     ),
     ('Rua do Beco 230 3ºD', 'Braga', '4123345', 'Rua do Barco 20', 'Aveiro', 
-     '4123234', 'UserPhotos/farol1_user.png', 'aveiroForLife@gmail.com', 'aveirooo23', 0x61766569726F, '2024-01-08T10:24:12'
+     '4123234', 'UserPhotos/farol1_user.png', 'aveiroForLife@gmail.com', 'aveirooo23', 'aveiroo', '2024-01-08T10:24:12'
     );
+	
 
 INSERT INTO Sessao (data_hora_inicio, data_hora_fim, user_id)
 VALUES

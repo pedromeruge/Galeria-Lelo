@@ -17,14 +17,14 @@ CREATE TABLE Utilizador (
     foto VARCHAR(150),
     email VARCHAR(150) NOT NULL,
     username VARCHAR(25) NOT NULL,
-    pass_hash BINARY(64) NOT NULL,
+    pass_hash VARCHAR(64) NOT NULL,
     data_registo DATETIME NOT NULL
 );
 
 CREATE TABLE Sessao (
     sessao_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     data_hora_inicio DATETIME NOT NULL,
-    data_hora_fim DATETIME NOT NULL,
+    data_hora_fim DATETIME,
     user_id INT,
     CONSTRAINT FK_user_id_sessao FOREIGN KEY (user_id) 
         REFERENCES Utilizador(user_id)

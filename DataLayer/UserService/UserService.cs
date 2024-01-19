@@ -1,5 +1,7 @@
 using Classes.User;
 using Classes.Session;
+using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DataLayer.UserService {
 
@@ -17,12 +19,12 @@ namespace DataLayer.UserService {
 			if (userList.Count > 0)
 			{
 				User user = userList[0];
-				Console.WriteLine("Encontrado user");
+				// Console.WriteLine("Encontrado user");
 				Console.WriteLine(user.username);
 				return user;
 			} else {
 				// throw new InvalidOperationException();
-				Console.WriteLine("User nao existe");
+				// Console.WriteLine("User nao existe");
 				return null;
 			}
 		}
@@ -67,6 +69,23 @@ namespace DataLayer.UserService {
 			// }
 			return true;
 		}
+		public async Task<Session> createSessionFor(User user) {
+			User dbUser = await getUser(user.email);
 
-    }
+			const string sessionSQL = "INSERT INTO Sessao (data_hora_inicio, data_hora_fim, user_id) OUTPUT INSERTED.sessao_id VALUES (@DataInicio, @UserId)";// data fim ignorada
+			DateTime data = DateTime.Now;
+			int id = await db.ExecuteScalar<dynamic>(sessionSQL, new {
+				DataInicio = data,
+				// DataFim = (DateTime?)null,
+				UserId = dbUser.user_id
+			});
+
+			Session session = new Session();
+			// session.data_hora_fim = (DateTime)(DateTime?)null; // ??????????????????????????????????????????????????????????????????????????????????
+			session.data_hora_inicio = data;
+			session.user_id = dbUser.user_id;
+			session.sessao_id = id;
+			return session;
+		}
+	}
 }

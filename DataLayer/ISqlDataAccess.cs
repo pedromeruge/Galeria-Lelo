@@ -4,5 +4,6 @@ namespace DataLayer {
         string ConnectionStringName { get; set; }
         Task<List<T>> LoadData<T, U>(string sql, U parameters);
         Task SaveData<T>(string sql, T parameters);
+		Task<int> ExecuteScalar<T>(string sql, T parameters);
     }
 }
