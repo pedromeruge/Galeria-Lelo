@@ -1,0 +1,77 @@
+@inherits ComponentBase
+@rendermode InteractiveServer
+@using app.Components.Pages.Menu
+@using Classes.User
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+
+@* TODO O CSS DISTO ESTA EXTREMAMENTE CURSED
+tentei organizar mais ou menos, deve dar para aproveitar nos outros menus mas ta
+completamente incompreensivel ilegivel
+o botao de fechar nem sequer ta centrado *@
+@if (mostrarRegistar) {
+	<RegisterMenu isVisible=true CloseCallback="FecharMenuRegistarCallback" user=@user/>
+}
+@if (isVisible) {
+	<div class="menu-overlay">
+		<div class="menu">
+			<div class="menu-header">
+				<div class="menu-title">
+					<div class="menu-header-title">Iniciar sessão ou criar uma conta</div>
+					<button class="close-button" @onclick="CloseMenu">X</button>
+				</div>
+				<div class="menu-line"></div>
+				<div class="menu-header-title">Que bom tê-lo de volta!</div>
+			</div>
+
+			<form class="inputs" @onsubmit="HandleSubmit">
+				<input class="input-container" type="email" id="email" @bind="user.email" placeholder="Endereço de e-mail" required>
+
+				<input class="input-container" type="password" id="password" @bind="user.password" placeholder="Palavra-passe" required>
+
+				<button class="input-button" type="submit">Iniciar sessão</button>
+
+				<button class="register-button" type="button" @onclick="ShowMenuRegistar">Registar conta</button>
+			</form>
+		</div>
+	</div>
+}
+
+@code {
+	User user = new User();
+
+	[Parameter]
+	public bool isVisible { get; set; } = true;
+	public bool mostrarRegistar = false;
+
+	[Parameter]
+    public Action? CloseCallback { get; set; }
+
+	public void CloseMenu() {
+		isVisible = false;
+		CloseCallback?.Invoke();
+		@* reset user?????? *@
+	}
+
+	public void ShowMenuRegistar() {
+		isVisible = false;
+		mostrarRegistar = true;
+	}
+
+	public void FecharMenuRegistarCallback() {
+		mostrarRegistar = false;
+		CloseCallback?.Invoke();
+	}
+
+	private async Task HandleSubmit() {
+		@* await localStorage.SetItemAsync("SessionToken", sessionToken); *@
+		@* sessionData = await localStorage.GetItemAsync<MySessionData>("SessionData"); *@
+
+		await localStorage.SetItemAsync("User", user);
+		NavigationManager.NavigateTo("/home");
+		CloseMenu();
+
+		@* reset user here?????????????????????????? *@
+
+	}
+}
