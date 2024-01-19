@@ -4,6 +4,7 @@
 @using Classes.User
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject IUserService UserService
 
 @* TODO O CSS DISTO ESTA EXTREMAMENTE CURSED
 tentei organizar mais ou menos, deve dar para aproveitar nos outros menus mas ta
@@ -27,7 +28,7 @@ o botao de fechar nem sequer ta centrado *@
 			<form class="inputs" @onsubmit="HandleSubmit">
 				<input class="input-container" type="email" id="email" @bind="user.email" placeholder="Endereço de e-mail" required>
 
-				<input class="input-container" type="password" id="password" @bind="user.password" placeholder="Palavra-passe" required>
+				<input class="input-container" type="password" id="password" @bind="user.pass_hash" placeholder="Palavra-passe" required>
 
 				<button class="input-button" type="submit">Iniciar sessão</button>
 

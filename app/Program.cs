@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using app.Components;
 using DataLayer;
 using DataLayer.Auction;
+using DataLayer.UserService;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -16,6 +17,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 builder.Services.AddBlazoredLocalStorage(); // local storage
 builder.WebHost.UseStaticWebAssets();
+builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddTransient<IAuctionRepository, AuctionRepository>();
 
