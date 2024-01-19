@@ -10,3 +10,4 @@ app/obj
 DataLayer/bin
 DataLayer/obj
 LI4.sln
+app/appsettings.json

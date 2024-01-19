@@ -18,7 +18,7 @@
 	background: white;
 	border-radius: 40px;
 	width: 30vw;
-	height: 25vw;
+	/* height: 25vw; absoluta estupidez dar-lhe uma altura quando ja e flex */
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -111,4 +111,5 @@
 	margin-top: 8%;
 	float: right;
 	margin-right: 10%;
+	margin-bottom: 10%;
 }

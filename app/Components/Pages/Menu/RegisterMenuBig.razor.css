@@ -18,7 +18,7 @@
 	background: white;
 	border-radius: 40px;
 	width: 30vw;
-	height: 35vw;
+	/* height: 35vw; */
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -87,6 +87,7 @@
 	width: 80%;
 	height: 12%;
 	margin-top: 4%;
+	margin-bottom: 10%;
 }
 
 .inputs {
