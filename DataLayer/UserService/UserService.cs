@@ -20,7 +20,7 @@ namespace DataLayer.UserService {
 			{
 				User user = userList[0];
 				// Console.WriteLine("Encontrado user");
-				Console.WriteLine(user.username);
+				// Console.WriteLine(user.username);
 				return user;
 			} else {
 				// throw new InvalidOperationException();
@@ -74,20 +74,25 @@ namespace DataLayer.UserService {
 
 			const string sessionSQL = "INSERT INTO Sessao (data_hora_inicio, user_id) OUTPUT INSERTED.sessao_id VALUES (@DataInicio, @UserId)";// data fim ignorada
 			DateTime data = DateTime.Now;
-			int id = await db.ExecuteScalar<dynamic>(sessionSQL, new {
-				DataInicio = data,
-				// DataFim = (DateTime?)null,
-				UserId = dbUser.user_id
-			});
+			try {
+				int id = await db.ExecuteScalar<dynamic>(sessionSQL, new {
+					DataInicio = data,
+					// DataFim = (DateTime?)null,
+					UserId = dbUser.user_id
+				});
 
-			Session session = new Session();
-			// session.data_hora_fim = (DateTime)(DateTime?)null; // ??????????????????????????????????????????????????????????????????????????????????
-			session.data_hora_inicio = data;
-			session.user_id = dbUser.user_id;
-			session.sessao_id = id;
+				Session session = new Session();
+				// session.data_hora_fim = (DateTime)(DateTime?)null; // ??????????????????????????????????????????????????????????????????????????????????
+				session.data_hora_inicio = data;
+				session.user_id = dbUser.user_id;
+				session.sessao_id = id;
 
-			// Console.WriteLine($"criada sessao para o user_id={dbUser.user_id} , session_id={session.sessao_id}");
-			return session;
+				// Console.WriteLine($"criada sessao para o user_id={dbUser.user_id} , session_id={session.sessao_id}");
+				return session;
+			} catch (System.NullReferenceException e) {
+				return null;
+			}
+
 		}
 	}
 }
