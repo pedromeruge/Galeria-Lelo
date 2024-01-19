@@ -72,7 +72,7 @@ namespace DataLayer.UserService {
 		public async Task<Session> createSessionFor(User user) {
 			User dbUser = await getUser(user.email);
 
-			const string sessionSQL = "INSERT INTO Sessao (data_hora_inicio, data_hora_fim, user_id) OUTPUT INSERTED.sessao_id VALUES (@DataInicio, @UserId)";// data fim ignorada
+			const string sessionSQL = "INSERT INTO Sessao (data_hora_inicio, user_id) OUTPUT INSERTED.sessao_id VALUES (@DataInicio, @UserId)";// data fim ignorada
 			DateTime data = DateTime.Now;
 			int id = await db.ExecuteScalar<dynamic>(sessionSQL, new {
 				DataInicio = data,
@@ -85,6 +85,8 @@ namespace DataLayer.UserService {
 			session.data_hora_inicio = data;
 			session.user_id = dbUser.user_id;
 			session.sessao_id = id;
+
+			// Console.WriteLine($"criada sessao para o user_id={dbUser.user_id} , session_id={session.sessao_id}");
 			return session;
 		}
 	}
