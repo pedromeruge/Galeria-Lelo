@@ -1,3 +1,4 @@
+using System.Data;
 using Classes.AuctionCard;
 
 namespace DataLayer.Auction {
@@ -88,6 +89,26 @@ namespace DataLayer.Auction {
             }
 
             return auctionCardList;
+        }
+
+        public async Task<List<AuctionCard>> SearchAuctions(string inputQuery)
+        {
+            string procedureName = "SearchAuctionsWithInput";
+
+            List<AuctionCard> auctionList = await db.ExecuteProcedure<AuctionCard, dynamic>(procedureName, new {SearchTerm = inputQuery});
+
+            // Console.WriteLine("Got number of auctions " + auctionList.Count);
+            foreach (var auction in auctionList)
+            {
+                // Console.WriteLine("Got auction from DB " +  auction.ToString());
+                List<AuctionPhoto> fotosLeilao = await par.FindAllFromAuction(auction.IdLeilao);
+
+                auction.Images = fotosLeilao;
+
+                
+            }
+
+            return auctionList;
         }
 
         public Task<AuctionCard> Update(AuctionCard card) {

@@ -57,18 +57,7 @@ else {
 			}
 		}
 
-        protected override async Task OnInitializedAsync() {
-			try {
-				cards = await db.FindAll();
-				@* Http.BaseAddress = new Uri(NavigationManager.BaseUri);
-
-				string jsonUrl = "/AuctionCards.json";
-				cards = await Http.GetFromJsonAsync<IEnumerable<AuctionCard>>(jsonUrl); *@
-				// Print the JSON response (for debugging purposes)
-				@* Console.WriteLine($"JSON Response: {JsonSerializer.Serialize(response)}"); *@
-			}
-			catch (HttpRequestException ex) {
-				Console.WriteLine($"There was a problem loading auction cards data: {ex.Message}");
-			}
-        }
+    protected override async Task OnInitializedAsync() {
+            cards = await db.FindAll();
+    }
 }

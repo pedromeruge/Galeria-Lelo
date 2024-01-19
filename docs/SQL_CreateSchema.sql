@@ -1,5 +1,17 @@
+-- USE master;
+-- GO
+
+-- ALTER DATABASE GaleriaLelo
+-- SET SINGLE_USER
+-- WITH ROLLBACK IMMEDIATE;
+
 -- DROP DATABASE GaleriaLelo; 
 -- GO
+
+-- ALTER DATABASE GaleriaLelo
+-- SET MULTI_USER;
+-- GO
+
 CREATE DATABASE GaleriaLelo;
 GO
 
@@ -79,3 +91,4 @@ CREATE TABLE Licitacao (
     CONSTRAINT FK_leilao_id_licitacao FOREIGN KEY (leilao_id)
         REFERENCES Leilao(leilao_id)
 );
+

@@ -7,7 +7,7 @@
 
 <div class="header">
   <img class="logo-galeria" src="pngs/logo-galeria-horiz.png" />
-  <form id="searchForm" class="searchbar">
+  <form id="searchForm" class="searchbar" @onsubmit="Search">
       <img class="lupa" src="pngs/searchbar-lupa.png" />
       <input type="search" id="searchInput" placeholder="Pesquisar artigos" @bind="searchQuery">
   </form>
@@ -26,8 +26,8 @@
 
 //interpretar pesquisa
 	private void Search() {
-		if (searchQuery != null) {
-			NavigationManager.NavigateTo($"searchresults.html?search={Uri.EscapeDataString(searchQuery)}");
+		if (searchQuery != null && searchQuery != "") {
+			NavigationManager.NavigateTo($"/SearchResults/{Uri.EscapeDataString(searchQuery)}");
 		}
 	}
 

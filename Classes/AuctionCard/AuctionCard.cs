@@ -11,7 +11,7 @@ namespace Classes.AuctionCard {
         public AuctionStatus Leilao_estado { get; }
         public float Preco_base { get; }
         public float Custo_envio { get; }
-        public string Nome_artista { get; }
+        public string Nome_artista { get; } ="";
         public float Prod_comprimento { get; }
         public float Prod_altura { get; }
         public float Prod_largura { get; }
@@ -19,13 +19,17 @@ namespace Classes.AuctionCard {
         public ProdTipo Prod_tipo { get; }
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public ProdEstado Prod_estado { get; }
-        public string Prod_tecnica { get; }
-        public string Prod_descricao { get; }
-        public string Prod_nome { get; }
+        public string Prod_tecnica { get; } = "";
+        public string Prod_descricao { get; } = "";
+        public string Prod_nome { get; } ="";
         public float Prod_peso { get; }
-        public List<AuctionPhoto> Images { get; }
+        public List<AuctionPhoto>? Images { get; set;}
         public int IdAdmin { get; }
 
+        public AuctionCard()
+        {
+            // Parameterless default constructor
+        }
         public AuctionCard(int idLeilao, DateTime dataInicio, DateTime dataFim, AuctionStatus leilao_estado,
             float preco_base, float custo_envio, string nome_artista, float prod_comprimento, float prod_altura,
             float prod_largura, ProdTipo prod_tipo, ProdEstado prod_estado, string prod_tecnica, string prod_descricao,
@@ -69,8 +73,7 @@ namespace Classes.AuctionCard {
                    $"Prod_descricao: {Prod_descricao}, " +
                    $"Prod_nome: {Prod_nome}, " +
                    $"Prod_peso: {Prod_peso}, " +
-                   $"IdAdmin: {IdAdmin}, " +
-                   $"Images: {string.Join(", ", Images)}"; // Assuming Images is a list
+                   $"IdAdmin: {IdAdmin}";
         }
     }
 }
