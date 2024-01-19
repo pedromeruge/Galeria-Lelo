@@ -12,19 +12,27 @@ namespace DataLayer.UserService {
         }
 
 		private async Task<User> getUser(string email) {
-			return null;
+			const string userSQL = "SELECT user_id, rua_fiscal, cidade_fiscal, codpostal_fiscal, rua_entrega, cidade_entrega, codpostal_entrega, foto, email, username, pass_hash, data_registo FROM Utilizador WHERE email = @Email";
+			List<User> userList = await db.LoadData<User, dynamic>(userSQL, new { Email = email });
+			if (userList.Count > 0)
+			{
+				User user = userList[0];
+				Console.WriteLine("Encontrado user");
+				Console.WriteLine(user.username);
+				return user;
+			} else {
+				// throw new InvalidOperationException();
+				Console.WriteLine("User nao existe");
+				return null;
+			}
 		}
 
 		private async Task<Session> getSession(int session_id) {
-			const string sessionSQL = "SELECT sessao_id, data_hora_inicio, data_hora_fim, user_id WHERE sessao_id = @Id";
+			const string sessionSQL = "SELECT sessao_id, data_hora_inicio, data_hora_fim, user_id FROM Sessao WHERE sessao_id = @Id";
 			List<Session> sessionList = await db.LoadData<Session, dynamic>(sessionSQL, new { Id = session_id });
 			if (sessionList.Count > 0)
 			{
 				Session session = sessionList[0];
-
-
-				Console.WriteLine("session tem id = ");
-				Console.WriteLine(session.sessao_id);
 
 				return session;
 			} else {

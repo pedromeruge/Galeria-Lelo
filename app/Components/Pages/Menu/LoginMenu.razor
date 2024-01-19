@@ -69,10 +69,9 @@ o botao de fechar nem sequer ta centrado *@
 		@* sessionData = await localStorage.GetItemAsync<MySessionData>("SessionData"); *@
 
 		await localStorage.SetItemAsync("User", user);
+
 		NavigationManager.NavigateTo("/home");
 		CloseMenu();
-
-		@* reset user here?????????????????????????? *@
 
 	}
 }

@@ -1,5 +1,4 @@
 using Classes.User;
-using Classes.User;
 using Classes.Session;
 
 namespace DataLayer.UserService {
