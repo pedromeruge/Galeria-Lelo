@@ -44,9 +44,9 @@ namespace DataLayer.Auction {
             );
 
             return auctionCard;
+        } else {
+            throw new InvalidOperationException();
         }
-
-        return null; // or throw an exception, depending on your requirements
     }
 
         public async Task<List<AuctionCard>> FindAll()

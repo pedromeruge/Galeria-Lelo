@@ -3,3 +3,9 @@ bin/*
 obj/*
 .DS_Store
 out/*
+Classes/obj
+Classes/bin
+app/bin
+app/obj
+DataLayer/bin
+DataLayer/obj
