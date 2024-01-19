@@ -1,5 +1,6 @@
 
 @page "/SearchResults/{searchQuery}"
+@layout LoginLayout
 
 @using System.Text.Json
 @inject HttpClient Http
@@ -7,7 +8,10 @@
 @inject IWebHostEnvironment WebHostEnvironment
 @inject IJSRuntime JSRuntime
 @using Classes.AuctionCard
+@using app.Components.ClassBlocks.AuctionCard
 @inject IAuctionRepository db
+@rendermode InteractiveServer
+@using DataLayer.Auction
 
 <PageTitle>Galeria Lelo</PageTitle>
 
