@@ -21,7 +21,7 @@ VALUES
     ('2024-01-09T08:30:02', '2024-01-09T08:42:15', 1),
     ('2024-01-10T11:00:00', '2024-01-10T11:05:25', 2);
 
-INSERT INTO Administador (email, pass_hash)
+INSERT INTO Administrador (email, pass_hash)
 VALUES
     ('admin1@gmail.com', 'admin1'),
     ('admin2@gmail.com', 'admin2');

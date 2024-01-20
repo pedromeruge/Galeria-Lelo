@@ -1,0 +1,59 @@
+﻿@page "/admin"
+@layout AdminLayout
+
+@using System.Text.Json
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+@using DataLayer.Auction
+@using Classes.AuctionCard
+@using app.Components.ClassBlocks.AuctionCard
+@inject IAuctionRepository db
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IAdminService AdminService
+@using Classes.Session
+
+<PageTitle>Galeria Lelo</PageTitle>
+
+@* @if (cards == null) {
+    <p>Loading home page...</p>
+}
+else { *@
+<div class="bckg-splashart">
+	<img src="pngs/home-bckg-galeria.png" class="home-backg-image" alt="Home background"> 
+	<div class="text-container">
+		<p class="nome-galeria">GALERIA LELO</p>
+		<p class="slogan-galeria">Transforme o belo em seu, e o dinheiro em meu</p>
+	</div>
+</div>
+<div class="leiloes">
+	<p class="texto-leiloes">Leilões a decorrer</p>
+	@* <div class="grid">
+		@foreach (var card in cards) {
+			<AuctionCardComponent Card="card" />
+		}
+	</div> *@
+</div>
+@* } *@
+
+
+@code {
+    @* private List<AuctionCard>? cards; *@
+
+		protected override async Task OnAfterRenderAsync(bool firstRender) {
+			if (firstRender) {
+				// ver se user existe e ta valido
+				Admin admin = await localStorage.GetItemAsync<Admin>("Admin");
+				if (admin != null) {
+					if (await AdminService.checkAdminValid(admin) == true) {
+						NavigationManager.NavigateTo("/admin/home");
+					}
+				}
+			}
+		}
+
+    @* protected override async Task OnInitializedAsync() {
+            cards = await db.FindAll();
+    } *@
+}

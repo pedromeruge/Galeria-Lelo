@@ -1,0 +1,65 @@
+@inherits ComponentBase
+@rendermode InteractiveServer
+@using app.Components.Pages.Menu
+@using Classes.Admin
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject IAdminService AdminService
+@using Classes.Session
+
+
+@if (isVisible) {
+	<div class="menu-overlay">
+		<div class="menu">
+			<div class="menu-header">
+				<div class="menu-title">
+					<div class="menu-header-title">Iniciar sessão ou criar uma conta</div>
+					<button class="close-button" @onclick="CloseMenu">X</button>
+				</div>
+				<div class="menu-line"></div>
+				<div class="menu-header-title">Que bom tê-lo de volta!</div>
+			</div>
+
+			<form class="inputs" @onsubmit="HandleSubmit">
+				<input class="input-container" type="email" id="email" @bind="admin.email" placeholder="Endereço de e-mail" required>
+
+				<input class="input-container" type="password" id="password" @bind="admin.pass_hash" placeholder="Palavra-passe" required>
+
+				<button class="input-button" type="submit">Iniciar sessão</button>
+			</form>
+		</div>
+	</div>
+}
+
+@code {
+	Admin admin = new Admin();
+
+	[Parameter]
+	public bool isVisible { get; set; } = true;
+	[Parameter]
+    public Action? CloseCallback { get; set; }
+
+	public void CloseMenu() {
+		isVisible = false;
+		CloseCallback?.Invoke();
+		@* reset user?????? *@
+	}
+
+	public void ShowMenuRegistar() {
+		isVisible = false;
+	}
+
+	private async Task HandleSubmit() {
+		if (await AdminService.checkAdminValid(admin) == true) {
+			// ir buscar o user completo
+			admin = await AdminService.getAdmin(admin.email); // fazer isto logo no check user valid???????
+			await localStorage.SetItemAsync("Admin", admin);
+			// assume que session nao existia
+
+			CloseMenu();
+			NavigationManager.NavigateTo("/admin/home");
+		} else {
+			// mensagem de erro.........
+		}
+	}
+}

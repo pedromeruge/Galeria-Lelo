@@ -42,8 +42,8 @@ CREATE TABLE Sessao (
         REFERENCES Utilizador(user_id)
 );
 
--- Create the Administador table
-CREATE TABLE Administador (
+-- Create the Administrador table
+CREATE TABLE Administrador (
     admin_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     email VARCHAR(150) NOT NULL,
     pass_hash VARCHAR(64) NOT NULL
@@ -68,7 +68,7 @@ CREATE TABLE Leilao (
     prod_peso FLOAT NOT NULL,
     admin_id INT,
     CONSTRAINT FK_admin_id_leilao FOREIGN KEY (admin_id) 
-        REFERENCES Administador(admin_id)
+        REFERENCES Administrador(admin_id)
 );
 
 -- Create the Foto_leilao table

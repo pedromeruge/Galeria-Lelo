@@ -15,11 +15,11 @@ namespace DataLayer.AdminService {
 
 		public async Task<Admin> getAdmin(string email) {
 			const string adminSQL = "SELECT admin_id, email, pass_hash FROM Administrador WHERE email = @Email";
-			List<Admin> userList = await db.LoadData<Admin, dynamic>(adminSQL, new { Email = email });
-			if (userList.Count > 0)
+			List<Admin> adminList = await db.LoadData<Admin, dynamic>(adminSQL, new { Email = email });
+			if (adminList.Count > 0)
 			{
-				Admin user = userList[0];
-				return user;
+				Admin admin = adminList[0];
+				return admin;
 			} else {
 				return null;
 			}
@@ -27,6 +27,7 @@ namespace DataLayer.AdminService {
 
 		public async Task<bool> checkAdminValid(Admin admin) {
 			Admin dbAdmin = await getAdmin(admin.email);
+			if (dbAdmin == null) Console.WriteLine("dsajkdask");
 			if (dbAdmin != null && admin.pass_hash == dbAdmin.pass_hash) {
 				return true;
 			}
