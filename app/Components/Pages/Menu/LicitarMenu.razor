@@ -1,0 +1,79 @@
+@inherits ComponentBase
+@rendermode InteractiveServer
+@using app.Components.Pages.Menu
+@using Classes.User
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject IUserService UserService
+@using Classes.Session
+
+@if (isVisible) {
+	<div class="menu-overlay">
+		<div class="menu">
+			<div class="menu-header">
+				<div class="menu-title">
+					<div class="menu-header-title">Licitar em leilão</div>
+					<button class="close-button" @onclick="CloseMenu">X</button>
+				</div>
+				<div class="menu-line"></div>
+			</div>
+            <div class="menu-body">
+			    <div class="menu-body-title">Maior licitação atual: @currHighestBid €</div>
+                <form class="inputs" @onsubmit="HandleSubmit">
+                    <input class="input-container" type="number" @bind="newBid" placeholder="> @currHighestBid€" required>
+                    <button class="input-button" type="submit">LICITAR</button>
+                    @if (invalidValue) {
+                        <p class="error-msg"> x Valor da licitação tem de ser superior a @currHighestBid €</p>
+                    }
+                </form>
+            </div>
+		</div>
+	</div>
+}
+
+@code {
+
+	[Parameter]
+	public bool isVisible { get; set; } = true; // se menu de licitar está ou não visível 
+
+    public bool invalidValue {get; set;} = false; // se valor introduzido é inválido ou não
+
+    [Parameter]
+    public int IdLeilao {get; set;}
+
+    public int currHighestBid {get; set;} = 5;
+
+    private int newBid {get; set;}
+
+	[Parameter]
+    public Action? CloseCallback { get; set; }
+
+	public void CloseMenu() {
+		isVisible = false;
+		CloseCallback?.Invoke();
+	}
+
+    @* protected override async Task OnInitializedAsync() {
+            currHighestBid = await db.FindHighestBid(IdLeilao);
+    } *@
+
+	private async Task HandleSubmit() {
+		@* await localStorage.SetItemAsync("SessionToken", sessionToken); *@
+		@* sessionData = await localStorage.GetItemAsync<MySessionData>("SessionData"); *@
+        
+        @* User user = await localStorage.GetItemAsync<User>("User"); *@
+        if (newBid <= currHighestBid) {
+            invalidValue = true;
+        } else {
+            bool success = true;
+            @* bool success = await submitNewBid(newBid); *@
+            if (success == true) {
+                invalidValue = false;
+		        CloseMenu();
+            }
+            else {
+                // transferência falhou ?
+            }
+        }
+	}
+}

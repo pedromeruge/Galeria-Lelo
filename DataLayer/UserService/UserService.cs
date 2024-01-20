@@ -112,7 +112,7 @@ namespace DataLayer.UserService {
 					Email = user.email,
 					Username = user.username,
 					Pass = user.pass_hash,
-					Data_reg = user.data_registo
+					Data_reg = DateTime.Now
 				});
 
 				User dbUser = new User();

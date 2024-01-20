@@ -2,11 +2,11 @@
 @layout LoginLayout
 
 @using System.Text.Json
-@inject HttpClient Http
-@inject NavigationManager NavigationManager
+@using Classes.AuctionCard
+@using app.Components.Pages.Menu
+@rendermode InteractiveServer
 @inject IWebHostEnvironment WebHostEnvironment
 @inject IJSRuntime JSRuntime
-@using Classes.AuctionCard
 @inject IAuctionRepository db
 
 @if (Leilao != null) {
@@ -40,6 +40,7 @@
                 <div class="licitacao-min">Min: @Leilao.Preco_base € </div>
             </div>
             <button class="licitar-button" @onclick="MostrarMenuLicitar">LICITAR</button>
+            
             <div class ="parameter-info">
                 <div class="artista-info">
                     <div class="artista-titulo">Artista</div>
@@ -92,6 +93,10 @@
             </div>
         </div>
     </div>
+	@if (mostrarMenuLicitar)
+	{
+		<LicitarMenu isVisible=true CloseCallback="FecharMenuLicitar"/>
+	}
 </div>
 
 } else {
@@ -99,11 +104,11 @@
 }
 
 @code {
-    public AuctionCard? Leilao { get; set; } = default!;
-    public float currPrice; // preço atual do leilão
     [Parameter]
     public int IdLeilao { get; set; }
-
+    public AuctionCard? Leilao { get; set; } = default!;
+    public float currPrice; // preço atual do leilão
+    bool mostrarMenuLicitar = false;
     protected override async Task OnInitializedAsync()
     {
         try {
@@ -125,6 +130,11 @@
     }
 
     private void MostrarMenuLicitar() {
-        Console.WriteLine("Licitar bue valores ya");
-  }
+        @* Console.WriteLine("Calling MostrarMenuLicitar"); *@
+       mostrarMenuLicitar = true;
+    }
+
+    private void FecharMenuLicitar() {
+		mostrarMenuLicitar = false;
+	}
 }
