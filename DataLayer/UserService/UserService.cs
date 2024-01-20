@@ -13,7 +13,7 @@ namespace DataLayer.UserService {
             db = data;
         }
 
-		private async Task<User> getUser(string email) {
+		public async Task<User> getUser(string email) {
 			const string userSQL = "SELECT user_id, rua_fiscal, cidade_fiscal, codpostal_fiscal, rua_entrega, cidade_entrega, codpostal_entrega, foto, email, username, pass_hash, data_registo FROM Utilizador WHERE email = @Email";
 			List<User> userList = await db.LoadData<User, dynamic>(userSQL, new { Email = email });
 			if (userList.Count > 0)
@@ -55,6 +55,8 @@ namespace DataLayer.UserService {
 			// vai buscar session e user a BD para garantir que ta tudo atualizado
 			User dbUser = await getUser(user.email);
 			if (dbUser == null) return false;
+
+			if (session.sessao_id < 0) return false;
 			Session dbSession = await getSession(session.sessao_id);
 			if (dbSession == null) return false;
 
@@ -92,7 +94,45 @@ namespace DataLayer.UserService {
 			} catch (System.NullReferenceException e) {
 				return null;
 			}
+		}
 
+		public async Task<User> createUser(User user) {
+			const string userSQL = "INSERT INTO Utilizador (rua_fiscal, cidade_fiscal, codpostal_fiscal, rua_entrega, cidade_entrega, codpostal_entrega, foto, email, username, pass_hash, data_registo) OUTPUT INSERTED.user_id VALUES (@RuaF, @CidadeF, @CodF, @RuaE, @CidadeE, @CodE, @Foto, @Email, @Username, @Pass, @Data_reg)";
+
+			try {
+				int id = await db.ExecuteScalar<dynamic>(userSQL, new {
+					RuaF = user.rua_fiscal,
+					CidadeF = user.cidade_fiscal,
+					CodF = user.codpostal_fiscal,
+					RuaE = user.rua_entrega,
+					CidadeE = user.cidade_entrega,
+					CodE = user.codpostal_entrega,
+					Foto = user.foto,
+					Email = user.email,
+					Username = user.username,
+					Pass = user.pass_hash,
+					Data_reg = user.data_registo
+				});
+
+				User dbUser = new User();
+					dbUser.user_id = id;
+					dbUser.rua_fiscal= user.rua_fiscal;
+					dbUser.cidade_fiscal= user.cidade_fiscal;
+					dbUser.codpostal_fiscal= user.codpostal_fiscal;
+					dbUser.rua_entrega= user.rua_entrega;
+					dbUser.cidade_entrega= user.cidade_entrega;
+					dbUser.codpostal_entrega= user.codpostal_entrega;
+					dbUser.foto= user.foto;
+					dbUser.email= user.email;
+					dbUser.username= user.username;
+					dbUser.pass_hash= user.pass_hash;
+					dbUser.data_registo= user.data_registo;
+
+				// Console.WriteLine($"criada sessao para o user_id={dbUser.user_id} , session_id={session.sessao_id}");
+				return dbUser;
+			} catch (NullReferenceException) {
+				return null;
+			}
 		}
 	}
 }

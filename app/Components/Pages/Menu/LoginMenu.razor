@@ -70,8 +70,10 @@ o botao de fechar nem sequer ta centrado *@
 		@* sessionData = await localStorage.GetItemAsync<MySessionData>("SessionData"); *@
 
 		if (await UserService.checkUserValid(user) == true) {
+			// ir buscar o user completo
+			user = await UserService.getUser(user.email); // fazer isto logo no check user valid???????
 			await localStorage.SetItemAsync("User", user);
-
+			// assume que session nao existia
 			Session session = await UserService.createSessionFor(user);
 			if (session != null) {
 				await localStorage.SetItemAsync("Session", session);

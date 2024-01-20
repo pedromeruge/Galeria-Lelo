@@ -8,8 +8,11 @@
 @using DataLayer.Auction
 @using Classes.AuctionCard
 @using app.Components.ClassBlocks.AuctionCard
-@using app.Components.Layout
 @inject IAuctionRepository db
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IUserService UserService
+@using Classes.Session
 
 <PageTitle>Galeria Lelo</PageTitle>
 
@@ -36,6 +39,16 @@ else {
 
 @* NOTA:  IEnumberable é lista final que não pode ser modificada != List em que se pode remover e adicionar elementos*@
 @code {
+	protected override async Task OnAfterRenderAsync(bool firstRender) {
+		if (firstRender) {
+			// ver se user existe e ta valido
+			User user = await localStorage.GetItemAsync<User>("User");
+			if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
+			Session session = await localStorage.GetItemAsync<Session>("Session");
+			if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
+		}
+	}
+
     private List<AuctionCard>? cards;
         protected override async Task OnInitializedAsync() {
             try {

@@ -1,6 +1,10 @@
 @inherits ComponentBase
 @rendermode InteractiveServer
 @using Classes.User
+@inject IUserService UserService
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@using Classes.Session
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 
 @* TODO O CSS DISTO ESTA EXTREMAMENTE CURSED
 tentei organizar mais ou menos, deve dar para aproveitar nos outros menus mas ta
@@ -66,6 +70,11 @@ o botao de fechar nem sequer ta centrado *@
 	}
 
 	private async Task HandleSubmit() {
-		@* ........... *@
+		// criar user e sessao na BD e local storage
+		User dbUser = await UserService.createUser(user);
+		Session session = await UserService.createSessionFor(dbUser);
+		await localStorage.SetItemAsync("User", dbUser);
+		await localStorage.SetItemAsync("Session", session);
+		NavigationManager.NavigateTo("/home");
 	}
 }

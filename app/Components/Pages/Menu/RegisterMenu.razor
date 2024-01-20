@@ -1,7 +1,7 @@
 @inherits ComponentBase
 @rendermode InteractiveServer
 @using Classes.User
-
+@inject IUserService UserService
 
 @if (showMenuBig) {
 		<RegisterMenuBig isVisible=true CloseCallback="CloseMenu" user=@user/>
@@ -50,8 +50,10 @@
 	}
 
 	private async Task HandleSubmit() {
-		@* ver na BD se email ja existe........ *@
-		showMenuBig = true;
-		isVisible = false;
+		// se for valido, quer dizer que ja existe, logo nao se pode continuar
+		if (await UserService.checkUserValid(user) == false) {
+			showMenuBig = true;
+			isVisible = false;
+		}
 	}
 }
