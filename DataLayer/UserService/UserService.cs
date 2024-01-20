@@ -108,11 +108,11 @@ namespace DataLayer.UserService {
 					RuaE = user.rua_entrega,
 					CidadeE = user.cidade_entrega,
 					CodE = user.codpostal_entrega,
-					Foto = user.foto,
+					Foto = "", // tirar daqui simplesmente?
 					Email = user.email,
 					Username = user.username,
 					Pass = user.pass_hash,
-					Data_reg = user.data_registo
+					Data_reg = DateTime.Now
 				});
 
 				User dbUser = new User();
