@@ -76,11 +76,13 @@
 	width: 80%;
 	height: 15%;
 	margin-top: 2%;
+	height: fit-content;
 }
 
 .inputs {
 	padding-top: 5%;
 	flex: 1;
+	margin-bottom: 10%;
 }
 
 .close-button {
