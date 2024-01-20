@@ -46,10 +46,10 @@ namespace DataLayer.UserService {
 
 		public async Task<bool> checkUserValid(User user) {
 			User dbUser = await getUser(user.email);
-			if (dbUser != null && user.pass_hash != dbUser.pass_hash) {
-				return false;
+			if (dbUser != null && user.pass_hash == dbUser.pass_hash) {
+				return true;
 			}
-			return true;
+			return false;
 		}
 
 		public async Task<bool> checkUserValidSession(User user, Session session) {
