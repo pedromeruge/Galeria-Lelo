@@ -2,6 +2,7 @@ using Classes.User;
 using Classes.Session;
 using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace DataLayer.UserService {
 
@@ -133,6 +134,16 @@ namespace DataLayer.UserService {
 			} catch (NullReferenceException) {
 				return null;
 			}
+		}
+
+		public async Task terminateSession(Session session) {
+			const string sessionSQL = "UPDATE Sessao SET data_hora_fim=@data_hora_fim WHERE sessao_id=@sessao_id";// data fim ignorada
+			session.data_hora_fim = DateTime.Now;
+			// try {
+				await db.SaveData(sessionSQL, session);
+			// } catch (System.NullReferenceException e) {
+			// 	return null;
+			// }
 		}
 	}
 }
