@@ -12,6 +12,10 @@
 @inject IAuctionRepository db
 @rendermode InteractiveServer
 @using DataLayer.Auction
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IUserService UserService
+@using Classes.Session
 
 <PageTitle>Galeria Lelo</PageTitle>
 
@@ -39,6 +43,15 @@ else {
     [Parameter]
     public String? SearchQuery { get; set; }
 
+	protected override async Task OnAfterRenderAsync(bool firstRender) {
+		if (firstRender) {
+			// ver se user existe e ta valido
+			User user = await localStorage.GetItemAsync<User>("User");
+			if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
+			Session session = await localStorage.GetItemAsync<Session>("Session");
+			if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
+		}
+	}
     protected override async Task OnInitializedAsync()
     {
         if (SearchQuery != null) {

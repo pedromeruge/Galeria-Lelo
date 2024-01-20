@@ -1,6 +1,5 @@
 @page "/AuctionDetails/{IdLeilao:int}"
 @layout LoginLayout
-
 @using System.Text.Json
 @using Classes.AuctionCard
 @using app.Components.Pages.Menu
@@ -8,91 +7,95 @@
 @inject IWebHostEnvironment WebHostEnvironment
 @inject IJSRuntime JSRuntime
 @inject IAuctionRepository db
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IUserService UserService
+@using Classes.Session
 
 @if (Leilao != null) {
 <div class="content">
-    <div class="background-rectangle"></div>
-    <div class="left-section">
-        <div class="info-names">
-            <span>
-            <span class="author">
-                @Leilao!.Nome_artista -
-            </span>
-            <span class="name">
-                @Leilao!.Prod_nome
-            </span>
-            </span>
-        </div>
-        <div class="auction-photos-container">
-             @foreach (var foto in @Leilao.Images) {
-                <div class="auction-photo-wrapper">
-                    <img src=@foto.Path class="auction-photo" alt="foto">
-                </div>
-            }
-        </div>
-    </div>
-    <div class="right-section">
-        <div class="data-limite">Termina em TOFIX: DATA</div>
-        <div class="auction-rectangle">
-            <div class="text-licitacao">Licitação atual</div>
-            <div class="precos">
-                <div class="preco-atual">@currPrice €</div>
-                <div class="licitacao-min">Min: @Leilao.Preco_base € </div>
-            </div>
-            <button class="licitar-button" @onclick="MostrarMenuLicitar">LICITAR</button>
-            
-            <div class ="parameter-info">
-                <div class="artista-info">
-                    <div class="artista-titulo">Artista</div>
-                    <div class="artista-data">@Leilao.Nome_artista</div>
-                </div>
-                <div class="nome-info">
-                    <div class="nome-titulo">Nome</div>
-                    <div class="nome-data">@Leilao.Prod_nome</div>
-                </div>
-                <div class="tecnica-info">
-                    <div class="tecnica-titulo">Técnica</div>
-                    <div class="tecnica-data">@Leilao.Prod_tecnica</div>
-                </div>
-                <div class="estado-info">
-                    <div class="estado-titulo">Estado</div>
-                    <div class="estado-data">@Leilao.Prod_estado</div>
-                </div>
-                <div class="tipo-info">
-                    <div class="tipo-titulo">Tipo</div>
-                    <div class="tipo-data">@Leilao.Prod_tipo</div>
-                </div>
-                <div class="peso-info">
-                    <div class="peso-titulo">Peso</div>
-                    <div class="peso-data">@Leilao.Prod_peso g</div>
-                </div>
-                <div class="dimensoes-info">
-                    <div class="dimensoes-titulo">Dimensões</div>
-                    <div class="dimensoes-data">@Leilao.Prod_comprimento x @Leilao.Prod_altura x @Leilao.Prod_largura cm</div>
-                </div>
-                <div class="descricao-info">
-                    <div class="descricao-titulo">Descrição</div>
-                    <div class="descricao-data">@Leilao.Prod_descricao</div>
-                </div>
-            </div>
-        </div>
-        <div class="shipping-rectangle">
-            <div class="shipping-info">
-                <img class="truck-img" src="pngs/van.png" />
-                <div class="shipping-text">
-                    <div class="envio-text">Envio</div>
-                    <div class="custo-container">
-                        <div class="custo-text">Custo: </div>
-                        <div class="custo-valor">@Leilao.Custo_envio €</div>
-                    </div>
-                </div>
-            </div>
-            <div class="payment-types">
-                <img class="MBWay" src="pngs/mbway.png" />
-                <img class="Mastercard" src="pngs/mastercard.png" />
-            </div>
-        </div>
-    </div>
+	<div class="background-rectangle"></div>
+	<div class="left-section">
+		<div class="info-names">
+			<span>
+			<span class="author">
+				@Leilao!.Nome_artista -
+			</span>
+			<span class="name">
+				@Leilao!.Prod_nome
+			</span>
+			</span>
+		</div>
+		<div class="auction-photos-container">
+			@foreach (var foto in @Leilao.Images) {
+				<div class="auction-photo-wrapper">
+					<img src=@foto.Path class="auction-photo" alt="foto">
+				</div>
+			}
+		</div>
+	</div>
+	<div class="right-section">
+		<div class="data-limite">Termina em TOFIX: DATA</div>
+		<div class="auction-rectangle">
+			<div class="text-licitacao">Licitação atual</div>
+			<div class="precos">
+				<div class="preco-atual">@currPrice €</div>
+				<div class="licitacao-min">Min: @Leilao.Preco_base € </div>
+			</div>
+			<button class="licitar-button" @onclick="MostrarMenuLicitar">LICITAR</button>
+			
+			<div class ="parameter-info">
+				<div class="artista-info">
+					<div class="artista-titulo">Artista</div>
+					<div class="artista-data">@Leilao.Nome_artista</div>
+				</div>
+				<div class="nome-info">
+					<div class="nome-titulo">Nome</div>
+					<div class="nome-data">@Leilao.Prod_nome</div>
+				</div>
+				<div class="tecnica-info">
+					<div class="tecnica-titulo">Técnica</div>
+					<div class="tecnica-data">@Leilao.Prod_tecnica</div>
+				</div>
+				<div class="estado-info">
+					<div class="estado-titulo">Estado</div>
+					<div class="estado-data">@Leilao.Prod_estado</div>
+				</div>
+				<div class="tipo-info">
+					<div class="tipo-titulo">Tipo</div>
+					<div class="tipo-data">@Leilao.Prod_tipo</div>
+				</div>
+				<div class="peso-info">
+					<div class="peso-titulo">Peso</div>
+					<div class="peso-data">@Leilao.Prod_peso g</div>
+				</div>
+				<div class="dimensoes-info">
+					<div class="dimensoes-titulo">Dimensões</div>
+					<div class="dimensoes-data">@Leilao.Prod_comprimento x @Leilao.Prod_altura x @Leilao.Prod_largura cm</div>
+				</div>
+				<div class="descricao-info">
+					<div class="descricao-titulo">Descrição</div>
+					<div class="descricao-data">@Leilao.Prod_descricao</div>
+				</div>
+			</div>
+		</div>
+		<div class="shipping-rectangle">
+			<div class="shipping-info">
+				<img class="truck-img" src="pngs/van.png" />
+				<div class="shipping-text">
+					<div class="envio-text">Envio</div>
+					<div class="custo-container">
+						<div class="custo-text">Custo: </div>
+						<div class="custo-valor">@Leilao.Custo_envio €</div>
+					</div>
+				</div>
+			</div>
+			<div class="payment-types">
+				<img class="MBWay" src="pngs/mbway.png" />
+				<img class="Mastercard" src="pngs/mastercard.png" />
+			</div>
+		</div>
+	</div>
 	@if (mostrarMenuLicitar)
 	{
 		<LicitarMenu isVisible=true CloseCallback="FecharMenuLicitar"/>
@@ -100,7 +103,7 @@
 </div>
 
 } else {
-    <p>Auction not found</p>
+	<p>Auction not found</p>
 }
 
 @code {
@@ -109,6 +112,17 @@
     public AuctionCard? Leilao { get; set; } = default!;
     public float currPrice; // preço atual do leilão
     bool mostrarMenuLicitar = false;
+
+	protected override async Task OnAfterRenderAsync(bool firstRender) {
+		if (firstRender) {
+			// ver se user existe e ta valido
+			User user = await localStorage.GetItemAsync<User>("User");
+			if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
+			Session session = await localStorage.GetItemAsync<Session>("Session");
+			if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
+		}
+	}
+
     protected override async Task OnInitializedAsync()
     {
         try {
