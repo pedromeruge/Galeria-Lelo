@@ -51,18 +51,18 @@ CREATE TABLE Leilao (
     Data_hora_inicio DATETIME NOT NULL,
     Data_hora_fim DATETIME NOT NULL,
     estado VARCHAR(12) NOT NULL CHECK (estado IN('em leilao', 'por pagar', 'por enviar','por entregar','concluido')),
-    preco_base FLOAT NOT NULL,
-    custo_envio FLOAT NOT NULL,
+    preco_base DECIMAL(10,2) NOT NULL,
+    custo_envio DECIMAL(10,2) NOT NULL,
     prod_nome_artista VARCHAR(75) NOT NULL,
-    prod_comprimento FLOAT NOT NULL,
-    prod_altura FLOAT NOT NULL,
-    prod_largura FLOAT NOT NULL,
+    prod_comprimento DECIMAL(10,5) NOT NULL,
+    prod_altura DECIMAL(10,5) NOT NULL,
+    prod_largura DECIMAL(10,5) NOT NULL,
     prod_tipo VARCHAR(10) NOT NULL CHECK (prod_tipo IN('desenho','escultura','pintura','fotografia','outro')),
     prod_estado VARCHAR(10) NOT NULL CHECK (prod_estado IN('excelente','bom','mau','pessimo')),
     prod_tecnica VARCHAR(45) NOT NULL,
     prod_descricao VARCHAR(500) NOT NULL,
     prod_nome VARCHAR(75) NOT NULL,
-    prod_peso FLOAT NOT NULL,
+    prod_peso DECIMAL(10,2) NOT NULL,
     admin_id INT,
     CONSTRAINT FK_admin_id_leilao FOREIGN KEY (admin_id) 
         REFERENCES Administrador(admin_id)
@@ -79,7 +79,7 @@ CREATE TABLE Foto_leilao (
 
 CREATE TABLE Licitacao (
     licitacao_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    valor FLOAT NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
     data_hora DATETIME NOT NULL,
     sessao_id INT,
     leilao_id INT,

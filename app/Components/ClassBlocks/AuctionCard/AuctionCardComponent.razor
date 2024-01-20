@@ -34,8 +34,8 @@
 @code {
   [Parameter, EditorRequired]
   public AuctionCard Card { get; set; } = default!;
-  private float finalCost;
-  private float currentBid;
+  private decimal finalCost;
+  private decimal currentBid;
 
   protected override void OnInitialized()
   {

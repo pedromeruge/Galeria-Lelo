@@ -10,12 +10,12 @@ namespace Classes.AuctionCard {
         public DateTime DataFim { get; }
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public AuctionStatus Leilao_estado { get; }
-        public float Preco_base { get; }
-        public float Custo_envio { get; }
+        public decimal Preco_base { get; }
+        public decimal Custo_envio { get; }
         public string Nome_artista { get; } ="";
-        public float Prod_comprimento { get; }
-        public float Prod_altura { get; }
-        public float Prod_largura { get; }
+        public decimal Prod_comprimento { get; }
+        public decimal Prod_altura { get; }
+        public decimal Prod_largura { get; }
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public ProdTipo Prod_tipo { get; }
         [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -23,16 +23,16 @@ namespace Classes.AuctionCard {
         public string Prod_tecnica { get; } = "";
         public string Prod_descricao { get; } = "";
         public string Prod_nome { get; } ="";
-        public float Prod_peso { get; }
+        public decimal Prod_peso { get; }
         public List<AuctionPhoto>? Images { get; set;}
         public Bid? Maior_licitacao {get; set;}
         public int IdAdmin { get; }
 
         public AuctionCard() {}
         public AuctionCard(int idLeilao, DateTime dataInicio, DateTime dataFim, AuctionStatus leilao_estado,
-            float preco_base, float custo_envio, string nome_artista, float prod_comprimento, float prod_altura,
-            float prod_largura, ProdTipo prod_tipo, ProdEstado prod_estado, string prod_tecnica, string prod_descricao,
-            string prod_nome, float prod_peso, List<AuctionPhoto> fotos, Bid bid, int idAdmin)
+            decimal preco_base, decimal custo_envio, string nome_artista, decimal prod_comprimento, decimal prod_altura,
+            decimal prod_largura, ProdTipo prod_tipo, ProdEstado prod_estado, string prod_tecnica, string prod_descricao,
+            string prod_nome, decimal prod_peso, List<AuctionPhoto> fotos, Bid bid, int idAdmin)
         {
             this.IdLeilao = idLeilao;
             this.DataInicio = dataInicio;

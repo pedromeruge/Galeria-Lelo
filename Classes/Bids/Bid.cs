@@ -4,13 +4,13 @@ using System.Text.Json.Serialization;
 namespace Classes.Bids {
     public class Bid {
         public int IdLicitacao {get; set;} = -1;
-        public float Valor {get; set; }
+        public decimal Valor {get; set; }
         public DateTime DataHora {get; set;}
         public int IdSessao {get; set;}
         public int IdLeilao {get; set;}
 
         public Bid() {}
-        public Bid(float valor, DateTime data, int sessao, int leilao) {
+        public Bid(decimal valor, DateTime data, int sessao, int leilao) {
             this.Valor = valor;
             this.DataHora = data;
             this.IdSessao = sessao;

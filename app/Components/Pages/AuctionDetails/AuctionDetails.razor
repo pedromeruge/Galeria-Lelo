@@ -112,7 +112,7 @@
     [Parameter]
     public int IdLeilao { get; set; }
     public AuctionCard? Leilao { get; set; } = default!;
-    public float currentBid;
+    public decimal currentBid;
     bool mostrarMenuLicitar = false;
 
 	protected override async Task OnAfterRenderAsync(bool firstRender) {
