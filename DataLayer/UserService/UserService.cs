@@ -117,17 +117,17 @@ namespace DataLayer.UserService {
 
 				User dbUser = new User();
 					dbUser.user_id = id;
-					dbUser.rua_fiscal= user.rua_fiscal;
-					dbUser.cidade_fiscal= user.cidade_fiscal;
-					dbUser.codpostal_fiscal= user.codpostal_fiscal;
-					dbUser.rua_entrega= user.rua_entrega;
-					dbUser.cidade_entrega= user.cidade_entrega;
-					dbUser.codpostal_entrega= user.codpostal_entrega;
-					dbUser.foto= user.foto;
-					dbUser.email= user.email;
-					dbUser.username= user.username;
-					dbUser.pass_hash= user.pass_hash;
-					dbUser.data_registo= user.data_registo;
+					dbUser.rua_fiscal = user.rua_fiscal;
+					dbUser.cidade_fiscal = user.cidade_fiscal;
+					dbUser.codpostal_fiscal = user.codpostal_fiscal;
+					dbUser.rua_entrega = user.rua_entrega;
+					dbUser.cidade_entrega = user.cidade_entrega;
+					dbUser.codpostal_entrega = user.codpostal_entrega;
+					dbUser.foto = user.foto;
+					dbUser.email = user.email;
+					dbUser.username = user.username;
+					dbUser.pass_hash = user.pass_hash;
+					dbUser.data_registo = user.data_registo;
 
 				// Console.WriteLine($"criada sessao para o user_id={dbUser.user_id} , session_id={session.sessao_id}");
 				return dbUser;

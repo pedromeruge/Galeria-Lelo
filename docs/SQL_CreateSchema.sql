@@ -46,7 +46,7 @@ CREATE TABLE Sessao (
 CREATE TABLE Administador (
     admin_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     email VARCHAR(150) NOT NULL,
-    pass_hash BINARY(64) NOT NULL
+    pass_hash VARCHAR(64) NOT NULL
 );
 
 CREATE TABLE Leilao (

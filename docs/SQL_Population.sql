@@ -23,8 +23,8 @@ VALUES
 
 INSERT INTO Administador (email, pass_hash)
 VALUES
-    ('admin1@gmail.com', 0x),
-    ('admin2@gmail.com', 0x);
+    ('admin1@gmail.com', 'admin1'),
+    ('admin2@gmail.com', 'admin2');
 
 INSERT INTO Leilao (
     Data_hora_inicio, Data_hora_fim, estado, preco_base, custo_envio, 
