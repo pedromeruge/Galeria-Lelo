@@ -1,4 +1,5 @@
-@using app.Components.ClassBlocks.AuctionCard;
+@using Classes.AuctionCard;
+@using Classes.Bids;
 @using System;
 @inherits ComponentBase
 @inject NavigationManager NavigationManager
@@ -23,8 +24,8 @@
   <div class="info-bids">
     <div class="left-bid-text"> Licitação atual:</div>
     <div class="right-bid-text"> 
-      <div class="preco-base">@Card.Preco_base €</div>
-      <div class="preco-com-envio"> @finalCost € incl.</div>
+      <div class="preco-atual">@currentBid.ToString("F2") €</div>
+      <div class="preco-com-envio"> @finalCost.ToString("F2") € incl.</div>
     </div>
   </div>
   <div class="time">TODO: FIX DATA</div>
@@ -34,11 +35,19 @@
   [Parameter, EditorRequired]
   public AuctionCard Card { get; set; } = default!;
   private float finalCost;
+  private float currentBid;
 
   protected override void OnInitialized()
   {
+      if (Card.Maior_licitacao == null) {
+        currentBid = Card.Preco_base;
+      }
+      else {
+        currentBid = Card.Maior_licitacao.Valor;
+      }
+
       // Pegar na maior licitação atual, tem de se mudar ainda
-      finalCost = Card.Preco_base + Card.Custo_envio;
+      finalCost = currentBid + Card.Custo_envio;
   }
 
   private void NavigateToDetalhesLeilao(int auctionId) {

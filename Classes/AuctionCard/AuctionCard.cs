@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json.Serialization;
+using Classes.Bids;
 
 namespace Classes.AuctionCard {
     public class AuctionCard
@@ -24,16 +25,14 @@ namespace Classes.AuctionCard {
         public string Prod_nome { get; } ="";
         public float Prod_peso { get; }
         public List<AuctionPhoto>? Images { get; set;}
+        public Bid? Maior_licitacao {get; set;}
         public int IdAdmin { get; }
 
-        public AuctionCard()
-        {
-            // Parameterless default constructor
-        }
+        public AuctionCard() {}
         public AuctionCard(int idLeilao, DateTime dataInicio, DateTime dataFim, AuctionStatus leilao_estado,
             float preco_base, float custo_envio, string nome_artista, float prod_comprimento, float prod_altura,
             float prod_largura, ProdTipo prod_tipo, ProdEstado prod_estado, string prod_tecnica, string prod_descricao,
-            string prod_nome, float prod_peso, List<AuctionPhoto> fotos, int idAdmin)
+            string prod_nome, float prod_peso, List<AuctionPhoto> fotos, Bid bid, int idAdmin)
         {
             this.IdLeilao = idLeilao;
             this.DataInicio = dataInicio;
@@ -52,6 +51,7 @@ namespace Classes.AuctionCard {
             this.Prod_nome = prod_nome;
             this.Prod_peso = prod_peso;
             this.Images = fotos;
+            this.Maior_licitacao = bid;
             this.IdAdmin = idAdmin;
         }
 
@@ -73,6 +73,7 @@ namespace Classes.AuctionCard {
                    $"Prod_descricao: {Prod_descricao}, " +
                    $"Prod_nome: {Prod_nome}, " +
                    $"Prod_peso: {Prod_peso}, " +
+                   $"Maior_licitacao: {Maior_licitacao.Valor}, " +
                    $"IdAdmin: {IdAdmin}";
         }
     }

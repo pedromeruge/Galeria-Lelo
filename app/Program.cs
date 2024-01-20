@@ -4,6 +4,7 @@ using DataLayer;
 using DataLayer.Auction;
 using DataLayer.UserService;
 using DataLayer.AdminService;
+
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -21,6 +22,7 @@ builder.WebHost.UseStaticWebAssets();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IAdminService, AdminService>();
 builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+builder.Services.AddTransient<IBidRepository, BidRepository>();
 builder.Services.AddTransient<IAuctionRepository, AuctionRepository>();
 
 var app = builder.Build();

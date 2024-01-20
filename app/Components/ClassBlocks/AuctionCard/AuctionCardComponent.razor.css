@@ -81,9 +81,9 @@
   transform: translate(0, -50%);
 }
 
-.preco-base {
+.preco-atual {
   color: #000000;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
 }
 

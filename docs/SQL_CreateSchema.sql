@@ -8,9 +8,6 @@
 -- DROP DATABASE GaleriaLelo; 
 -- GO
 
--- ALTER DATABASE GaleriaLelo
--- SET MULTI_USER;
--- GO
 
 CREATE DATABASE GaleriaLelo;
 GO

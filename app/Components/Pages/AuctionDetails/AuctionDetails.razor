@@ -2,15 +2,17 @@
 @layout LoginLayout
 @using System.Text.Json
 @using Classes.AuctionCard
+@using Classes.Bids
+@using Classes.Session
 @using app.Components.Pages.Menu
 @rendermode InteractiveServer
 @inject IWebHostEnvironment WebHostEnvironment
 @inject IJSRuntime JSRuntime
-@inject IAuctionRepository db
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IUserService UserService
-@using Classes.Session
+@inject IBidRepository BidService
+@inject IAuctionRepository AuctionService
 
 @if (Leilao != null) {
 <div class="content">
@@ -27,7 +29,7 @@
 			</span>
 		</div>
 		<div class="auction-photos-container">
-			@foreach (var foto in @Leilao.Images) {
+			@foreach (var foto in @Leilao.Images!) {
 				<div class="auction-photo-wrapper">
 					<img src=@foto.Path class="auction-photo" alt="foto">
 				</div>
@@ -39,8 +41,8 @@
 		<div class="auction-rectangle">
 			<div class="text-licitacao">Licitação atual</div>
 			<div class="precos">
-				<div class="preco-atual">@currPrice €</div>
-				<div class="licitacao-min">Min: @Leilao.Preco_base € </div>
+				<div class="preco-atual">@currentBid.ToString("F2") €</div>
+				<div class="licitacao-min">Min: @Leilao.Preco_base.ToString("F2") € </div>
 			</div>
 			<button class="licitar-button" @onclick="MostrarMenuLicitar">LICITAR</button>
 			
@@ -86,7 +88,7 @@
 					<div class="envio-text">Envio</div>
 					<div class="custo-container">
 						<div class="custo-text">Custo: </div>
-						<div class="custo-valor">@Leilao.Custo_envio €</div>
+						<div class="custo-valor">@Leilao.Custo_envio.ToString("F2") €</div>
 					</div>
 				</div>
 			</div>
@@ -98,7 +100,7 @@
 	</div>
 	@if (mostrarMenuLicitar)
 	{
-		<LicitarMenu isVisible=true CloseCallback="FecharMenuLicitar"/>
+		<LicitarMenu isVisible=true IdLeilao=@Leilao.IdLeilao BasePrice=@Leilao.Preco_base CloseCallback="FecharMenuLicitar"/>
 	}
 </div>
 
@@ -110,7 +112,7 @@
     [Parameter]
     public int IdLeilao { get; set; }
     public AuctionCard? Leilao { get; set; } = default!;
-    public float currPrice; // preço atual do leilão
+    public float currentBid;
     bool mostrarMenuLicitar = false;
 
 	protected override async Task OnAfterRenderAsync(bool firstRender) {
@@ -126,18 +128,12 @@
     protected override async Task OnInitializedAsync()
     {
         try {
-            @* Http.BaseAddress = new Uri(NavigationManager.BaseUri);
-            string jsonPath = "/AuctionCards.json";
-            IEnumerable<AuctionCard>? cards = await Http.GetFromJsonAsync<IEnumerable<AuctionCard>>(jsonPath);
-            Leilao = cards?.FirstOrDefault(auction => auction!.IdLeilao == IdLeilao); *@
-            Leilao = await db.Find(IdLeilao);
-
-            if (Leilao != null) {
-            // Pegar na maior licitação atual, tem de se mudar ainda
-                currPrice = Leilao.Preco_base;
-            } else {
-                currPrice = 0;
-            }
+            Leilao = await AuctionService.Find(IdLeilao);
+			if (Leilao.Maior_licitacao == null)
+				currentBid = Leilao.Preco_base;
+			else {
+				currentBid = Leilao.Maior_licitacao.Valor;
+			}
         } catch (HttpRequestException ex) {
             Console.WriteLine($"There was a problem loading auction card data: {ex.Message}");
         }
@@ -148,7 +144,18 @@
        mostrarMenuLicitar = true;
     }
 
-    private void FecharMenuLicitar() {
+    private async void FecharMenuLicitar() {
+		//get updated biggest bid
+		Bid latestBid = await BidService.FindHighestBid(IdLeilao);
+
+		//código igual à funcao de cima, meio nheca
+		if (latestBid == null)
+			currentBid = Leilao.Preco_base;
+		else {
+			currentBid = latestBid.Valor;
+		}
 		mostrarMenuLicitar = false;
+
+		StateHasChanged(); // Forçar UI a dar update do novo valor de bid
 	}
 }

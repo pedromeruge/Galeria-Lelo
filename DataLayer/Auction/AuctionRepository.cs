@@ -1,50 +1,35 @@
 using System.Data;
 using Classes.AuctionCard;
+using Classes.Bids;
 
 namespace DataLayer.Auction {
 
     public class AuctionRepository: IAuctionRepository {
         private ISqlDataAccess db;
         private PhotoAuctionRepository par;
+
+        private BidRepository br;
         public AuctionRepository(ISqlDataAccess data)
         {
             db = data;
             par = new PhotoAuctionRepository(data);
+            br = new BidRepository(data);
         }
 
     public async Task<AuctionCard> Find(int id) {
         string leilaoSql = "SELECT leilao_id AS IdLeilao, Data_hora_inicio, Data_hora_fim, estado, preco_base, custo_envio, prod_nome_artista AS Nome_artista, prod_comprimento, prod_altura, prod_largura, prod_tipo, prod_estado, prod_tecnica, prod_descricao, prod_nome, prod_peso, admin_id AS IdAdmin FROM Leilao WHERE leilao_id = @Id";
-        Task<List<AuctionModel>> auctionListTask = db.LoadData<AuctionModel, dynamic>(leilaoSql, new { Id = id }); // forma diferente de fazer isto
-        
-        List<AuctionModel> auctionList = await auctionListTask;
+        List<AuctionCard> auctionList = await db.LoadData<AuctionCard, dynamic>(leilaoSql, new { Id = id }); // forma diferente de fazer isto
 
         if (auctionList.Count > 0)
         {
-            AuctionModel auction = auctionList[0];
+            AuctionCard auction = auctionList[0];
             List<AuctionPhoto> fotosLeilao = await par.FindAllFromAuction(auction.IdLeilao);
+            auction.Images = fotosLeilao;
 
-            AuctionCard auctionCard = new AuctionCard(
-                auction.IdLeilao,
-                auction.DataInicio,
-                auction.DataFim,
-                auction.Leilao_estado,
-                auction.Preco_base,
-                auction.Custo_envio,
-                auction.Nome_artista,
-                auction.Prod_comprimento,
-                auction.Prod_altura,
-                auction.Prod_largura,
-                auction.Prod_tipo,
-                auction.Prod_estado,
-                auction.Prod_tecnica,
-                auction.Prod_descricao,
-                auction.Prod_nome,
-                auction.Prod_peso,
-                fotosLeilao,
-                auction.IdAdmin
-            );
+            Bid maiorLicitacao = await br.FindHighestBid(auction.IdLeilao);
+            auction.Maior_licitacao = maiorLicitacao;
 
-            return auctionCard;
+            return auction;
         } else {
             throw new InvalidOperationException();
         }
@@ -53,10 +38,7 @@ namespace DataLayer.Auction {
         public async Task<List<AuctionCard>> FindAll()
         {
             string leiloesSql = "SELECT leilao_id AS IdLeilao, Data_hora_inicio, Data_hora_fim, estado, preco_base, custo_envio, prod_nome_artista AS Nome_artista, prod_comprimento, prod_altura, prod_largura, prod_tipo, prod_estado, prod_tecnica, prod_descricao, prod_nome, prod_peso, admin_id AS IdAdmin FROM Leilao";
-            Task<List<AuctionModel>> auctionListTask = db.LoadData<AuctionModel, dynamic>(leiloesSql, new { });
-            
-            List<AuctionModel> auctionList = await auctionListTask;
-            List<AuctionCard> auctionCardList = new List<AuctionCard>();
+            List<AuctionCard> auctionList = await db.LoadData<AuctionCard, dynamic>(leiloesSql, new { });
 
             foreach (var auction in auctionList)
             {
@@ -64,31 +46,14 @@ namespace DataLayer.Auction {
                 List<AuctionPhoto> fotosLeilao = await par.FindAllFromAuction(auction.IdLeilao);
                 // Console.WriteLine("Got number of images " + fotosLeilao.Count + "for leilaoID: " + auction.IdLeilao);
 
-                AuctionCard auctionCard = new AuctionCard(
-                    auction.IdLeilao,
-                    Convert.ToDateTime(auction.DataInicio),
-                    auction.DataFim.ToLocalTime(),
-                    auction.Leilao_estado,
-                    auction.Preco_base,
-                    auction.Custo_envio,
-                    auction.Nome_artista,
-                    auction.Prod_comprimento,
-                    auction.Prod_altura,
-                    auction.Prod_largura,
-                    auction.Prod_tipo,
-                    auction.Prod_estado,
-                    auction.Prod_tecnica,
-                    auction.Prod_descricao,
-                    auction.Prod_nome,
-                    auction.Prod_peso,
-                    fotosLeilao,
-                    auction.IdAdmin
-                );
+                auction.Images = fotosLeilao;
 
-                auctionCardList.Add(auctionCard);
+                Bid maiorLicitacao = await br.FindHighestBid(auction.IdLeilao);
+                // Console.WriteLine("Got biggest bid " + maiorLicitacao.Valor + "for leilaoID: " + auction.IdLeilao);
+                auction.Maior_licitacao = maiorLicitacao;
             }
 
-            return auctionCardList;
+            return auctionList;
         }
 
         public async Task<List<AuctionCard>> SearchAuctions(string inputQuery)
@@ -105,7 +70,9 @@ namespace DataLayer.Auction {
 
                 auction.Images = fotosLeilao;
 
-                
+                Bid maiorLicitacao = await br.FindHighestBid(auction.IdLeilao);
+                // Console.WriteLine("Got biggest bid " + maiorLicitacao.Valor + "for leilaoID: " + auction.IdLeilao);
+                auction.Maior_licitacao = maiorLicitacao;
             }
 
             return auctionList;

@@ -1,11 +1,14 @@
 @inherits ComponentBase
 @rendermode InteractiveServer
 @using app.Components.Pages.Menu
-@using Classes.User
+@using Classes.Session
+@using Classes.Bids
+
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IUserService UserService
-@using Classes.Session
+@inject IBidRepository BidService
 
 @if (isVisible) {
 	<div class="menu-overlay">
@@ -18,9 +21,12 @@
 				<div class="menu-line"></div>
 			</div>
             <div class="menu-body">
-			    <div class="menu-body-title">Maior licitação atual: @currHighestBid €</div>
+                <div class="meny-body-text">
+                    <div class="body-title">Maior licitação atual:</div>
+                    <div class="body-value">@currHighestBid.ToString("F2") €</div>
+                </div>
                 <form class="inputs" @onsubmit="HandleSubmit">
-                    <input class="input-container" type="number" @bind="newBid" placeholder="> @currHighestBid€" required>
+                    <input class="input-container" type="number" step="0.01" @bind="newBid" placeholder="> @currHighestBid€" required>
                     <button class="input-button" type="submit">LICITAR</button>
                     @if (invalidValue) {
                         <p class="error-msg"> x Valor da licitação tem de ser superior a @currHighestBid €</p>
@@ -41,9 +47,12 @@
     [Parameter]
     public int IdLeilao {get; set;}
 
-    public int currHighestBid {get; set;} = 5;
+	[Parameter]
+    public float BasePrice {get; set;}
+    private float currHighestBid {get; set;}
 
-    private int newBid {get; set;}
+    private float newBid {get; set;}
+
 
 	[Parameter]
     public Action? CloseCallback { get; set; }
@@ -53,21 +62,26 @@
 		CloseCallback?.Invoke();
 	}
 
-    @* protected override async Task OnInitializedAsync() {
-            currHighestBid = await db.FindHighestBid(IdLeilao);
-    } *@
+    protected override async Task OnInitializedAsync() {
+        Bid latestBid = await BidService.FindHighestBid(IdLeilao);
+        if (latestBid != null)
+			currHighestBid = latestBid.Valor;
+		else {
+			currHighestBid = BasePrice;
+		}
+    }
 
 	private async Task HandleSubmit() {
-		@* await localStorage.SetItemAsync("SessionToken", sessionToken); *@
-		@* sessionData = await localStorage.GetItemAsync<MySessionData>("SessionData"); *@
-        
-        @* User user = await localStorage.GetItemAsync<User>("User"); *@
+		Session session = await localStorage.GetItemAsync<Session>("Session");
+
         if (newBid <= currHighestBid) {
             invalidValue = true;
         } else {
-            bool success = true;
-            @* bool success = await submitNewBid(newBid); *@
-            if (success == true) {
+            Bid bid = new Bid(newBid,DateTime.Now,session.sessao_id,IdLeilao);
+            int id = await BidService.createBid(bid);
+            bid.IdLicitacao = id;
+            Console.WriteLine("Built bid: " + bid.ToString());
+            if (id != -1) {
                 invalidValue = false;
 		        CloseMenu();
             }
