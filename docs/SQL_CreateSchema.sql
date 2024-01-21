@@ -88,4 +88,3 @@ CREATE TABLE Licitacao (
     CONSTRAINT FK_leilao_id_licitacao FOREIGN KEY (leilao_id)
         REFERENCES Leilao(leilao_id)
 );
-

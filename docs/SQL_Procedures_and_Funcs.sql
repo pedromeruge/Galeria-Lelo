@@ -43,5 +43,36 @@ BEGIN
         OR prod_tipo LIKE '%' + SearchTerm.value + '%' -- verificar também se alguma palavra de input indica o tipo (pré-definido) do objeto do leilao
     );
 END;
+GO
+
+CREATE FUNCTION GetHighestBid
+(
+    @IdLeilao INT
+)
+RETURNS DECIMAL(10,2)
+AS
+BEGIN
+    DECLARE @HighestBid DECIMAL(10,2)
+
+    SELECT @HighestBid = MAX(valor)
+		FROM Licitacao
+		WHERE leilao_id = @IdLeilao
+
+    RETURN ISNULL(@HighestBid, 0)
+END;
+GO
+
+CREATE PROCEDURE GetLucrosEntre
+	@DataInicio DATETIME,
+	@DataFim DATETIME
+AS
+BEGIN
+	SELECT leilao_id, estado, preco_base, Data_hora_fim, ISNULL(GaleriaLelo.GetHighestBid(leilao_id), 0) AS maior
+	FROM Leilao
+	WHERE estado IN ('por entregar','concluido')
+		AND Data_hora_fim >= @DataInicio
+		AND Data_hora_fim <= @DataFim
+END;
+
 
 -- EXEC SearchAuctionsWithInput 'grito';

@@ -26,11 +26,13 @@ else { *@
             <p class="nome-galeria">GALERIA LELO</p>
             <p class="slogan-galeria">Transforme o belo em seu, e o dinheiro em meu</p>
         </div>
-    </div>
+	</div>
+    <div class="botoes">
+		<button @onclick="redirectStats">Estatísticas</button>
+		<button @onclick="redirectCriarLeilao">Criar leilão</button>
+	</div>
     <div class="leiloes">
         <p class="texto-leiloes">Leilões a decorrer</p>
-
-		<p>admin loginado</p>
         @* <div class="grid">
             @foreach (var card in cards) {
                 <AuctionCardComponent Card="card" />
@@ -46,6 +48,14 @@ else { *@
 			Admin admin = await localStorage.GetItemAsync<Admin>("Admin");
 			if (admin == null || await AdminService.checkAdminValid(admin) == false) NavigationManager.NavigateTo("/admin");
 		}
+	}
+
+	private async Task redirectStats() {
+		NavigationManager.NavigateTo("/admin/stats");
+	}
+
+	private async Task redirectCriarLeilao() {
+		NavigationManager.NavigateTo("/admin/stats");
 	}
 
     @* private List<AuctionCard>? cards; *@
