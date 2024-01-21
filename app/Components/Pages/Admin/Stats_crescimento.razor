@@ -1,4 +1,4 @@
-@page "/admin/stats_venda"
+@page "/admin/stats_crescimento"
 @layout LoginAdminLayout
 
 @using System.Text.Json
@@ -16,12 +16,12 @@
 
 <div class="stats_page">
 	<div class="stats_buttons">
-		<button class="botao_stats_pressed" disabled="disabled">
+		<button class="botao_stats" @onclick="StatsVenda">
 			Estatísticas
 			<br>
 			de venda
 		</button>
-		<button class="botao_stats" @onclick="StatsCrescimento">
+		<button class="botao_stats_pressed" disabled="disabled">
 			Estatísticas
 			<br>
 			de crescimento
@@ -34,30 +34,18 @@
 	</form>
 	<div class="stats_container">
 		<p class="stats_text">
-			Total lucro: @TotalLucro
+			Users novos: @UsersNovos
 		</p>
 		<p class="stats_text">
-			Leilões concluidos: @LeiloesConcluidos
-		</p>
-		<p class="stats_text">
-			Leilões iniciados: @LeiloesIniciados
-		</p>
-		<p class="stats_text">
-			Lucro médio: @LucroMedio
-		</p>
-		<p class="stats_text">
-			Licitação final média: @LicitacaoFinalMedia
+			Total logins: @Logins
 		</p>
 	</div>
 </div>
 
 
 @code {
-	private float TotalLucro = 0;
-	private int LeiloesConcluidos = 0;
-	private int LeiloesIniciados = 0;
-	private float LucroMedio = 0;
-	private float LicitacaoFinalMedia = 0;
+	private int UsersNovos = 0;
+	private int Logins = 0;
 	private DateTime DataInicio = DateTime.Now;
 	private DateTime DataFim = DateTime.Now;
 
@@ -70,15 +58,11 @@
 		}
 	}
 
-	private async Task StatsCrescimento() {
-		NavigationManager.NavigateTo("/admin/stats_crescimento");
+	private async Task StatsVenda() {
+		NavigationManager.NavigateTo("/admin/stats_venda");
 	}
-
 	private async Task UpdateData() {
-		TotalLucro = await AdminService.getLucroEntre(DataInicio, DataFim);
-		LeiloesConcluidos = await AdminService.getNumeroLeiloesConcluidosEntre(DataInicio, DataFim);
-		LeiloesIniciados = await AdminService.getNumeroLeiloesIniciadosEntre(DataInicio, DataFim);
-		LucroMedio = await AdminService.getLucroMedioEntre(DataInicio, DataFim);
-		LicitacaoFinalMedia = await AdminService.getMediaLicitacaoFinalEntre(DataInicio, DataFim);
+		UsersNovos = await AdminService.getNumeroNovosUsersEntre(DataInicio, DataFim);
+		Logins = await AdminService.getNumeroLoginsEntre(DataInicio, DataFim);
 	}
 }
