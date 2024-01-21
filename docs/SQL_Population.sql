@@ -32,17 +32,23 @@ INSERT INTO Leilao (
     prod_estado, prod_tecnica, prod_descricao, prod_nome, prod_peso, admin_id
 )
 VALUES
-    ('2024-01-05T08:30:00', '2024-02-12T20:30:00', 'Em Leilao', 250.00, 10.00, 
+    ('2024-01-05T08:30:00', '2024-02-12T20:30:00', 'em leilao', 250.00, 10.00, 
      'Leonardo Da Vinki', 15.00, 10.00, 8.00, 'Pintura', 
      'Excelente', 'Pintou, morreu, famosou', 'Descrição descritiva', 'Maconha Lisa', 
         200, 2
     ),
-    ('2024-01-09T08:30:00', '2024-02-10T18:30:00', 'Em Leilao', 100.00, 15.00, 
+    ('2024-01-09T08:30:00', '2024-02-10T18:30:00', 'em leilao', 100.00, 15.00, 
      'Eduardo Muncha muito', 18.00, 20.00, 4.00, 'Pintura', 
      'Excelente', 'Gritou, Pintou', 'Descrição mais descritiva que a outra descrição', 'O grito louco', 
         140, 1
     ),
-    ('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'Em Leilao', 87.00, 20.00, 
+    ('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em leilao', 87.00, 20.00, 
+     'Desconhecido', 40.00, 20.01, 15.2, 'Escultura', 
+     'Bom', 'Esculpir madeira', 
+     'Bela escultura de Mambila dos Camarões. O estilo é dominado, os volumes são bem tratados. O corpo é compacto e atarracado. O rosto é expressivo, suave e sensível. A sua presença é pacífica. O rosto apresenta resquícios de pigmentos brancos e vermelhos. O seu cocar é lindo, feito de pontas de madeira. A madeira está danificada em alguns lugares, os insetos atacaram-na, a madeira é sólida. Ver fotos. Vendido como está. Um lindo item de colecionador antigo e autêntico. Por volta de 1950.', 
+     'Quadro Mambila, Camarões', 300, 1
+    ),
+    ('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'concluido', 87.00, 20.00, 
      'Desconhecido', 40.00, 20.01, 15.2, 'Escultura', 
      'Bom', 'Esculpir madeira', 
      'Bela escultura de Mambila dos Camarões. O estilo é dominado, os volumes são bem tratados. O corpo é compacto e atarracado. O rosto é expressivo, suave e sensível. A sua presença é pacífica. O rosto apresenta resquícios de pigmentos brancos e vermelhos. O seu cocar é lindo, feito de pontas de madeira. A madeira está danificada em alguns lugares, os insetos atacaram-na, a madeira é sólida. Ver fotos. Vendido como está. Um lindo item de colecionador antigo e autêntico. Por volta de 1950.', 
@@ -63,6 +69,5 @@ VALUES
     (260.00, '2024-01-10T11:02:00', 2, 1),
     (150.00, '2024-01-09T08:31:23', 2, 2),
     (100.00, '2024-01-09T08:34:02', 1, 3),
-    (105.20, '2024-01-10T11:04:00', 2, 3);
-
-
+    (105.20, '2024-01-10T11:04:00', 2, 3),
+    (120.20,'2024-01-09T11:04:00', 1, 4);

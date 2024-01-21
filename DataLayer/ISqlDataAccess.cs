@@ -7,5 +7,6 @@ namespace DataLayer {
 		Task<int> ExecuteScalar<T>(string sql, T parameters);
 
         Task<List<T>> ExecuteProcedure<T, U>(string procedureName, U parameters);
+		Task<List<T>> ExecuteFunction<T, U>(string functionName, U parameters);
     }
 }

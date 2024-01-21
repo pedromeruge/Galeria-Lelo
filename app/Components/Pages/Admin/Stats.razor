@@ -23,6 +23,7 @@
 			// ver se user existe e ta valido
 			Admin admin = await localStorage.GetItemAsync<Admin>("Admin");
 			if (admin == null || await AdminService.checkAdminValid(admin) == false) NavigationManager.NavigateTo("/admin");
+			Console.WriteLine(await AdminService.getLucroMedioEntre(DateTime.Parse("2022-01-05"), DateTime.Parse("2025-01-10")));
 		}
 	}
 }

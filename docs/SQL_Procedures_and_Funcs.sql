@@ -82,4 +82,44 @@ BEGIN
 END;
 GO
 
+CREATE FUNCTION dbo.GetMediaLucrosEntre
+(
+    @DataInicio DATETIME,
+    @DataFim DATETIME
+)
+RETURNS DECIMAL(10, 2)
+AS
+BEGIN
+    DECLARE @LucroMedio DECIMAL(10, 2)
+
+    SELECT @LucroMedio = AVG(dbo.GetHighestBid(leilao_id) * 0.2)
+    FROM Leilao
+    WHERE estado IN ('por entregar', 'concluido')
+        AND Data_hora_fim >= @DataInicio
+        AND Data_hora_fim <= @DataFim
+
+    RETURN ISNULL(@LucroMedio, 0)
+END;
+GO
+
+CREATE FUNCTION dbo.GetMediaLicitacoesEntre
+(
+    @DataInicio DATETIME,
+    @DataFim DATETIME
+)
+RETURNS DECIMAL(10, 2)
+AS
+BEGIN
+    DECLARE @MediaLicitacoes DECIMAL(10, 2)
+
+    SELECT @MediaLicitacoes = COUNT(dbo.GetHighestBid(leilao_id))
+    FROM Leilao
+    WHERE estado IN ('por entregar', 'concluido')
+        AND Data_hora_fim >= @DataInicio
+        AND Data_hora_fim <= @DataFim
+
+    RETURN ISNULL(@MediaLicitacoes, 0)
+END;
+GO
+
 -- EXEC SearchAuctionsWithInput 'grito';

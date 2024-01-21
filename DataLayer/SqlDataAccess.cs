@@ -63,5 +63,23 @@ namespace DataLayer {
                 throw;
             }
         }
+
+		public async Task<List<T>> ExecuteFunction<T, U>(string functionName, U parameters) {
+			try {
+                string? connectionString = _config.GetConnectionString(ConnectionStringName);
+
+                using (IDbConnection connection = new SqlConnection(connectionString))
+                {
+                    var data = await connection.QueryAsync<T>(functionName, parameters, commandType: CommandType.StoredProcedure);
+                    return data.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in ExecuteProcedure: {ex.Message}");
+                throw;
+            }
+		}
+
     }
 }

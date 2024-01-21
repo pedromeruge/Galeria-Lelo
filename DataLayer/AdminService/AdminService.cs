@@ -34,15 +34,11 @@ namespace DataLayer.AdminService {
 		}
 
 		public async Task<float> getLucroEntre(DateTime start, DateTime end) {
-			string procedureName = "GetLucrosEntre";
-
-            List<float> lucros = await db.ExecuteProcedure<float, dynamic>(procedureName, new {DataInicio = start, DataFim = end});
-
-            if (lucros.Count > 0) {
-				return lucros[0];
-			} else {
-				return 0;
-			}
+			// string functionName = "GetLucrosEntre @DataInicio, @DataFim";
+			//???????????????????????????????????????????????????????????????????????????????
+			string functionName = "DECLARE @Result DECIMAL(10, 2); SET @Result = dbo.GetLucrosEntre(@DataInicio, @DataFim); SELECT @Result AS TotalProfit;";
+			// esta funcao funciona mas vai truncar para um int, nao sei resolver nao vejo onde esta a API que retorna float, por agora tbm nao interessa
+            return await db.ExecuteScalar<dynamic>(functionName, new {DataInicio = start, DataFim = end});
 		}
 
 		public async Task<int> getNumeroLeiloesConcluidosEntre(DateTime start, DateTime end) {
@@ -53,7 +49,9 @@ namespace DataLayer.AdminService {
 		}
 
 		public async Task<float> getLucroMedioEntre(DateTime start, DateTime end) {
-			return 0;
+			string functionName = "DECLARE @Result DECIMAL(10, 2); SET @Result = dbo.GetMediaLucrosEntre(@DataInicio, @DataFim); SELECT @Result AS TotalProfit;";
+			// esta funcao funciona mas vai truncar para um int, nao sei resolver nao vejo onde esta a API que retorna float, por agora tbm nao interessa
+            return await db.ExecuteScalar<dynamic>(functionName, new {DataInicio = start, DataFim = end});
 		}
 
 		public async Task<int> getNumeroNovosUsersEntre(DateTime start, DateTime end) {
@@ -64,7 +62,9 @@ namespace DataLayer.AdminService {
 		}
 
 		public async Task<float> getMediaLicitacaoFinalEntre(DateTime start, DateTime end) {
-			return 0;
+			string functionName = "DECLARE @Result DECIMAL(10, 2); SET @Result = dbo.GetMediaLicitacoesEntre(@DataInicio, @DataFim); SELECT @Result AS TotalProfit;";
+			// esta funcao funciona mas vai truncar para um int, nao sei resolver nao vejo onde esta a API que retorna float, por agora tbm nao interessa
+            return await db.ExecuteScalar<dynamic>(functionName, new {DataInicio = start, DataFim = end});
 		}
 	}
 }
