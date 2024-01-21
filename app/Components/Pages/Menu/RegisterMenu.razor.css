@@ -80,21 +80,27 @@
 }
 
 .inputs {
-	padding-top: 5%;
 	flex: 1;
 	margin-bottom: 10%;
 }
 
 .close-button {
-	background: #3b80ba;
-	color: white;
+	background: transparent;
+	color: #808080;
 	border: none;
 	outline: none;
 	text-align: right;
+    font-family: "Lato-Light", sans-serif;
+    font-size: 15px;
+    font-weight: 200;
 	height: fit-content;
 	width: fit-content;
-	margin-right: 10%;
-	margin-top: 1%;
+    cursor: pointer;
+    padding-right: 25px;
+}
+
+.close-button:hover {
+    color: #000000; /* Change the color on hover */
 }
 
 .menu-title {
