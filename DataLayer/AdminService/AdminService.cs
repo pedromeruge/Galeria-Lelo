@@ -42,10 +42,13 @@ namespace DataLayer.AdminService {
 		}
 
 		public async Task<int> getNumeroLeiloesConcluidosEntre(DateTime start, DateTime end) {
-			return 0;
+			string SQL = "SELECT COUNT(leilao_id) FROM Leilao WHERE Data_hora_fim >= @DataInicio AND Data_hora_fim <= @DataFim";
+			return await db.ExecuteScalar<dynamic>(SQL, new {DataInicio = start, DataFim = end});
+
 		}
 		public async Task<int> getNumeroLeiloesIniciadosEntre(DateTime start, DateTime end) {
-			return 0;
+			string SQL = "SELECT COUNT(leilao_id) FROM Leilao WHERE Data_hora_inicio >= @DataInicio AND Data_hora_inicio <= @DataFim";
+			return await db.ExecuteScalar<dynamic>(SQL, new {DataInicio = start, DataFim = end});
 		}
 
 		public async Task<float> getLucroMedioEntre(DateTime start, DateTime end) {
@@ -55,10 +58,12 @@ namespace DataLayer.AdminService {
 		}
 
 		public async Task<int> getNumeroNovosUsersEntre(DateTime start, DateTime end) {
-			return 0;
+			string newUsersSQL = "SELECT COUNT(user_id) FROM Utilizador WHERE data_registo >= @DataInicio AND data_registo <= @DataFim";
+			return await db.ExecuteScalar<dynamic>(newUsersSQL, new {DataInicio = start, DataFim = end});
 		}
 		public async Task<int> getNumeroLoginsEntre(DateTime start, DateTime end) {
-			return 0;
+			string loginsSQL = "SELECT COUNT(sessao_id) FROM Sessao WHERE data_hora_inicio >= @DataInicio AND data_hora_fim <= @DataFim";
+			return await db.ExecuteScalar<dynamic>(loginsSQL, new {DataInicio = start, DataFim = end});
 		}
 
 		public async Task<float> getMediaLicitacaoFinalEntre(DateTime start, DateTime end) {
@@ -68,27 +73,3 @@ namespace DataLayer.AdminService {
 		}
 	}
 }
-
-
-/*         public async Task<List<AuctionCard>> SearchAuctions(string inputQuery)
-        {
-            string procedureName = "SearchAuctionsWithInput";
-
-            List<AuctionCard> auctionList = await db.ExecuteProcedure<AuctionCard, dynamic>(procedureName, new {SearchTerm = inputQuery});
-
-            // Console.WriteLine("Got number of auctions " + auctionList.Count);
-            foreach (var auction in auctionList)
-            {
-                // Console.WriteLine("Got auction from DB " +  auction.ToString());
-                List<AuctionPhoto> fotosLeilao = await par.FindAllFromAuction(auction.IdLeilao);
-
-                auction.Images = fotosLeilao;
-
-                Bid maiorLicitacao = await br.FindHighestBid(auction.IdLeilao);
-                // Console.WriteLine("Got biggest bid " + maiorLicitacao.Valor + "for leilaoID: " + auction.IdLeilao);
-                auction.Maior_licitacao = maiorLicitacao;
-            }
-
-            return auctionList;
-        }
- */

@@ -6,15 +6,16 @@ namespace DataLayer.AdminService {
 		Task<Admin> getAdmin(string email);
 		Task<bool> checkAdminValid(Admin admin); // ve se email existe e se password bate certo (o resto por agora nao interessa)
 
+		// estatísticas de venda
 		Task<float> getLucroEntre(DateTime start, DateTime end);
 		Task<int> getNumeroLeiloesConcluidosEntre(DateTime start, DateTime end);
 		Task<int> getNumeroLeiloesIniciadosEntre(DateTime start, DateTime end);
 		Task<float> getLucroMedioEntre(DateTime start, DateTime end);
-		
+		Task<float> getMediaLicitacaoFinalEntre(DateTime start, DateTime end);
+
+		// estatísticas de crescimento
 		Task<int> getNumeroNovosUsersEntre(DateTime start, DateTime end);
 		Task<int> getNumeroLoginsEntre(DateTime start, DateTime end);
-
-		Task<float> getMediaLicitacaoFinalEntre(DateTime start, DateTime end);
 	}
 }
 
