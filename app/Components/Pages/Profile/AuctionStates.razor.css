@@ -1,0 +1,148 @@
+.page,
+.page * {
+  box-sizing: border-box;
+}
+.page {
+  background: #ffffff;
+  padding: 2vh 5vw;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow: auto;
+  margin: 0;
+}
+
+.page-title {
+    color: #000000;
+    text-align: left;
+    font-family: "Lato-Bold", sans-serif;
+    font-size: 2vw;
+    font-weight: 500;
+    position: relative;
+    margin-bottom: 2vh;
+}
+
+.body {
+  margin:0;
+  padding:0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-grow: 1;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.concluido-section, .por-pagar-section, .por-enviar-section, .por-entregar-section {
+    cursor: pointer;
+    max-width: 38vh;
+    max-height: 38vh; /*mudar isto se preferir fazer algum scroll para ver as opções de baixo e ter os quadrados maiores*/
+    object-fit: cover;
+    display: flex;
+    padding: 0;
+}
+
+.por-pagar-section, .por-entregar-section {
+    justify-content: flex-start;
+    margin-right: 20px;
+}
+
+.concluido-section, .por-enviar-section {
+    justify-content: flex-end;
+}
+
+.por-pagar-section, .por-enviar-section {
+    margin-bottom: 20px;
+}
+
+.por-entregar, .concluido {
+    bottom: 0;
+}
+
+.em-leilao-section {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    border-radius: 70px;
+    border: 18px solid white;
+    overflow: hidden;
+    cursor: pointer;
+    max-width: 42vh;
+    max-height: 42vh; /*mudar isto se preferir fazer algum scroll para ver as opções de baixo e ter os quadrados maiores*/
+    object-fit: cover;
+    display: flex;
+    padding: 0;
+    background-color: white;
+}
+
+.por-pagar, .por-enviar, .por-entregar, .concluido, .em-leilao {
+    font-family: "Lato-ExtraBold", sans-serif;
+    font-size: 3.8vh;
+    font-weight: 800; 
+    color: #ffffff;
+    position: absolute;
+    margin: 5vh;
+    max-width: 100%;
+}
+
+.em-leilao {
+    font-size: 4.2vh;
+}
+
+.bckg {
+    max-width: 100%;
+    max-height: auto;
+    border-radius: 0;
+    background: white;
+    opacity: 1;
+}
+
+/* porque é que este em específico nao funfa???*/
+.por-pagar-section:active .bckg {
+    opacity: 0.5;
+}
+  
+.por-pagar-section:hover .bckg {
+    opacity: 0.7;
+}
+
+.por-enviar-section:active .bckg {
+    opacity: 0.5;
+}
+  
+.por-enviar-section:hover .bckg {
+    opacity: 0.7;
+}
+
+.por-entregar-section:active .bckg {
+    opacity: 0.5;
+}
+  
+.por-entregar-section:hover .bckg {
+    opacity: 0.7;
+}
+
+.concluido-section:active .bckg {
+    opacity: 0.5;
+}
+  
+.concluido-section:hover .bckg {
+    opacity: 0.7;
+}
+
+.em-leilao-section:active .bckg {
+    opacity: 0.5;
+}
+  
+.em-leilao-section:hover .bckg {
+    opacity: 0.7;
+}
+
+
+  

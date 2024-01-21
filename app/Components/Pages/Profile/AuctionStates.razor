@@ -1,0 +1,64 @@
+@page "/AuctionStates"
+@attribute [StreamRendering]
+@inherits ComponentBase
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+<PageTitle>AuctionStates</PageTitle>
+
+<div class="page">
+  <div class="page-title">Licitações</div>
+  <div class="body">
+    <div class="row">
+        <div class="por-pagar-section" @onclick=" () => NavigateToPorPagarSection()">
+            <img class="bckg" src="pngs/por-pagar-bckg.png" />
+            <div class="por-pagar">POR PAGAR</div>
+        </div>
+        <div class="por-enviar-section" @onclick=" () => NavigateToPorEnviarSection()">
+        <img class="bckg" src="pngs/por-enviar-bckg.png" />
+        <div class="por-enviar">POR ENVIAR</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="por-entregar-section" @onclick=" () => NavigateToPorEntregarSection()">
+        <img class="bckg" src="pngs/por-entregar-bckg.png" />
+        <div class="por-entregar">POR ENTREGAR</div>
+        </div>
+        <div class="concluido-section" @onclick=" () => NavigateToConcluidoSection()">
+        <img class="bckg" src="pngs/concluido-bckg.png" />
+        <div class="concluido">CONCLUIDO</div>
+        </div>
+    </div>
+    <div class="em-leilao-section" @onclick=" () => NavigateToEmLeilaoSection()">
+        <img class="bckg" src="pngs/em-leilao-bckg.png" />
+        <div class="em-leilao">EM LEILÃO</div>
+    </div>
+  </div>
+</div>
+
+@code {
+    private void NavigateToPorPagarSection() {
+        Console.WriteLine("Pressing Por Pagar");
+        NavigationManager.NavigateTo("/AuctionStates/PorPagar"); 
+    }
+
+    private void NavigateToPorEnviarSection() {
+        Console.WriteLine("Pressing Por Enviar");
+        NavigationManager.NavigateTo($"/AuctionStates/PorEnviar"); 
+    }
+
+    private void NavigateToPorEntregarSection() {
+         Console.WriteLine("Pressing Por Entregar");
+        NavigationManager.NavigateTo("/AuctionStates/PorEntregar"); 
+    }
+    
+    private void NavigateToConcluidoSection() {
+         Console.WriteLine("Pressing Concluido");
+        NavigationManager.NavigateTo("/AuctionStates/Concluido"); 
+    }
+
+    private void NavigateToEmLeilaoSection() {
+         Console.WriteLine("Pressing Em Leilao");
+        NavigationManager.NavigateTo("/AuctionStates/EmLeilao"); 
+    }
+}

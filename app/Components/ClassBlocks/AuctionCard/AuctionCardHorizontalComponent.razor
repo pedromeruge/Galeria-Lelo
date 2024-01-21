@@ -1,0 +1,57 @@
+@using Classes.AuctionCard;
+@using Classes.Bids;
+@using System;
+@inherits ComponentBase
+@inject NavigationManager NavigationManager
+
+<div class="card-component" @onclick=" () => NavigateToDetalhesLeilao(Card.IdLeilao)">
+  @if (Card.Images.Any()) {
+    <img src="@Card.Images.First().Path" class="card-img-top" alt="@Card.Images.First().Path">
+  }
+  else {
+    <p class="card-img-top">Image not found</p>
+  }
+  <div class="top-row">
+    <div class="info-names">
+        <span class="author">
+            @Card.Nome_artista -
+        </span>
+        <span class="name">
+            @Card.Prod_nome
+        </span>
+    <div class="time">TODO: FIX DATA</div>
+  </div>
+  </div>
+  <div class="bottom-row">
+    <div class="left-bid-text"> Licitação atual:</div>
+    <div class="right-bid-text"> 
+      <div class="preco-atual">@currentBid.ToString("F2") €</div>
+      <div class="preco-com-envio"> @finalCost.ToString("F2") € incl.</div>
+    </div>
+  </div>
+</div>
+
+@code {
+  [Parameter, EditorRequired]
+  public AuctionCard Card { get; set; } = default!;
+  private decimal finalCost;
+  private decimal currentBid;
+
+  protected override void OnInitialized()
+  {
+      if (Card.Maior_licitacao == null) {
+        currentBid = Card.Preco_base;
+      }
+      else {
+        currentBid = Card.Maior_licitacao.Valor;
+      }
+
+      // Pegar na maior licitação atual, tem de se mudar ainda
+      finalCost = currentBid + Card.Custo_envio;
+  }
+
+  private void NavigateToDetalhesLeilao(int auctionId) {
+    @* Console.WriteLine("Calling NavigateToDeatlhesLeilao"); *@
+    NavigationManager.NavigateTo($"/AuctionDetails/{Card.IdLeilao}"); 
+  }
+}
