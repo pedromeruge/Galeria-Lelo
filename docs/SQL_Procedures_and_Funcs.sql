@@ -112,7 +112,7 @@ AS
 BEGIN
     DECLARE @MediaLicitacoes DECIMAL(10, 2)
 
-    SELECT @MediaLicitacoes = COUNT(dbo.GetHighestBid(leilao_id))
+    SELECT @MediaLicitacoes = AVG(dbo.GetHighestBid(leilao_id))
     FROM Leilao
     WHERE estado IN ('por entregar', 'concluido')
         AND Data_hora_fim >= @DataInicio
