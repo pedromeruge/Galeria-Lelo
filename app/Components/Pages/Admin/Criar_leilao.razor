@@ -1,0 +1,28 @@
+@page "/admin/criar_leilao"
+@layout LoginAdminLayout
+
+@using System.Text.Json
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+@using DataLayer.Auction
+@using Classes.AuctionCard
+@using app.Components.ClassBlocks.AuctionCard
+@inject IAuctionRepository db
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IAdminService AdminService
+@using Classes.Admin
+
+
+
+@code {
+	protected override async Task OnAfterRenderAsync(bool firstRender) {
+		if (firstRender) {
+			// ver se user existe e ta valido
+			Admin admin = await localStorage.GetItemAsync<Admin>("Admin");
+			if (admin == null || await AdminService.checkAdminValid(admin) == false) NavigationManager.NavigateTo("/admin");
+		}
+	}
+
+}
