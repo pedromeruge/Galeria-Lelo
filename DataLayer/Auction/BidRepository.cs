@@ -38,7 +38,7 @@ namespace DataLayer.Auction {
 					LeilaoId = licitacao.IdLeilao
 				});
 
-				Console.WriteLine($"Criada licitacao para a sessao_id={licitacao.IdSessao} , leilao_id={licitacao.IdLeilao}");
+				// Console.WriteLine($"Criada licitacao para a sessao_id={licitacao.IdSessao} , leilao_id={licitacao.IdLeilao}");
 				return id;
 			} catch (System.NullReferenceException e) {
 				Console.WriteLine($"Error creating big; {e}");

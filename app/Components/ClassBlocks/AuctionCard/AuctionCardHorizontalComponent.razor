@@ -1,8 +1,10 @@
 @using Classes.AuctionCard;
 @using Classes.Bids;
+@using Classes.Time;
 @using System;
 @inherits ComponentBase
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <div class="card-component" @onclick=" () => NavigateToDetalhesLeilao(Card.IdLeilao)">
   <div class="left-side">
@@ -26,7 +28,14 @@
               @Card.Prod_nome
           </span>
       </div>
-      <div class="time">TODO: FIX DATA</div>
+        <div id="remainingTime_@Card.IdLeilao" class="time">
+          @if (Card.DataFim > DateTime.Now) { //inicialmente meter valores, javascript vai alterá-los apos o minute passar
+            <text>@Time.RemainingTimeToStringShort(Card.DataFim)</text>
+            }
+          else{
+            <text>ENCERRADO</text>
+          }
+      </div>
     </div>
     <div class="bottom-row">
       <div class="left-bid-section"> 
@@ -43,12 +52,14 @@
   </div>
 </div>
 
+<script src="JSscripts/timeUpdater.js"></script>
+
 @code {
   [Parameter, EditorRequired]
   public AuctionCard Card { get; set; } = default!;
 
   [Parameter]
-  public decimal UserHighestBidDiff {get; set;}
+  public decimal UserHighestBidDiff {get; set;} = 0;
   private decimal finalCost;
   private decimal currentBid;
 
@@ -65,8 +76,17 @@
       finalCost = currentBid + Card.Custo_envio;
   }
 
+  protected override async Task OnInitializedAsync() {
+    string elementId = "remainingTime_" + Card.IdLeilao;
+    int updateFrequency = Card.DataFim.Hour < 1 ? 1000 : 60000; // se tempo restante for menor de 1 hora atualizar a cada seg, senao a cada min *@
+    JSRuntime.InvokeVoidAsync("startCountdown", elementId, Card.DataFim.ToString("yyyy-MM-ddTHH:mm:ss"), updateFrequency);
+  }
+
   private void NavigateToDetalhesLeilao(int auctionId) {
-    @* Console.WriteLine("Calling NavigateToDeatlhesLeilao"); *@
-    NavigationManager.NavigateTo($"/AuctionDetails/{Card.IdLeilao}"); 
+    if (Card.Leilao_estado == AuctionStatus.em_leilao) {
+        NavigationManager.NavigateTo($"/AuctionDetails/{Card.IdLeilao}");
+    } else {
+      NavigationManager.NavigateTo($"/AuctionDetailsFinished/{Card.IdLeilao}");
+    }
   }
 }

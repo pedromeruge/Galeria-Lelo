@@ -58,6 +58,6 @@ else {
 		}
 
     protected override async Task OnInitializedAsync() {
-            cards = await db.FindAll();
+            cards = await db.FindAllInState(AuctionStatus.em_leilao);
     }
 }

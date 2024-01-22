@@ -13,6 +13,9 @@
 @inject IUserService UserService
 @inject IBidRepository BidService
 @inject IAuctionRepository AuctionService
+@inject IJSRuntime JSRuntime
+@using Classes.Time;
+
 
 @if (Leilao != null) {
 <div class="content">
@@ -37,7 +40,13 @@
 		</div>
 	</div>
 	<div class="right-section">
-		<div class="data-limite">Termina em TOFIX: DATA</div>
+		<div id="remainingTime_@Leilao.IdLeilao" class="data-limite">
+			@if (Leilao.DataFim > DateTime.Now) { //inicialmente meter valores, javascript vai alterá-los apos o minute passar
+				<text>@Time.RemainingTimeToString(Leilao.DataFim)</text>
+			} else{
+				<text>ENCERRADO</text>
+			}
+  		</div>
 		<div class="auction-rectangle">
 			<div class="text-licitacao">Licitação atual</div>
 			<div class="precos">
@@ -69,11 +78,11 @@
 				</div>
 				<div class="peso-info">
 					<div class="peso-titulo">Peso</div>
-					<div class="peso-data">@Leilao.Prod_peso g</div>
+					<div class="peso-data">@Leilao.Prod_peso.ToString("F3") g</div>
 				</div>
 				<div class="dimensoes-info">
 					<div class="dimensoes-titulo">Dimensões</div>
-					<div class="dimensoes-data">@Leilao.Prod_comprimento x @Leilao.Prod_altura x @Leilao.Prod_largura cm</div>
+					<div class="dimensoes-data">@Leilao.Prod_comprimento.ToString("F3") x @Leilao.Prod_altura.ToString("F3") x @Leilao.Prod_largura.ToString("F3") cm</div>
 				</div>
 				<div class="descricao-info">
 					<div class="descricao-titulo">Descrição</div>
@@ -127,21 +136,19 @@
 
     protected override async Task OnInitializedAsync()
     {
-        try {
-            Leilao = await AuctionService.Find(IdLeilao);
-			if (Leilao.Leilao_estado == AuctionStatus.em_leilao) {
-				if (Leilao.Maior_licitacao == null)
-					currentBid = Leilao.Preco_base;
-				else {
-					currentBid = Leilao.Maior_licitacao.Valor;
-				}
-			} else {
-				NavigationManager.NavigateTo($"/AuctionDetailsFinished/{IdLeilao}");
+		Leilao = await AuctionService.Find(IdLeilao);
+		@* if (Leilao.Leilao_estado == AuctionStatus.em_leilao) { *@ // preciso ????
+			if (Leilao.Maior_licitacao == null)
+				currentBid = Leilao.Preco_base;
+			else {
+				currentBid = Leilao.Maior_licitacao.Valor;
 			}
-
-        } catch (HttpRequestException ex) {
-            Console.WriteLine($"There was a problem loading auction card data: {ex.Message}");
-        }
+		@* } else {
+			NavigationManager.NavigateTo($"/AuctionDetailsFinished/{IdLeilao}");
+		} *@
+		string elementId = "remainingTime_" + Leilao.IdLeilao;
+    	int updateFrequency = Leilao.DataFim.Hour < 1 ? 1000 : 1000; // se tempo restante for menor de 1 hora atualizar a cada seg, senao a cada min *@
+    	JSRuntime.InvokeVoidAsync("startCountdown", elementId, Leilao.DataFim.ToString("yyyy-MM-ddTHH:mm:ss"), updateFrequency);
     }
 
     private void MostrarMenuLicitar() {

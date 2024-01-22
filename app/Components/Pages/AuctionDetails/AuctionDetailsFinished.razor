@@ -4,6 +4,7 @@
 @using Classes.AuctionCard
 @using Classes.Bids
 @using Classes.Session
+@using Classes.Time
 @using app.Components.Pages.Menu
 @rendermode InteractiveServer
 @inject IWebHostEnvironment WebHostEnvironment
@@ -37,7 +38,7 @@
 		</div>
 	</div>
 	<div class="right-section">
-		<div class="data-limite">Terminado em @Leilao.DataFim</div>
+		<div class="data-limite">Terminado em @EndDateOcurred</div>
 		<div class="auction-rectangle">
 			<div class="text-licitacao">Licitação atual</div>
 			<div class="precos">
@@ -69,11 +70,11 @@
 				</div>
 				<div class="peso-info">
 					<div class="peso-titulo">Peso</div>
-					<div class="peso-data">@Leilao.Prod_peso g</div>
+					<div class="peso-data">@Leilao.Prod_peso.ToString("F3") g</div>
 				</div>
 				<div class="dimensoes-info">
 					<div class="dimensoes-titulo">Dimensões</div>
-					<div class="dimensoes-data">@Leilao.Prod_comprimento x @Leilao.Prod_altura x @Leilao.Prod_largura cm</div>
+					<div class="dimensoes-data">@Leilao.Prod_comprimento.ToString("F3") x @Leilao.Prod_altura.ToString("F3") x @Leilao.Prod_largura.ToString("F3") cm</div>
 				</div>
 				<div class="descricao-info">
 					<div class="descricao-titulo">Descrição</div>
@@ -111,6 +112,8 @@
     public decimal currentBid;
     bool mostrarMenuLicitar = false;
 
+	private string EndDateOcurred;
+
 	protected override async Task OnAfterRenderAsync(bool firstRender) {
 		if (firstRender) {
 			// ver se user existe e ta valido
@@ -123,19 +126,16 @@
 
     protected override async Task OnInitializedAsync()
     {
-        try {
-            Leilao = await AuctionService.Find(IdLeilao);
-			if (Leilao.Leilao_estado == AuctionStatus.em_leilao) {
-				NavigationManager.NavigateTo($"/AuctionDetails/{IdLeilao}");
-			} else {
-				if (Leilao.Maior_licitacao == null)
-					currentBid = Leilao.Preco_base;
-				else {
-					currentBid = Leilao.Maior_licitacao.Valor;
-				}
+		Leilao = await AuctionService.Find(IdLeilao);
+		@* if (Leilao.Leilao_estado == AuctionStatus.em_leilao) { // preciso ???
+			NavigationManager.NavigateTo($"/AuctionDetails/{IdLeilao}");
+		} else { *@
+			if (Leilao.Maior_licitacao == null)
+				currentBid = Leilao.Preco_base;
+			else {
+				currentBid = Leilao.Maior_licitacao.Valor;
 			}
-        } catch (HttpRequestException ex) {
-            Console.WriteLine($"There was a problem loading auction card data: {ex.Message}");
-        }
+		@* } *@
+		EndDateOcurred = Time.BetterPrintDate(Leilao.DataFim);
     }
 }

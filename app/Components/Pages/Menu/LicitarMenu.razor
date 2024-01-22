@@ -80,7 +80,7 @@
             Bid bid = new Bid(newBid,DateTime.Now,session.sessao_id,IdLeilao);
             int id = await BidService.createBid(bid);
             bid.IdLicitacao = id;
-            Console.WriteLine("Built bid: " + bid.ToString());
+            @* Console.WriteLine("Built bid: " + bid.ToString()); *@
             if (id != -1) {
                 invalidValue = false;
 		        CloseMenu();

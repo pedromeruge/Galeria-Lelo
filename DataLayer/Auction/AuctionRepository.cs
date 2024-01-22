@@ -80,6 +80,27 @@ namespace DataLayer.Auction {
             return auctionList;
         }
 
+        public async Task<List<AuctionCard>> FindAllInState(AuctionStatus estado)
+        {
+            string leiloesSql = "SELECT leilao_id AS IdLeilao, Data_hora_inicio AS DataInicio, Data_hora_fim AS DataFim, estado AS Leilao_estado, preco_base, custo_envio, prod_nome_artista AS Nome_artista, prod_comprimento, prod_altura, prod_largura, prod_tipo, prod_estado, prod_tecnica, prod_descricao, prod_nome, prod_peso, admin_id AS IdAdmin FROM Leilao WHERE estado = @Estado";
+            List<AuctionCard> auctionList = await db.LoadData<AuctionCard, dynamic>(leiloesSql, new {Estado = estado.ToString()});
+
+            foreach (var auction in auctionList)
+            {
+                // Console.WriteLine("Got auction from DB " +  auction.ToString());
+                List<AuctionPhoto> fotosLeilao = await par.FindAllFromAuction(auction.IdLeilao);
+                // Console.WriteLine("Got number of images " + fotosLeilao.Count + "for leilaoID: " + auction.IdLeilao);
+
+                auction.Images = fotosLeilao;
+
+                Bid maiorLicitacao = await br.FindHighestBid(auction.IdLeilao);
+                // Console.WriteLine("Got biggest bid " + maiorLicitacao.Valor + "for leilaoID: " + auction.IdLeilao);
+                auction.Maior_licitacao = maiorLicitacao;
+            }
+
+            return auctionList;
+        }
+
         public async Task<List<AuctionCard>> SearchAuctions(string inputQuery)
         {
             string procedureName = "SearchAuctionsWithInput";
