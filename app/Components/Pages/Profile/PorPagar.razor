@@ -1,1 +1,54 @@
 @page "/AuctionStates/PorPagar"
+@layout LoginLayout
+
+@using System.Text.Json
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IWebHostEnvironment WebHostEnvironment
+@inject IJSRuntime JSRuntime
+@using app.Components.ClassBlocks.AuctionCard
+@inject IAuctionRepository db
+@rendermode InteractiveServer
+@using DataLayer.Auction
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IUserService UserService
+@using Classes.Session
+@using Classes.AuctionCard
+
+<PageTitle>Galeria Lelo</PageTitle>
+
+@if (cards == null) {
+    <p>Loading page...</p>
+}
+else {
+    <div class="leiloes">
+        @if(cards.Count > 0) {
+            <p class="texto-leiloes">Leilões encontrados</p>
+            <div class="grid">
+                @foreach (var card in cards) {
+                    <AuctionCardHorizontalComponent Card="card" />
+                }
+            </div>
+        } else {
+            <p class="texto-leiloes">Sem leilões por pagar </p>
+        }
+    </div>
+}
+
+@code {
+    public List<AuctionCard>? cards;
+    private int idUser;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender) {
+            // ver se user existe e ta valido
+            User user = await localStorage.GetItemAsync<User>("User");
+            if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
+            Session session = await localStorage.GetItemAsync<Session>("Session");
+            if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
+            cards = await db.FindAllFromUserInState(user.user_id, AuctionStatus.por_pagar);
+            StateHasChanged(); // Forçar UI update
+        }
+    }
+}
