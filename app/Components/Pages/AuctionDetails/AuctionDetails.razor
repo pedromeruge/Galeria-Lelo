@@ -129,11 +129,17 @@
     {
         try {
             Leilao = await AuctionService.Find(IdLeilao);
-			if (Leilao.Maior_licitacao == null)
-				currentBid = Leilao.Preco_base;
-			else {
-				currentBid = Leilao.Maior_licitacao.Valor;
+			Console.WriteLine(Leilao.Leilao_estado);
+			if (Leilao.Leilao_estado == AuctionStatus.EmLeilao) {
+				if (Leilao.Maior_licitacao == null)
+					currentBid = Leilao.Preco_base;
+				else {
+					currentBid = Leilao.Maior_licitacao.Valor;
+				}
+			} else {
+				NavigationManager.NavigateTo($"/AuctionDetailsFinished/{IdLeilao}");
 			}
+
         } catch (HttpRequestException ex) {
             Console.WriteLine($"There was a problem loading auction card data: {ex.Message}");
         }

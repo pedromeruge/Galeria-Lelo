@@ -17,7 +17,7 @@ namespace DataLayer.Auction {
         }
 
     public async Task<AuctionCard> Find(int id) {
-        string leilaoSql = "SELECT leilao_id AS IdLeilao, Data_hora_inicio AS DataInicio, Data_hora_fim AS DataFim, estado, preco_base, custo_envio, prod_nome_artista AS Nome_artista, prod_comprimento, prod_altura, prod_largura, prod_tipo, prod_estado, prod_tecnica, prod_descricao, prod_nome, prod_peso, admin_id AS IdAdmin FROM Leilao WHERE leilao_id = @Id";
+        string leilaoSql = "SELECT leilao_id AS IdLeilao, Data_hora_inicio AS DataInicio, Data_hora_fim AS DataFim, estado AS Leilao_estado, preco_base, custo_envio, prod_nome_artista AS Nome_artista, prod_comprimento, prod_altura, prod_largura, prod_tipo, prod_estado, prod_tecnica, prod_descricao, prod_nome, prod_peso, admin_id AS IdAdmin FROM Leilao WHERE leilao_id = @Id";
         List<AuctionCard> auctionList = await db.LoadData<AuctionCard, dynamic>(leilaoSql, new { Id = id }); // forma diferente de fazer isto
 
         if (auctionList.Count > 0)
