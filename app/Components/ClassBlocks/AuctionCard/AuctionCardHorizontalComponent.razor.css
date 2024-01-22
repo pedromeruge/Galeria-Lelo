@@ -4,40 +4,73 @@
   
   .card-component {
     background-color: white;
-    cursor: pointer; /* é clicavel!*/
-    width: 235px;
-    height: 400px;
+    cursor: pointer;
+    width: 450px;
+    height: 150px;
     position: relative;
     /* border: 1px solid red; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
   }
   
-  .card-img-top {
-    display: block;
-    width:100%;
-    height:280px;
-    object-fit: cover;
-    object-position: 20% 0;
-    background: white;
+  .left-side {
+    flex-grow: 0;
     position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: auto;
+    /* padding: 5px; */
+    align-items: center;
+    aspect-ratio: 1;
+  }
+
+  .auction-img {
+    display: block;
+    background: white;
+    height: 150px;
+    width: auto;
+    object-fit: cover;
+    aspect-ratio: 1;
+    object-position: 10%, 0;
   }
   
+  .right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+  }
+
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bottom-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
   .info-names,
   .info-bids,
   .time {
     line-height: 20px;
-    padding: 10px;
+    padding: 10px 0px;
     width:100%;
+    box-sizing: border-box;
   }
   
   .info-names {
     display: flex;
-    /* align-items: center; */
-    justify-content: center;
-    text-align: center;
-    top:280px;
-    height: 50px;
-    /* border: 1px solid blue; */
+    justify-content: flex-start;
+    text-align: left;
+    flex-direction: column;
+    flex: 3;
   }
   
   .author {
@@ -49,19 +82,11 @@
   
   .name {
     color: #000000;
-    text-align: center;
     font-family: "Lato-Medium", sans-serif;
     font-size: 16px;
     font-weight: 400;
   }
   
-  .bottom-row{
-    top: 330px;
-    height: 40px;
-    line-height: 15px;
-    padding: 10px;
-    /* border: 1px solid blue; */
-  }
   
   .left-bid-text {
     color: #000000;
@@ -69,16 +94,17 @@
     font-family: "Lato-Light", sans-serif;
     font-size: 18px;
     font-weight: 150;
-    transform: translate(0, 40%);
+    flex: 3;
   }
   
   .right-bid-text {
     text-align: right;
     font-family: "Lato-Medium", sans-serif;
     flex-direction: column;
-    font-size: 25px;
-    font-weight: 400;
-    transform: translate(0, -50%);
+    font-size: 28px;
+    font-weight: 350;
+    flex: 2;
+    padding-left: 10px;
   }
   
   .preco-atual {
@@ -94,24 +120,21 @@
   }
   
   .time {
-    bottom: 0;
     color: #3b80ba;
-    text-align: center;
+    text-align: right;
     font-family: "Lato-Medium", sans-serif;
     font-size: 18px;
-    top: 370px;
-    height: 30px;
-    /* border: 1px solid blue; */
     font-weight: 450;
-    padding: 5px;
+    flex: 2;
+    align-self: flex-start;
+    padding-left: 10px;
   }
-  
-  /* porque é que este em específico nao funfa???*/
-  .card-component:active .card-img-top {
+
+  .card-component:active .auction-img {
     opacity: 0.5;
   }
   
-  .card-component:hover .card-img-top {
+  .card-component:hover .auction-img {
     opacity: 0.7;
   }
   

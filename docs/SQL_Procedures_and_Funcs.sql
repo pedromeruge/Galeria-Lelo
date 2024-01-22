@@ -94,6 +94,8 @@ BEGIN
 END;
 GO
 
+-- EXEC FindAllAuctionsFromUserInState 1,em_leilao; 
+
 CREATE FUNCTION dbo.GetHighestBid
 (
     @IdLeilao INT

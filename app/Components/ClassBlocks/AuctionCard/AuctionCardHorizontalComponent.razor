@@ -5,28 +5,32 @@
 @inject NavigationManager NavigationManager
 
 <div class="card-component" @onclick=" () => NavigateToDetalhesLeilao(Card.IdLeilao)">
-  @if (Card.Images.Any()) {
-    <img src="@Card.Images.First().Path" class="card-img-top" alt="@Card.Images.First().Path">
-  }
-  else {
-    <p class="card-img-top">Image not found</p>
-  }
-  <div class="top-row">
-    <div class="info-names">
-        <span class="author">
-            @Card.Nome_artista -
-        </span>
-        <span class="name">
-            @Card.Prod_nome
-        </span>
-    <div class="time">TODO: FIX DATA</div>
+  <div class="left-side">
+    @if (Card.Images.Any()) {
+      <img src="@Card.Images.First().Path" class="auction-img" alt="@Card.Images.First().Path">
+    }
+    else {
+      <p class="auction-img">Image not found</p>
+    }
   </div>
-  </div>
-  <div class="bottom-row">
-    <div class="left-bid-text"> Licitação atual:</div>
-    <div class="right-bid-text"> 
-      <div class="preco-atual">@currentBid.ToString("F2") €</div>
-      <div class="preco-com-envio"> @finalCost.ToString("F2") € incl.</div>
+  <div class="right-side">
+    <div class="top-row">
+      <div class="info-names">
+          <span class="author">
+              @Card.Nome_artista -
+          </span>
+          <span class="name">
+              @Card.Prod_nome
+          </span>
+      </div>
+      <div class="time">TODO: FIX DATA</div>
+    </div>
+    <div class="bottom-row">
+      <div class="left-bid-text"> Licitação atual:</div>
+      <div class="right-bid-text"> 
+        <div class="preco-atual">@currentBid.ToString("F2") €</div>
+        <div class="preco-com-envio"> @finalCost.ToString("F2") € incl.</div>
+      </div>
     </div>
   </div>
 </div>
