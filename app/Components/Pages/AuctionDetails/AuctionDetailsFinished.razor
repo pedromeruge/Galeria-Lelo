@@ -125,7 +125,7 @@
     {
         try {
             Leilao = await AuctionService.Find(IdLeilao);
-			if (Leilao.Leilao_estado == AuctionStatus.EmLeilao) {
+			if (Leilao.Leilao_estado == AuctionStatus.Em_Leilao) {
 				NavigationManager.NavigateTo($"/AuctionDetails/{IdLeilao}");
 			} else {
 				if (Leilao.Maior_licitacao == null)

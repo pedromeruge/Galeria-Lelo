@@ -4,7 +4,7 @@ namespace Classes.AuctionCard
 {
     public enum AuctionStatus
     {
-        EmLeilao,
+        Em_Leilao,
         PorPagar,
         PorEnviar,
         PorEntregar,

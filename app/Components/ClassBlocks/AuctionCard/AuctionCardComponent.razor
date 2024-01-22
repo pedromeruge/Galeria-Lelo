@@ -52,7 +52,7 @@
 
   private void NavigateToDetalhesLeilao(int auctionId) {
     @* Console.WriteLine("Calling NavigateToDeatlhesLeilao"); *@
-	if (Card.Leilao_estado == AuctionStatus.EmLeilao) {
+	if (Card.Leilao_estado == AuctionStatus.Em_Leilao) {
     	NavigationManager.NavigateTo($"/AuctionDetails/{Card.IdLeilao}");
 	} else {
 		NavigationManager.NavigateTo($"/AuctionDetailsFinished/{Card.IdLeilao}");
