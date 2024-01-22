@@ -45,56 +45,62 @@ BEGIN
 END;
 GO
 
-CREATE FUNCTION UserBidOnLeilao (
-    @IdLeilao INT,
-    @IdUser INT
-)
-RETURNS BIT
-AS 
-BEGIN 
-    DECLARE @Result BIT
-
-    SELECT @Result = CASE WHEN EXISTS (
-        SELECT 1
-        FROM Licitacao AS l 
-        INNER JOIN Sessao as S ON l.sessao_id = s.sessao_id
-        WHERE l.leilao_id = @IdLeilao AND s.user_id=@IdUser
-    ) THEN 1 ELSE 0 END;
-
-    RETURN @Result;
-END;
-GO
-
--- devolve leilões em que user licitou, no estado dado
 CREATE PROCEDURE FindAllAuctionsFromUserInState
     @User_id INT,
     @Estado VARCHAR(12)
 AS
 BEGIN 
     SELECT 
-        leilao_id AS IdLeilao,
-        Data_hora_inicio AS DataInicio,
-        Data_hora_fim As DataFim,
-        estado AS Leilao_estado,
-        preco_base,
-        custo_envio,
-        prod_nome_artista AS Nome_artista,
-        prod_comprimento,
-        prod_altura,
-        prod_largura,
-        prod_tipo,
-        prod_estado,
-        prod_tecnica,
-        prod_descricao,
-        prod_nome,
-        prod_peso,
-        admin_id AS IdAdmin
-    FROM Leilao 
-    WHERE estado = @Estado AND dbo.UserBidOnLeilao(leilao_id, @User_id) = 1
+        l.leilao_id AS IdLeilao,
+        l.Data_hora_inicio AS DataInicio,
+        l.Data_hora_fim As DataFim,
+        l.estado AS Leilao_estado,
+        l.preco_base,
+        l.custo_envio,
+        l.prod_nome_artista AS Nome_artista,
+        l.prod_comprimento,
+        l.prod_altura,
+        l.prod_largura,
+        l.prod_tipo,
+        l.prod_estado,
+        l.prod_tecnica,
+        l.prod_descricao,
+        l.prod_nome,
+        l.prod_peso,
+        l.admin_id AS IdAdmin
+    FROM Leilao AS l
+    CROSS APPLY ( -- aplica subquery a cada entrada de tabela leilao
+        SELECT TOP 1 lic.valor, lic.data_hora, lic.leilao_id
+        FROM Licitacao AS lic 
+        INNER JOIN Sessao AS s ON lic.sessao_id = s.sessao_id
+            WHERE s.user_id = @User_id AND lic.leilao_id = l.leilao_id
+            ORDER BY lic.data_hora DESC
+    ) AS latestBid
+    WHERE l.estado = @Estado
+    ORDER BY latestBid.data_hora DESC;
 END;
 GO
 
--- EXEC FindAllAuctionsFromUserInState 1,em_leilao; 
+-- DROP PROCEDURE FindAllAuctionsFromUserInState;
+-- EXEC FindAllAuctionsFromUserInState 2,em_leilao; 
+
+CREATE FUNCTION dbo.GetHighestBidFromUser
+(
+    @IdLeilao INT,
+    @IdUser INT
+)
+RETURNS DECIMAL(10,2)
+AS
+BEGIN
+    DECLARE @HighestBid DECIMAL(10,2)
+
+    SELECT @HighestBid = MAX(valor)
+        FROM Licitacao As lic
+        INNER JOIN Sessao AS s ON lic.session_id = s.session_id 
+            WHERE leilao_id = @IdLeilao AND s.user_id = @IdUser
+    RETURN ISNULL(@HighestBid, 0)
+END;
+GO
 
 CREATE FUNCTION dbo.GetHighestBid
 (

@@ -8,27 +8,28 @@
 @inject IWebHostEnvironment WebHostEnvironment
 @inject IJSRuntime JSRuntime
 @using app.Components.ClassBlocks.AuctionCard
-@inject IAuctionRepository db
 @rendermode InteractiveServer
 @using DataLayer.Auction
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IUserService UserService
+@inject IAuctionRepository AuctionService
+@inject IBidRepository BidService
 @using Classes.Session
 @using Classes.AuctionCard
 
 <PageTitle>Galeria Lelo</PageTitle>
 
-@if (cards == null) {
+@if (auctions == null) {
     <p>Loading page...</p>
 }
 else {
     <div class="leiloes">
-        @if(cards.Count > 0) {
+        @if(auctions.Count > 0) {
             <p class="texto-leiloes">Leilões encontrados</p>
             <div class="grid">
-                @foreach (var card in cards) {
-                    <AuctionCardHorizontalComponent Card="card" />
+                @foreach (var tuple in auctions) {
+                    <AuctionCardHorizontalComponent UserHighestBidDiff="tuple.Item1" Card="tuple.Item2" />
                 }
             </div>
         } else {
@@ -38,7 +39,7 @@ else {
 }
 
 @code {
-    public List<AuctionCard>? cards;
+    private List<Tuple<decimal,AuctionCard>> auctions = new List<Tuple<decimal,AuctionCard>>();
     private int idUser;
 
 	protected override async Task OnAfterRenderAsync(bool firstRender) {
@@ -48,8 +49,14 @@ else {
 			if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
 			Session session = await localStorage.GetItemAsync<Session>("Session");
 			if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
-            cards = await db.FindAllFromUserInState(user.user_id, AuctionStatus.em_leilao);
+            List<AuctionCard> cards = await AuctionService.FindAllFromUserInState(user.user_id, AuctionStatus.em_leilao);
+            for (int i = 0; i < cards.Count; i++) {
+                AuctionCard currLeilao = cards[i];
+                decimal userHighestBidDiff = await BidService.FindHighestBidFromUser(currLeilao.IdLeilao, user.user_id) - currLeilao.Maior_licitacao.Valor;
+                auctions.Add(Tuple.Create(userHighestBidDiff,currLeilao));
+            }
             StateHasChanged(); // Forçar UI update
+            }
 		}
 	}
 }

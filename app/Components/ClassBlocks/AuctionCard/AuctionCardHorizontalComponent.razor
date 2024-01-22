@@ -6,6 +6,9 @@
 
 <div class="card-component" @onclick=" () => NavigateToDetalhesLeilao(Card.IdLeilao)">
   <div class="left-side">
+    @if (UserHighestBidDiff < 0) {
+      <p class="outbid-text">OUTBID</p>
+    }
     @if (Card.Images.Any()) {
       <img src="@Card.Images.First().Path" class="auction-img" alt="@Card.Images.First().Path">
     }
@@ -26,7 +29,12 @@
       <div class="time">TODO: FIX DATA</div>
     </div>
     <div class="bottom-row">
-      <div class="left-bid-text"> Licitação atual:</div>
+      <div class="left-bid-section"> 
+        <div class="licitacao-text">Licitação atual:</div>
+        @if (UserHighestBidDiff < 0) {
+          <div class="bid-diff-text">@UserHighestBidDiff.ToString("F2") €</div>
+        }
+      </div>
       <div class="right-bid-text"> 
         <div class="preco-atual">@currentBid.ToString("F2") €</div>
         <div class="preco-com-envio"> @finalCost.ToString("F2") € incl.</div>
@@ -38,6 +46,9 @@
 @code {
   [Parameter, EditorRequired]
   public AuctionCard Card { get; set; } = default!;
+
+  [Parameter]
+  public decimal UserHighestBidDiff {get; set;}
   private decimal finalCost;
   private decimal currentBid;
 
