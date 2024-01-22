@@ -61,7 +61,8 @@ VALUES
     ('AuctionPhotos/grito_foto1.jpg', 2),
     ('AuctionPhotos/camaroes_foto1.png',3),
     ('AuctionPhotos/camaroes_foto2.png',3),
-    ('AuctionPhotos/camaroes_foto3.png',3);
+    ('AuctionPhotos/camaroes_foto3.png',3),
+    ('AuctionPhotos/camaroes_foto1.png',4);
 
 INSERT INTO Licitacao (valor, data_hora, sessao_id, leilao_id)
 VALUES

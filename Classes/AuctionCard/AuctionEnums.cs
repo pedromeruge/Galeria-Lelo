@@ -4,11 +4,11 @@ namespace Classes.AuctionCard
 {
     public enum AuctionStatus
     {
-        Em_Leilao,
-        PorPagar,
-        PorEnviar,
-        PorEntregar,
-        Concluido
+        em_leilao,
+        por_pagar,
+        por_enviar,
+        por_entregar,
+        concluido
     }
 
     public enum ProdTipo

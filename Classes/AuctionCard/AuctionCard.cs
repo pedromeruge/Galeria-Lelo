@@ -57,6 +57,7 @@ namespace Classes.AuctionCard {
 
         public override string ToString()
         {
+            decimal maior_bid = Maior_licitacao != null ? Maior_licitacao.Valor : -1;
             return $"IdLeilao: {IdLeilao}, " +
                    $"DataInicio: {DataInicio}, " +
                    $"DataFim: {DataFim}, " +
@@ -73,7 +74,7 @@ namespace Classes.AuctionCard {
                    $"Prod_descricao: {Prod_descricao}, " +
                    $"Prod_nome: {Prod_nome}, " +
                    $"Prod_peso: {Prod_peso}, " +
-                   $"Maior_licitacao: {Maior_licitacao.Valor}, " +
+                   $"Maior_licitacao: {maior_bid}, " +
                    $"IdAdmin: {IdAdmin}";
         }
     }

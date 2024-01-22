@@ -3,6 +3,9 @@
 @inherits ComponentBase
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IUserService UserService
+@using Classes.Session
 
 <PageTitle>AuctionStates</PageTitle>
 
@@ -61,4 +64,14 @@
          Console.WriteLine("Pressing Em Leilao");
         NavigationManager.NavigateTo("/AuctionStates/EmLeilao"); 
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender) {
+            // ver se user existe e ta valido
+            User user = await localStorage.GetItemAsync<User>("User");
+            if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
+            Session session = await localStorage.GetItemAsync<Session>("Session");
+            if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
+        }
+	}
 }

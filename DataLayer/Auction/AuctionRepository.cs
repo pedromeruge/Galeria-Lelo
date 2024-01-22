@@ -28,16 +28,40 @@ namespace DataLayer.Auction {
 
             Bid maiorLicitacao = await br.FindHighestBid(auction.IdLeilao);
             auction.Maior_licitacao = maiorLicitacao;
-
+            // Console.WriteLine("Got auction from DB " +  auction.ToString());
             return auction;
         } else {
             throw new InvalidOperationException();
         }
     }
 
+    public async Task<List<AuctionCard>> FindAllFromUserInState(int userId, AuctionStatus estado)
+    {
+        string procedureName = "FindAllAuctionsFromUserInState";
+
+        // Console.WriteLine($"Giving to procedure values userID: {userId} and estado: {estado}");
+
+        List<AuctionCard> auctionList = await db.ExecuteProcedure<AuctionCard, dynamic>(procedureName, new {User_id = userId, Estado = estado.ToString()});
+
+        // Console.WriteLine("Got number of auctions " + auctionList.Count);
+        foreach (var auction in auctionList)
+        {
+            // Console.WriteLine("Got auction from DB " +  auction.ToString());
+            List<AuctionPhoto> fotosLeilao = await par.FindAllFromAuction(auction.IdLeilao);
+
+            auction.Images = fotosLeilao;
+
+            Bid maiorLicitacao = await br.FindHighestBid(auction.IdLeilao);
+            auction.Maior_licitacao = maiorLicitacao;
+            // Console.WriteLine("Got biggest bid " + maiorLicitacao.Valor + "for leilaoID: " + auction.IdLeilao);
+        }
+
+        return auctionList;
+    }
+
         public async Task<List<AuctionCard>> FindAll()
         {
-            string leiloesSql = "SELECT leilao_id AS IdLeilao, Data_hora_inicio, Data_hora_fim, estado, preco_base, custo_envio, prod_nome_artista AS Nome_artista, prod_comprimento, prod_altura, prod_largura, prod_tipo, prod_estado, prod_tecnica, prod_descricao, prod_nome, prod_peso, admin_id AS IdAdmin FROM Leilao";
+            string leiloesSql = "SELECT leilao_id AS IdLeilao, Data_hora_inicio AS DataInicio, Data_hora_fim AS DataFim, estado AS Leilao_estado, preco_base, custo_envio, prod_nome_artista AS Nome_artista, prod_comprimento, prod_altura, prod_largura, prod_tipo, prod_estado, prod_tecnica, prod_descricao, prod_nome, prod_peso, admin_id AS IdAdmin FROM Leilao";
             List<AuctionCard> auctionList = await db.LoadData<AuctionCard, dynamic>(leiloesSql, new { });
 
             foreach (var auction in auctionList)

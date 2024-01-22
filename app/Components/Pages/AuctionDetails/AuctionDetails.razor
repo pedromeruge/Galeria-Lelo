@@ -129,7 +129,7 @@
     {
         try {
             Leilao = await AuctionService.Find(IdLeilao);
-			if (Leilao.Leilao_estado == AuctionStatus.Em_Leilao) {
+			if (Leilao.Leilao_estado == AuctionStatus.em_leilao) {
 				if (Leilao.Maior_licitacao == null)
 					currentBid = Leilao.Preco_base;
 				else {

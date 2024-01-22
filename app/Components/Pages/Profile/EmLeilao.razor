@@ -7,7 +7,6 @@
 @inject NavigationManager NavigationManager
 @inject IWebHostEnvironment WebHostEnvironment
 @inject IJSRuntime JSRuntime
-@using Classes.AuctionCard
 @using app.Components.ClassBlocks.AuctionCard
 @inject IAuctionRepository db
 @rendermode InteractiveServer
@@ -16,6 +15,7 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IUserService UserService
 @using Classes.Session
+@using Classes.AuctionCard
 
 <PageTitle>Galeria Lelo</PageTitle>
 
@@ -32,16 +32,14 @@ else {
                 }
             </div>
         } else {
-            <p class="texto-leiloes">Sem correspondências para "@SearchQuery"</p>
+            <p class="texto-leiloes">Sem leilões em que tenha licitado a decorrer </p>
         }
     </div>
 }
 
 @code {
     public List<AuctionCard>? cards;
-
-    [Parameter]
-    public String? SearchQuery { get; set; }
+    private int idUser;
 
 	protected override async Task OnAfterRenderAsync(bool firstRender) {
 		if (firstRender) {
@@ -50,12 +48,8 @@ else {
 			if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
 			Session session = await localStorage.GetItemAsync<Session>("Session");
 			if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
+            cards = await db.FindAllFromUserInState(user.user_id, AuctionStatus.em_leilao);
+            StateHasChanged(); // Forçar UI update
 		}
 	}
-    protected override async Task OnInitializedAsync()
-    {
-        if (SearchQuery != null) {
-            cards = await db.SearchAuctions(SearchQuery);
-        }
-    }
 }

@@ -50,7 +50,7 @@ CREATE TABLE Leilao (
     leilao_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     Data_hora_inicio DATETIME NOT NULL,
     Data_hora_fim DATETIME NOT NULL,
-    estado VARCHAR(12) NOT NULL CHECK (estado IN('em_leilao', 'por pagar', 'por enviar','por entregar','concluido')),
+    estado VARCHAR(12) NOT NULL CHECK (estado IN('em_leilao', 'por_pagar', 'por_enviar','por_entregar','concluido')),
     preco_base DECIMAL(10,2) NOT NULL,
     custo_envio DECIMAL(10,2) NOT NULL,
     prod_nome_artista VARCHAR(75) NOT NULL,
