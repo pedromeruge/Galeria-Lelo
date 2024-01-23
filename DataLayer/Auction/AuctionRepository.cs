@@ -123,6 +123,42 @@ namespace DataLayer.Auction {
             return auctionList;
         }
 
+        	public async Task<int> createAuction(AuctionCard auction, List<string> fotos) {
+			try {
+			    const string auctionSQL = "INSERT INTO Leilao (Data_hora_inicio, Data_hora_fim, estado, preco_base, custo_envio, prod_nome_artista, prod_comprimento, prod_altura, prod_largura, prod_tipo, prod_estado, prod_tecnica, prod_descricao, prod_nome, prod_peso, admin_id) OUTPUT INSERTED.leilao_id VALUES (@Data_hora_inicio,@Data_hora_fim,@Estado,@Preco_base,@Custo_envio,@Prod_nome_artista,@Prod_comprimento,@Prod_altura,@Prod_largura,@Prod_tipo,@Prod_estado,@Prod_tecnica,@Prod_descricao,@Prod_nome,@Prod_peso,@Admin_id)";
+
+				int id = await db.ExecuteScalar<dynamic>(auctionSQL, new {
+                    Data_hora_inicio = auction.DataInicio,
+                    Data_hora_fim = auction.DataFim,
+                    Estado = auction.Leilao_estado.ToString(),
+                    Preco_base = auction.Preco_base,
+                    Custo_envio = auction.Custo_envio,
+                    Prod_nome_artista = auction.Nome_artista,
+                    Prod_comprimento= auction.Prod_comprimento,
+                    Prod_altura= auction.Prod_altura,
+                    Prod_largura= auction.Prod_largura,
+                    Prod_tipo = auction.Prod_tipo.ToString(),
+                    Prod_estado = auction.Prod_estado.ToString(),
+                    Prod_tecnica= auction.Prod_tecnica,
+                    Prod_descricao= auction.Prod_descricao,
+                    Prod_nome= auction.Prod_nome,
+                    Prod_peso = auction.Prod_peso,
+                    Admin_id = auction.IdAdmin
+				});
+
+                const string photoSQL = "INSERT INTO Foto_leilao (foto, leilao_id) VALUES (@Foto_path,@Leilao_id)";
+                foreach (var foto in fotos) {
+                    await db.ExecuteScalar<dynamic>(photoSQL, new {
+                    Foto_path = foto,
+                    Leilao_id = id
+                    });
+                }
+				return id;
+			} catch (NullReferenceException) {
+				return -1;
+			}
+		}
+
         public Task<AuctionCard> Update(AuctionCard card) {
             throw new NotImplementedException();
         }

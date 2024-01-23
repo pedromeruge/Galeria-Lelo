@@ -24,6 +24,18 @@ namespace Classes.Time {
             }
         }
 
+        public static string DateInDaysHours(int inputHours) {
+            int days = inputHours / 24;
+            int hours = inputHours % 24;
+            string result = "";
+            if (days > 0) {
+                result = result + days + " dias ";
+            }
+            if (hours > 0)
+                result = result + hours + " horas ";
+            return result;
+        }
+
         public static string BetterPrintDate(DateTime endDate) {
             return $"{endDate.Day.ToString("00")}/{endDate.Month.ToString("00")}/{endDate.Year.ToString("00")} {endDate.Hour.ToString("00")}:{endDate.Minute.ToString("00")}:{endDate.Second.ToString("00")}";
         }

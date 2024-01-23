@@ -5,28 +5,28 @@ using Classes.Bids;
 namespace Classes.AuctionCard {
     public class AuctionCard
     {
-        public int IdLeilao { get; }
-        public DateTime DataInicio { get; }
-        public DateTime DataFim { get; }
+        public int IdLeilao { get; set;}
+        public DateTime DataInicio { get; set;}
+        public DateTime DataFim { get; set;}
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public AuctionStatus Leilao_estado { get; }
-        public decimal Preco_base { get; }
-        public decimal Custo_envio { get; }
-        public string Nome_artista { get; } ="";
-        public decimal Prod_comprimento { get; }
-        public decimal Prod_altura { get; }
-        public decimal Prod_largura { get; }
+        public AuctionStatus Leilao_estado { get; set;}
+        public decimal Preco_base { get; set;}
+        public decimal Custo_envio { get; set;}
+        public string Nome_artista { get; set;} ="";
+        public decimal Prod_comprimento { get; set;}
+        public decimal Prod_altura { get; set;}
+        public decimal Prod_largura { get; set;}
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public ProdTipo Prod_tipo { get; }
+        public ProdTipo Prod_tipo { get; set;}
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public ProdEstado Prod_estado { get; }
-        public string Prod_tecnica { get; } = "";
-        public string Prod_descricao { get; } = "";
-        public string Prod_nome { get; } ="";
-        public decimal Prod_peso { get; }
+        public ProdEstado Prod_estado { get; set;}
+        public string Prod_tecnica { get; set;} = "";
+        public string Prod_descricao { get; set;} = "";
+        public string Prod_nome { get; set;} ="";
+        public decimal Prod_peso { get; set;}
         public List<AuctionPhoto>? Images { get; set;}
         public Bid? Maior_licitacao {get; set;}
-        public int IdAdmin { get; }
+        public int IdAdmin { get; set;}
 
         public AuctionCard() {}
         public AuctionCard(int idLeilao, DateTime dataInicio, DateTime dataFim, AuctionStatus leilao_estado,

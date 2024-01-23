@@ -1,61 +1,51 @@
-.bckg-splashart {
-    position: relative;
-    height: 100%;
-    max-height: 16000px;
-    margin: 0, auto;
-    padding: 0, auto;
+.criar-leilao-page {
+    padding: 5vh 5vw;
 }
 
-.home-backg-image{
-    width:100%;
-    max-height: 100%;
-    display:block;
-    object-fit: cover;
-}
-
-.text-container{
-    position: absolute;
-    bottom:0;
-    left:0;
-    padding-left:80px;
-    padding-bottom:20px;
-    line-height: 40px;
-    /* border: 1px solid red; */
-}
-
-.nome-galeria {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Lato-ExtraBold", sans-serif;
-    font-size: 60px;
-    font-weight: 800;
-}
-
-.slogan-galeria {
-    color: #ffffff;
-    text-align: left;
+h3 {
     font-family: "Lato-Bold", sans-serif;
-    font-size: 30px;
+    font-size: 3vw;
     font-weight: 500;
+    color: black;
+    margin-bottom: 2%;
 }
 
-.leiloes {
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 20px;
-    padding-bottom: 40px;
+.form-group {
+    margin-bottom: 2vh;
 }
-.texto-leiloes {
-    color: #000000;
+
+.form-control {
+    width: 90%;
+    font-family: "Lato-SemiBold", sans-serif;
+    font-size: 2.5vw;
+    font-weight: 500;
+    color: black;
+    padding-left: 1vw;
     text-align: left;
-    font-family: "Lato-Bold", sans-serif;
-    font-size: 30px;
-    font-weight: 500;
-    position: relative;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
-    grid-gap: 30px;
+.label {
+    font-family: "Lato-Bold", sans-serif;
+    font-size: 3vw;
+    font-weight: 500;
+    color: black;
+    padding-left: 1vw;
+    text-align: left;
+}
+
+.form-control[type="range"] {
+    width: 100%;
+}
+
+.form-group button.btn-secondary {
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.submit-check-right {
+    color: green;
+    font-family: "Lato-SemiBold", sans-serif;
+    font-size: 1vw;
+    font-weight: 500;
+    margin-top: 1%;
 }

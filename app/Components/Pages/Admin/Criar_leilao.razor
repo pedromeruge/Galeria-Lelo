@@ -12,63 +12,130 @@
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @inject IAdminService AdminService
+@inject IAuctionRepository AuctionService
+@inject IJSRuntime JSRuntime
 @using Classes.Admin
+@using Classes.Bids
+@using Classes.Time
 
-<div class="criar-leilao-page">
-    <h3>Criar Novo Leilão</h3>
+<div id="topoCriarLeilao" class="criar-leilao-page">
+    <h3>Criar Leilão</h3>
 
-    <form @onsubmit="CriarLeilao">
+    <EditForm Model="@leilao" OnValidSubmit="CriarLeilao">
+        <DataAnnotationsValidator />
+
         <div class="form-group">
-            <label for="dataInicio">Data de Início:</label>
-            <input type="datetime-local" class="form-control" id="dataInicio" @bind="DataInicio" required />
+            <label>Duração do leilão:</label>
+            <input type="range" id="timeInput" @bind="timeframeHours" min="2" max="168" step="1" class="form-control"/>
+            <span id="timeOutput">@Time.DateInDaysHours(timeframeHours)</span>
+            <ValidationMessage For="@(() => timeframeHours)" />
         </div>
 
         <div class="form-group">
-            <label for="dataFim">Data de Fim:</label>
-            <input type="datetime-local" class="form-control" id="dataFim" @bind="DataFim" required />
+            <label>Nome Artista:</label>
+            <InputText @bind-Value="leilao.Nome_artista" class="form-control" />
+            <ValidationMessage For="@(() => leilao.Nome_artista)" />
         </div>
 
         <div class="form-group">
-            <label for="nomeArtista">Nome do Artista:</label>
-            <input type="text" class="form-control" id="nomeArtista" @bind="NomeArtista" required />
+            <label>Nome da obra:</label>
+            <InputText @bind-Value="leilao.Prod_nome" class="form-control" />
+            <ValidationMessage For="@(() => leilao.Prod_nome)" />
         </div>
 
         <div class="form-group">
-            <label for="descricao">Descrição do Produto:</label>
-            <textarea class="form-control" id="descricao" @bind="Descricao" rows="4" required></textarea>
+            <label>Tipo da obra:</label>
+            <InputSelect @bind-Value="leilao.Prod_tipo" class="form-control">
+                <option value="Desenho">Desenho</option>
+                <option value="Escultura">Escultura</option>
+                <option value="Pintura">Pintura</option>
+                <option value="Fotografia">Fotografia</option>
+                <option value="Outro">Outro</option>
+            </InputSelect>
+            <ValidationMessage For="@(() => leilao.Prod_tipo)" />
         </div>
 
         <div class="form-group">
-            <label for="precoBase">Preço Base:</label>
-            <input type="number" class="form-control" id="precoBase" @bind="PrecoBase" step="0.01" required />
+            <label>Estado da obra:</label>
+            <InputSelect @bind-Value="leilao.Prod_estado" class="form-control">
+                <option value="Excelente">Excelente</option>
+                <option value="Bom">Bom</option>
+                <option value="Mau">Mau</option>
+                <option value="Pessimo">Péssimo</option>
+            </InputSelect>
+            <ValidationMessage For="@(() => leilao.Prod_estado)" />
         </div>
 
-        <!-- Add more form fields for other auction details -->
+        <div class="form-group">
+            <label>Técnica utilizada:</label>
+            <InputText @bind-Value="leilao.Prod_tecnica" class="form-control" />
+            <ValidationMessage For="@(() => leilao.Prod_tecnica)" />
+        </div>
 
-        <button type="submit" class="btn btn-primary">Criar Leilão</button>
-    </form>
+        <div class="form-group">
+            <label>Descrição:</label>
+            <InputTextArea @bind-Value="leilao.Prod_descricao" class="form-control" />
+            <ValidationMessage For="@(() => leilao.Prod_descricao)" />
+        </div>
+
+        <div class="form-group">
+            <label>Preço Base):</label>
+            <InputNumber @bind-Value="leilao.Preco_base" class="form-control" />
+            <ValidationMessage For="@(() => leilao.Preco_base)" />
+        </div>
+
+        <div class="form-group">
+            <label>Custo Envio (€):</label>
+            <InputNumber @bind-Value="leilao.Custo_envio" class="form-control" />
+            <ValidationMessage For="@(() => leilao.Custo_envio)" />
+        </div>
+
+        <div class="form-group">
+            <label>Comprimento da obra (cm):</label>
+            <InputNumber @bind-Value="leilao.Prod_comprimento" class="form-control" />
+            <ValidationMessage For="@(() => leilao.Prod_comprimento)" />
+        </div>
+
+        <div class="form-group">
+            <label>Altura da obra (cm):</label>
+            <InputNumber @bind-Value="leilao.Prod_altura" class="form-control" />
+            <ValidationMessage For="@(() => leilao.Prod_altura)" />
+        </div>
+
+        <div class="form-group">
+            <label>Largura da obra (cm):</label>
+            <InputNumber @bind-Value="leilao.Prod_largura" class="form-control" />
+            <ValidationMessage For="@(() => leilao.Prod_largura)" />
+        </div>
+
+        <div class="form-group">
+            <label>Peso da obra (g):</label>
+            <InputNumber @bind-Value="leilao.Prod_peso" class="form-control" />
+            <ValidationMessage For="@(() => leilao.Prod_peso)" />
+        </div>
+        <div class="form-group">
+            <label>Fotos de leilão:</label>
+            <InputText @bind-Value="fotoInput" class="form-control" />
+            <button type="button" class="btn btn-secondary" @onclick="AdicionarFoto">Adicionar foto</button>
+            <ul>
+                @foreach (var foto in fotosLeilao) {
+                    <li>@foto</li>
+                }
+            </ul>
+        </div>
+        <button type="submit" class="btn btn-primary">Submeter Leilão</button>
+        @if (submetido) {
+            <p class="submit-check-right">&#10003; Leilão submetido com sucesso (redirecionado em 2 segundos..) </p> 
+        }
+    </EditForm>
 </div>
 
 @code {
-
-
-    private int IdLeilao;
-    private DateTime DataInicio;
-    private AuctionStatus Leilao_estado;
-    private decimal Preco_base;
-    private decimal Custo_envio;
-    private string Nome_artista;
-    private decimal Prod_comprimento;
-    private decimal Prod_altura;
-    private decimal Prod_largura;
-    private ProdTipo Prod_tipo;
-    private ProdEstado Prod_estado;
-    private string Prod_tecnica;
-    private string Prod_descricao;
-    private string Prod_nome;
-    private decimal Prod_peso;
-    private Bid? Maior_licitacao;
-
+    private AuctionCard leilao = new AuctionCard();
+    private int timeframeHours = 24; // default é 24 horas para um leilao
+    private string fotoInput = "";
+    private List<string> fotosLeilao = new List<string>();
+    private bool submetido = false;
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if (firstRender) {
             // ver se user existe e ta valido
@@ -76,27 +143,36 @@
             if (admin == null || await AdminService.checkAdminValid(admin) == false) NavigationManager.NavigateTo("/admin");
         }
     }
+    private void AdicionarFoto()
+    {
+        if (!string.IsNullOrWhiteSpace(fotoInput))
+        {
+            fotosLeilao.Add("AuctionPhotos/" + fotoInput);
+            fotoInput = ""; // limpar input antes de próximo valor
+        }
+    }
 
     private async Task CriarLeilao()
     {
-        await AdminService.CreateAuction(new AuctionCard
-        {
-            IdLeilao = IdLeilao,
-            DataInicio = DataInicio,
-            Leilao_estado = Leilao_estado,
-            Preco_base = Preco_base,
-            Custo_envio = Custo_envio,
-            Nome_artista = Nome_artista,
-            Prod_comprimento = Prod_comprimento,
-            Prod_altura = Prod_altura,
-            Prod_largura = Prod_largura,
-            Prod_tipo = Prod_tipo,
-            Prod_estado = Prod_estado,
-            Prod_tecnica = Prod_tecnica,
-            Prod_descricao = Prod_descricao,
-            Prod_nome = Prod_nome,
-            Prod_peso = Prod_peso,
-            Maior_licitacao = Maior_licitacao,
-        });
+        leilao.DataInicio = DateTime.Now;
+        leilao.DataFim = leilao.DataInicio.AddHours(timeframeHours);
+        leilao.Leilao_estado = AuctionStatus.em_leilao;
+        leilao.IdAdmin = 1; // como obter esta informação ????
+        int idLeilao = await AuctionService.createAuction(leilao, fotosLeilao);
+        if (idLeilao >= 0) {
+            submetido = true;
+            StateHasChanged();
+            await Task.Delay(2000);
+            ResetForm();
+        }
+    }
+
+    private void ResetForm() {
+        leilao = new AuctionCard();
+        timeframeHours = 24;
+        fotoInput = "";
+        fotosLeilao.Clear();
+        submetido = false;
+                    NavigationManager.NavigateTo("/admin/criar_leilao#topoCriarLeilao", forceLoad: true);
     }
 }
