@@ -14,15 +14,89 @@
 @inject IAdminService AdminService
 @using Classes.Admin
 
+<div class="criar-leilao-page">
+    <h3>Criar Novo Leilão</h3>
 
+    <form @onsubmit="CriarLeilao">
+        <div class="form-group">
+            <label for="dataInicio">Data de Início:</label>
+            <input type="datetime-local" class="form-control" id="dataInicio" @bind="DataInicio" required />
+        </div>
+
+        <div class="form-group">
+            <label for="dataFim">Data de Fim:</label>
+            <input type="datetime-local" class="form-control" id="dataFim" @bind="DataFim" required />
+        </div>
+
+        <div class="form-group">
+            <label for="nomeArtista">Nome do Artista:</label>
+            <input type="text" class="form-control" id="nomeArtista" @bind="NomeArtista" required />
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Descrição do Produto:</label>
+            <textarea class="form-control" id="descricao" @bind="Descricao" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="precoBase">Preço Base:</label>
+            <input type="number" class="form-control" id="precoBase" @bind="PrecoBase" step="0.01" required />
+        </div>
+
+        <!-- Add more form fields for other auction details -->
+
+        <button type="submit" class="btn btn-primary">Criar Leilão</button>
+    </form>
+</div>
 
 @code {
-	protected override async Task OnAfterRenderAsync(bool firstRender) {
-		if (firstRender) {
-			// ver se user existe e ta valido
-			Admin admin = await localStorage.GetItemAsync<Admin>("Admin");
-			if (admin == null || await AdminService.checkAdminValid(admin) == false) NavigationManager.NavigateTo("/admin");
-		}
-	}
 
+
+    private int IdLeilao;
+    private DateTime DataInicio;
+    private AuctionStatus Leilao_estado;
+    private decimal Preco_base;
+    private decimal Custo_envio;
+    private string Nome_artista;
+    private decimal Prod_comprimento;
+    private decimal Prod_altura;
+    private decimal Prod_largura;
+    private ProdTipo Prod_tipo;
+    private ProdEstado Prod_estado;
+    private string Prod_tecnica;
+    private string Prod_descricao;
+    private string Prod_nome;
+    private decimal Prod_peso;
+    private Bid? Maior_licitacao;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender) {
+            // ver se user existe e ta valido
+            Admin admin = await localStorage.GetItemAsync<Admin>("Admin");
+            if (admin == null || await AdminService.checkAdminValid(admin) == false) NavigationManager.NavigateTo("/admin");
+        }
+    }
+
+    private async Task CriarLeilao()
+    {
+        await AdminService.CreateAuction(new AuctionCard
+        {
+            IdLeilao = IdLeilao,
+            DataInicio = DataInicio,
+            Leilao_estado = Leilao_estado,
+            Preco_base = Preco_base,
+            Custo_envio = Custo_envio,
+            Nome_artista = Nome_artista,
+            Prod_comprimento = Prod_comprimento,
+            Prod_altura = Prod_altura,
+            Prod_largura = Prod_largura,
+            Prod_tipo = Prod_tipo,
+            Prod_estado = Prod_estado,
+            Prod_tecnica = Prod_tecnica,
+            Prod_descricao = Prod_descricao,
+            Prod_nome = Prod_nome,
+            Prod_peso = Prod_peso,
+            Maior_licitacao = Maior_licitacao,
+        });
+    }
 }
