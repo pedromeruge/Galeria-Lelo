@@ -49,11 +49,23 @@ else {
 			if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
 			Session session = await localStorage.GetItemAsync<Session>("Session");
 			if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
+
             List<AuctionCard> cards = await AuctionService.FindAllFromUserInState(user.user_id, AuctionStatus.em_leilao);
-            for (int i = 0; i < cards.Count; i++) {
-                AuctionCard currLeilao = cards[i];
+            
+            List<Tuple<decimal, AuctionCard>> negativeDiffTuples = new List<Tuple<decimal, AuctionCard>>();
+            List<Tuple<decimal, AuctionCard>> positiveDiffTuples = new List<Tuple<decimal, AuctionCard>>();
+
+            foreach (var currLeilao in cards) {
                 decimal userHighestBidDiff = await BidService.FindHighestBidFromUser(currLeilao.IdLeilao, user.user_id) - currLeilao.Maior_licitacao.Valor;
-                auctions.Add(Tuple.Create(userHighestBidDiff,currLeilao));
+                @* Console.WriteLine($"For auction {currLeilao.IdLeilao}, got user {user.user_id} biDiff as {userHighestBidDiff} from userBid {await BidService.FindHighestBidFromUser(currLeilao.IdLeilao, user.user_id)} and HighestBid {currLeilao.Maior_licitacao.Valor}"); *@
+                var currTuple = Tuple.Create(userHighestBidDiff,currLeilao);
+                if (userHighestBidDiff <0) {
+                    negativeDiffTuples.Add(currTuple);
+                }
+                else {
+                    positiveDiffTuples.Add(currTuple);
+                }
+                auctions = new List<Tuple<decimal, AuctionCard>>(negativeDiffTuples.Concat(positiveDiffTuples));
             }
             StateHasChanged(); // Forçar UI update
             }

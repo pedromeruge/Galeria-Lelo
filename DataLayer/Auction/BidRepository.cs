@@ -63,7 +63,7 @@ namespace DataLayer.Auction {
 		public async Task<decimal> FindHighestBidFromUser(int id_leilao, int id_user) {
 			string functionName = "DECLARE @Result DECIMAL(10, 2); SET @Result = dbo.GetHighestBidFromUser(@IdLeilao,@IdUser); SELECT @Result AS TotalProfit;";
 			// esta funcao funciona mas vai truncar para um int, nao sei resolver nao vejo onde esta a API que retorna float, por agora tbm nao interessa
-            return await db.ExecuteScalar<dynamic>(functionName, new {IdLeilao = id_leilao, IdUser = id_user});
+            return await db.ExecuteScalar2<dynamic>(functionName, new {IdLeilao = id_leilao, IdUser = id_user});
 		}
 	}
 }

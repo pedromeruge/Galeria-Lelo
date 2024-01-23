@@ -37,12 +37,22 @@ namespace DataLayer {
             }
         }
 
+        //CAUTION: Devolve INT
 		public async Task<int> ExecuteScalar<T>(string sql, T parameters)
         {
             string? connectionString = _config.GetConnectionString(ConnectionStringName);
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 return await connection.ExecuteScalarAsync<int>(sql, parameters);
+            }
+        }
+
+        public async Task<decimal> ExecuteScalar2<T>(string sql, T parameters)
+        {
+            string? connectionString = _config.GetConnectionString(ConnectionStringName);
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                return await connection.ExecuteScalarAsync<decimal>(sql, parameters);
             }
         }
 
