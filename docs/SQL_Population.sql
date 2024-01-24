@@ -9,17 +9,36 @@ INSERT INTO Utilizador (
 )
 VALUES
     ('Rua de Cima 180 1ºE', 'Braga', '4700200', 'Rua de Baixo 163', 'Guimaraes', 
-     '4530201', NULL, 'ronnyGamer@gmail.com', 'ronnyGamer12', 'ronny', '2024-01-18T13:38:35'
+     '4530201', NULL, 'ronnyGamer@gmail.com', 'ronnyGamer12', 'ronny', '2024-01-08T13:38:35'
     ),
     ('Rua do Beco 230 3ºD', 'Braga', '4123345', 'Rua do Barco 20', 'Aveiro', 
      '4123234', 'UserPhotos/farol1_user.png', 'aveiroForLife@gmail.com', 'aveirooo23', 'aveiroo', '2024-01-08T10:24:12'
+    ),
+	('Rua do Metro 180 1ºE', 'Porto', '4778400', 'Rua do Metro 180 1ºE', 'Porto', 
+     '4778400', 'UserPhotos/farol1_user.png', 'rasteirinho@gmail.com', 'Macholo', 'soubig', '2024-01-09T17:32:27'
+    ),
+    ('Rua das Tocas  174 1ºD', 'Almada', '4393945', 'Rua das Tocas  230 3ºD', 'Almada', 
+     '4393945', 'UserPhotos/farol1_user.png', 'gymBro@gmail.com', 'samuelmassas', '30faralho', '2024-01-10T21:14:13'
+    )
+	('Rua dos Santinhos  24 1ºE', 'Fátima', '4384638', 'Rua dos Santinhos  24 1ºE', 'Fátima', 
+     '4384638', 'UserPhotos/farol1_user.png', 'Jesusrocks@gmail.com', 'godalike', 'aialminhas', '2024-01-11T21:17:54'
+    )
+    ('Rua das Andorinhas  17 1ºD', 'Braga', '4356538', 'Rua do Monte  32 1ºE', 'Braga', 
+     '4356537', 'UserPhotos/farol1_user.png', 'zaza@gmail.com', 'blaze420', 'damelumemeumenino', '2024-01-11T13:21:01'
     );
 	
 
 INSERT INTO Sessao (data_hora_inicio, data_hora_fim, user_id)
 VALUES
-    ('2024-01-09T08:30:02', '2024-01-09T08:42:15', 1),
-    ('2024-01-10T11:00:00', '2024-01-10T11:05:25', 2);
+    ('2024-01-09T08:31:27', '2024-01-09T08:42:11', 1),
+    ('2024-01-10T11:00:31', '2024-01-10T11:05:27', 2),
+	('2024-01-10T18:11:12', '2024-01-10T18:32:15', 3),
+    ('2024-01-11T12:03:32', '2024-01-11T12:45:23', 4),
+	('2024-01-12T04:31:42', '2024-01-12T04:57:34', 5),
+    ('2024-01-12T15:05:37', '2024-01-12T16:23:42', 6),
+	('2024-01-13T12:13:12', '2024-01-13T12:47:33', 2),
+	('2024-01-13T17:21:22', '2024-01-13T17:47:54', 5),
+    ('2024-01-14T15:15:37', '2024-01-14T16:51:17', 4);
 
 INSERT INTO Administrador (email, pass_hash)
 VALUES
@@ -53,6 +72,41 @@ VALUES
      'Bom', 'Esculpir madeira', 
      'Bela escultura de Mambila dos Camarões. O estilo é dominado, os volumes são bem tratados. O corpo é compacto e atarracado. O rosto é expressivo, suave e sensível. A sua presença é pacífica. O rosto apresenta resquícios de pigmentos brancos e vermelhos. O seu cocar é lindo, feito de pontas de madeira. A madeira está danificada em alguns lugares, os insetos atacaram-na, a madeira é sólida. Ver fotos. Vendido como está. Um lindo item de colecionador antigo e autêntico. Por volta de 1950.', 
      'Quadro Mambila, Camarões', 300, 1
+    ),
+	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+     'Bianca', 15.00, 10.00, 8.00, 'Pintura', 
+     'Excelente', 'Juntou, Pintou', 
+     'Um frenesi de formas e cores entrelaça-se neste quadro, onde sete homens, uma mulher e uma criança emergem como elementos vibrantes de uma sinfonia visual, transcendendo as fronteiras da individualidade para criar uma expressão única de coletividade', 'Convivio', 200, 1
+    ),
+	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+     'lutadéro', 15.00, 10.00, 8.00, 'Escudo', 
+     'Razoavel', 'Esculpir', 
+     'Um pequeno escudo tribal africano, intrincadamente entalhado, exibe uma dança caleidoscópica de padrões geométricos, simbolizando a conexão sagrada entre atradição, a comunidade e a espiritualidade.','Escudo tribal africano', 200, 1
+    ),
+	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+     'Gaby', 15.00, 10.00, 8.00, 'Pintura', 
+     'Excelente', 'Arrependeu, Pintou', 
+     'Um homem religioso diante de um crucifixo, cercado por uma caveira, chicote e água benta, explora a complexidade entre penitência e redenção','la barranquilha', 200, 1
+    ),
+	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+     'Picollo', 15.00, 10.00, 8.00, 'Pintura', 
+     'Bom', 'Chorou, Pintou', 
+     'lamento silencioso, um quadro que ecoa a tristeza intemporal','la llorona', 200, 1
+    ),
+	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+     'Desconhecido', 15.00, 10.00, 8.00, 'Banco', 
+     'Bom', 'Cravar madeira', 
+     'banco xpto','sentocu', 200, 1
+    ),
+	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+     'shinji ping', 15.00, 10.00, 8.00, 'Pintura', 
+     'Bom', 'Lutou, Pintou', 
+     'Um quadro japonês capta a intensidade de três pássaros em luta, enquanto um terceiro espelha a passividade do zé povinho','uccellinos', 200, 1
+    ),
+	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+     'Sun Tzu', 15.00, 10.00, 8.00, 'Armadura', 
+     'Razoavel', 'Forjar', 
+     'Uma armadura samurai, testemunha silenciosa de bravura e tradição','ultimo samurai', 200, 1
     );
 
 INSERT INTO Foto_leilao (foto, leilao_id)
@@ -62,7 +116,14 @@ VALUES
     ('AuctionPhotos/camaroes_foto1.png',3),
     ('AuctionPhotos/camaroes_foto2.png',3),
     ('AuctionPhotos/camaroes_foto3.png',3),
-    ('AuctionPhotos/camaroes_foto1.png',4);
+    ('AuctionPhotos/camaroes_foto1.png',4),
+	('AuctionPhotos/convivio_foto1.png',5),
+	('AuctionPhotos/escudo_tribal_africano_foto1.png',6),
+	('AuctionPhotos/la_barranquilha_foto1.png',7),
+	('AuctionPhotos/la_llorona_foto1.png',8),
+	('AuctionPhotos/sentocu_foto1.png',9),
+    ('AuctionPhotos/uccellinos_foto1.png',10),
+    ('AuctionPhotos/ultimo_samurai_foto1.png',11);
 
 INSERT INTO Licitacao (valor, data_hora, sessao_id, leilao_id)
 VALUES
@@ -72,4 +133,17 @@ VALUES
     (150.00, '2024-01-09T08:31:23', 2, 2),
     (100.00, '2024-01-09T08:34:02', 1, 3),
     (105.20, '2024-01-10T11:04:00', 2, 3),
-    (120.20,'2024-01-09T11:04:00', 1, 4);
+    (120.20,'2024-01-09T11:04:00', 1, 4),
+	(250.00, '2024-01-09T08:33:02', 1, 5),
+    (260.00, '2024-01-10T11:02:00', 2, 6),
+    (270.00, '2024-01-10T11:03:02', 2, 7),
+    (150.00, '2024-01-09T08:31:23', 2, 8),
+    (100.00, '2024-01-09T08:34:02', 1, 9),
+    (105.20, '2024-01-10T11:04:00', 2, 9),
+    (120.20,'2024-01-09T11:04:00', 1, 10),
+	(250.00, '2024-01-09T08:33:02', 1, 11),
+    (260.00, '2024-01-10T11:02:00', 2, 5),
+    (270.00, '2024-01-10T11:03:02', 2, 6),
+    (280.00, '2024-01-09T08:31:23', 2, 7),
+    (105.20, '2024-01-10T11:04:00', 2, 9),
+    (130.20,'2024-01-09T11:04:00', 1, 4);
