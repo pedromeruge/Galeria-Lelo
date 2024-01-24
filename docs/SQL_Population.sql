@@ -19,10 +19,10 @@ VALUES
     ),
     ('Rua das Tocas  174 1ºD', 'Almada', '4393945', 'Rua das Tocas  230 3ºD', 'Almada', 
      '4393945', 'UserPhotos/farol1_user.png', 'gymBro@gmail.com', 'samuelmassas', '30faralho', '2024-01-10T21:14:13'
-    )
+    ),
 	('Rua dos Santinhos  24 1ºE', 'Fátima', '4384638', 'Rua dos Santinhos  24 1ºE', 'Fátima', 
      '4384638', 'UserPhotos/farol1_user.png', 'Jesusrocks@gmail.com', 'godalike', 'aialminhas', '2024-01-11T21:17:54'
-    )
+    ),
     ('Rua das Andorinhas  17 1ºD', 'Braga', '4356538', 'Rua do Monte  32 1ºE', 'Braga', 
      '4356537', 'UserPhotos/farol1_user.png', 'zaza@gmail.com', 'blaze420', 'damelumemeumenino', '2024-01-11T13:21:01'
     );
