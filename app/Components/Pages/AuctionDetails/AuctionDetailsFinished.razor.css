@@ -138,7 +138,7 @@
     justify-content: center;
     align-items: center;
     padding: 7px 2px 7px 2px;
-    color: #ffffff; /* cor do texto*/
+    color: black;
     font-family: "Lato-SemiBold", sans-serif;
     font-size: 2vw;
     font-weight: 500;
@@ -147,6 +147,7 @@
     background: #C7A2B0;
     height: 70px;
     margin-top: 20px;
+
 }
 
 .parameter-info{

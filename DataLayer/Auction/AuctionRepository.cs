@@ -159,9 +159,12 @@ namespace DataLayer.Auction {
 			}
 		}
 
-        public Task<AuctionCard> Update(AuctionCard card) {
-            throw new NotImplementedException();
+        public async Task<AuctionCard> Update(AuctionCard auction) {
+			const string sessionSQL = "UPDATE Auction SET estado=@Leilao_estado WHERE leilao_id=@IdLeilao";
+		    await db.SaveData(sessionSQL, auction);
+            return null; // o que é suposto isto devolver?
         }
+
         public Task Remove(int id) {
             throw new NotImplementedException();
         }

@@ -1,0 +1,66 @@
+@inherits ComponentBase
+@rendermode InteractiveServer
+@using app.Components.Pages.Menu
+@using Classes.AuctionCard
+
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IUserService UserService
+@inject IAuctionRepository AuctionService
+
+@if (isVisible) {
+	<div class="menu-overlay">
+		<div class="menu">
+			<div class="menu-header">
+				<div class="menu-title">
+					<div class="menu-header-title">Pagar leilão</div>
+					<button class="close-button" @onclick="CloseMenu">X</button>
+				</div>
+				<div class="menu-line"></div>
+			</div>
+            <div class="menu-body">
+                <div class="meny-body-text">
+                    <div class="body-title">Licitação final (com taxa de envio):</div>
+                    <div class="body-value">@maiorLicitacao.ToString("F2") €</div>
+                    <div class="body-value">@custoFinal.ToString("F2") €</div>
+                </div>
+                <form class="inputs" @onsubmit="HandleSubmit">
+                    <div class="body-title">Simução de janela de pagamento </div>
+                    <button class="input-button" type="submit">PAGAR</button>
+                </form>
+            </div>
+		</div>
+	</div>
+}
+
+@code {
+
+	[Parameter]
+	public bool isVisible { get; set; } = true; // se menu de licitar está ou não visível 
+
+	[Parameter]
+    public Action? CloseCallback { get; set; }
+
+	[Parameter]
+    public AuctionCard leilao {get; set;}
+
+    private decimal maiorLicitacao;
+    private decimal custoFinal;
+
+	public void CloseMenu() {
+		isVisible = false;
+		CloseCallback?.Invoke();
+	}
+
+    protected override async Task OnInitializedAsync() {
+        maiorLicitacao = leilao.Maior_licitacao.Valor;
+        custoFinal = leilao.Maior_licitacao.Valor + leilao.Custo_envio;
+    }
+
+	private async Task HandleSubmit() {
+        leilao.Leilao_estado = AuctionStatus.por_enviar;
+        AuctionService.Update(leilao);
+        CloseMenu();
+	}
+}
