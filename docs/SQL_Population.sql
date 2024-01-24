@@ -30,15 +30,15 @@ VALUES
 
 INSERT INTO Sessao (data_hora_inicio, data_hora_fim, user_id)
 VALUES
-    ('2024-01-09T08:31:27', '2024-01-09T08:42:11', 1),
-    ('2024-01-10T11:00:31', '2024-01-10T11:05:27', 2),
-	('2024-01-10T18:11:12', '2024-01-10T18:32:15', 3),
-    ('2024-01-11T12:03:32', '2024-01-11T12:45:23', 4),
-	('2024-01-12T04:31:42', '2024-01-12T04:57:34', 5),
-    ('2024-01-12T15:05:37', '2024-01-12T16:23:42', 6),
-	('2024-01-13T12:13:12', '2024-01-13T12:47:33', 2),
-	('2024-01-13T17:21:22', '2024-01-13T17:47:54', 5),
-    ('2024-01-14T15:15:37', '2024-01-14T16:51:17', 4);
+    ('2024-01-09T08:31:27', '2024-01-09T18:42:11', 1),
+    ('2024-01-10T07:00:31', '2024-01-10T21:05:27', 2),
+	('2024-01-10T08:11:12', '2024-01-10T18:32:15', 3),
+    ('2024-01-11T06:03:32', '2024-01-11T22:45:23', 4),
+	('2024-01-12T04:31:42', '2024-01-12T19:57:34', 5),
+    ('2024-01-12T07:05:37', '2024-01-12T17:23:42', 6),
+	('2024-01-13T09:13:12', '2024-01-13T19:47:33', 2),
+	('2024-01-13T07:21:22', '2024-01-13T17:47:54', 5),
+    ('2024-01-14T05:15:37', '2024-01-14T17:51:17', 4);
 
 INSERT INTO Administrador (email, pass_hash)
 VALUES
@@ -51,56 +51,56 @@ INSERT INTO Leilao (
     prod_estado, prod_tecnica, prod_descricao, prod_nome, prod_peso, admin_id
 )
 VALUES
-    ('2024-01-05T08:30:00', '2024-02-12T20:30:00', 'em_leilao', 250.00, 10.00, 
+    ('2024-01-05T08:30:00', '2024-02-12T20:30:00', 'em_leilao', 100.00, 10.00, 
      'Leonardo Da Vinki', 15.00, 10.00, 8.00, 'Pintura', 
-     'Excelente', 'Pintou, morreu, famosou', 'Descrição descritiva', 'Maconha Lisa', 
+     'Excelente', 'Sfumato', 'Seu sorriso sutil e olhar cativante convidam à reflexão em meio à técnica sfumato, criando uma aura de mistério atemporal', 'Mona Grossa', 
         200, 2
     ),
     ('2024-01-09T08:30:00', '2024-02-10T18:30:00', 'em_leilao', 100.00, 15.00, 
      'Eduardo Muncha muito', 18.00, 20.00, 4.00, 'Pintura', 
-     'Excelente', 'Gritou, Pintou', 'Descrição mais descritiva que a outra descrição', 'O grito louco', 
+     'Excelente', 'Têmpera', 'Uma explosão de angústia capturada em cores vibrantes e formas distorcidas, refletindo a intensidade da condição humana', 'O grito louco', 
         140, 1
     ),
     ('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
      'Desconhecido', 40.00, 20.01, 15.2, 'Escultura', 
-     'Bom', 'Esculpir madeira', 
+     'Bom', 'Entalhe', 
      'Bela escultura de Mambila dos Camarões. O estilo é dominado, os volumes são bem tratados. O corpo é compacto e atarracado. O rosto é expressivo, suave e sensível. A sua presença é pacífica. O rosto apresenta resquícios de pigmentos brancos e vermelhos. O seu cocar é lindo, feito de pontas de madeira. A madeira está danificada em alguns lugares, os insetos atacaram-na, a madeira é sólida. Ver fotos. Vendido como está. Um lindo item de colecionador antigo e autêntico. Por volta de 1950.', 
      'Quadro Mambila, Camarões', 300, 1
     ),
-    ('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'concluido', 87.00, 20.00, 
+    ('2024-01-09T08:30:00', '2024-01-30T18:30:00', 'concluido', 87.00, 20.00, 
      'Desconhecido', 40.00, 20.01, 15.2, 'Escultura', 
-     'Bom', 'Esculpir madeira', 
+     'Bom', 'Entalhe', 
      'Bela escultura de Mambila dos Camarões. O estilo é dominado, os volumes são bem tratados. O corpo é compacto e atarracado. O rosto é expressivo, suave e sensível. A sua presença é pacífica. O rosto apresenta resquícios de pigmentos brancos e vermelhos. O seu cocar é lindo, feito de pontas de madeira. A madeira está danificada em alguns lugares, os insetos atacaram-na, a madeira é sólida. Ver fotos. Vendido como está. Um lindo item de colecionador antigo e autêntico. Por volta de 1950.', 
      'Quadro Mambila, Camarões', 300, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
      'Bianca', 15.00, 10.00, 8.00, 'Pintura', 
-     'Excelente', 'Juntou, Pintou', 
+     'Excelente', 'Afresco seco', 
      'Um frenesi de formas e cores entrelaça-se neste quadro, onde sete homens, uma mulher e uma criança emergem como elementos vibrantes de uma sinfonia visual, transcendendo as fronteiras da individualidade para criar uma expressão única de coletividade', 'Convivio', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
      'lutadéro', 15.00, 10.00, 8.00, 'Escudo', 
-     'Razoavel', 'Esculpir', 
+     'Razoavel', 'Entalhe', 
      'Um pequeno escudo tribal africano, intrincadamente entalhado, exibe uma dança caleidoscópica de padrões geométricos, simbolizando a conexão sagrada entre atradição, a comunidade e a espiritualidade.','Escudo tribal africano', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
      'Gaby', 15.00, 10.00, 8.00, 'Pintura', 
-     'Excelente', 'Arrependeu, Pintou', 
+     'Excelente', 'Grisalha', 
      'Um homem religioso diante de um crucifixo, cercado por uma caveira, chicote e água benta, explora a complexidade entre penitência e redenção','la barranquilha', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
      'Picollo', 15.00, 10.00, 8.00, 'Pintura', 
-     'Bom', 'Chorou, Pintou', 
+     'Bom', 'Sfumato', 
      'lamento silencioso, um quadro que ecoa a tristeza intemporal','la llorona', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
      'Desconhecido', 15.00, 10.00, 8.00, 'Banco', 
-     'Bom', 'Cravar madeira', 
+     'Bom', 'Entalhe', 
      'banco xpto','sentocu', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
      'shinji ping', 15.00, 10.00, 8.00, 'Pintura', 
-     'Bom', 'Lutou, Pintou', 
+     'Bom', 'Sumi-e', 
      'Um quadro japonês capta a intensidade de três pássaros em luta, enquanto um terceiro espelha a passividade do zé povinho','uccellinos', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
@@ -127,23 +127,23 @@ VALUES
 
 INSERT INTO Licitacao (valor, data_hora, sessao_id, leilao_id)
 VALUES
-    (250.00, '2024-01-09T08:33:02', 1, 1),
+    (250.00, '2024-01-09T10:33:02', 1, 1),
     (260.00, '2024-01-10T11:02:00', 2, 1),
-    (270.00, '2024-01-10T11:03:02', 2, 1),
-    (150.00, '2024-01-09T08:31:23', 2, 2),
-    (100.00, '2024-01-09T08:34:02', 1, 3),
+    (270.00, '2024-01-10T11:03:02', 3, 1),
+    (150.00, '2024-01-09T10:31:23', 2, 2),
+    (100.00, '2024-01-09T10:34:02', 1, 3),
     (105.20, '2024-01-10T11:04:00', 2, 3),
     (120.20,'2024-01-09T11:04:00', 1, 4),
-	(250.00, '2024-01-09T08:33:02', 1, 5),
-    (260.00, '2024-01-10T11:02:00', 2, 6),
-    (270.00, '2024-01-10T11:03:02', 2, 7),
-    (150.00, '2024-01-09T08:31:23', 2, 8),
-    (100.00, '2024-01-09T08:34:02', 1, 9),
-    (105.20, '2024-01-10T11:04:00', 2, 9),
+	(250.00, '2024-01-12T10:33:02', 6, 5),
+    (260.00, '2024-01-11T11:02:00', 4, 6),
+    (270.00, '2024-01-13T11:03:02', 2, 7),
+    (150.00, '2024-01-09T10:31:23', 2, 8),
+    (100.00, '2024-01-09T10:34:02', 1, 9),
+    (105.20, '2024-01-10T11:04:00', 3, 9),
     (120.20,'2024-01-09T11:04:00', 1, 10),
-	(250.00, '2024-01-09T08:33:02', 1, 11),
-    (260.00, '2024-01-10T11:02:00', 2, 5),
-    (270.00, '2024-01-10T11:03:02', 2, 6),
-    (280.00, '2024-01-09T08:31:23', 2, 7),
-    (105.20, '2024-01-10T11:04:00', 2, 9),
-    (130.20,'2024-01-09T11:04:00', 1, 4);
+	(250.00, '2024-01-09T10:33:02', 1, 11),
+    (260.00, '2024-01-13T11:02:00', 5, 5),
+    (270.00, '2024-01-12T11:03:02', 5, 6),
+    (280.00, '2024-01-14T10:31:23', 4, 7),
+    (115.20, '2024-01-13T11:04:00', 5, 9),
+    (130.20,'2024-01-14T11:04:00', 4, 4);
