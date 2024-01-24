@@ -52,60 +52,60 @@ INSERT INTO Leilao (
 )
 VALUES
     ('2024-01-05T08:30:00', '2024-02-12T20:30:00', 'em_leilao', 100.00, 10.00, 
-     'Leonardo Da Vinki', 15.00, 10.00, 8.00, 'Pintura', 
-     'Excelente', 'Sfumato', 'Seu sorriso sutil e olhar cativante convidam à reflexão em meio à técnica sfumato, criando uma aura de mistério atemporal', 'Mona Grossa', 
+     'Leonardo Da Vinki', 15.00, 10.00, 8.00, 'pintura', 
+     'excelente', 'Sfumato', 'Seu sorriso sutil e olhar cativante convidam à reflexão em meio à técnica sfumato, criando uma aura de mistério atemporal', 'Mona Grossa', 
         200, 2
     ),
     ('2024-01-09T08:30:00', '2024-02-10T18:30:00', 'em_leilao', 100.00, 15.00, 
-     'Eduardo Muncha muito', 18.00, 20.00, 4.00, 'Pintura', 
-     'Excelente', 'Têmpera', 'Uma explosão de angústia capturada em cores vibrantes e formas distorcidas, refletindo a intensidade da condição humana', 'O grito louco', 
+     'Eduardo Muncha muito', 18.00, 20.00, 4.00, 'pintura', 
+     'excelente', 'Têmpera', 'Uma explosão de angústia capturada em cores vibrantes e formas distorcidas, refletindo a intensidade da condição humana', 'O grito louco', 
         140, 1
     ),
     ('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
-     'Desconhecido', 40.00, 20.01, 15.2, 'Escultura', 
-     'Bom', 'Entalhe', 
+     'Desconhecido', 40.00, 20.01, 15.2, 'escultura', 
+     'bom', 'Entalhe', 
      'Bela escultura de Mambila dos Camarões. O estilo é dominado, os volumes são bem tratados. O corpo é compacto e atarracado. O rosto é expressivo, suave e sensível. A sua presença é pacífica. O rosto apresenta resquícios de pigmentos brancos e vermelhos. O seu cocar é lindo, feito de pontas de madeira. A madeira está danificada em alguns lugares, os insetos atacaram-na, a madeira é sólida. Ver fotos. Vendido como está. Um lindo item de colecionador antigo e autêntico. Por volta de 1950.', 
      'Quadro Mambila, Camarões', 300, 1
     ),
     ('2024-01-09T08:30:00', '2024-01-30T18:30:00', 'concluido', 87.00, 20.00, 
-     'Desconhecido', 40.00, 20.01, 15.2, 'Escultura', 
-     'Bom', 'Entalhe', 
+     'Desconhecido', 40.00, 20.01, 15.2, 'escultura', 
+     'bom', 'Entalhe', 
      'Bela escultura de Mambila dos Camarões. O estilo é dominado, os volumes são bem tratados. O corpo é compacto e atarracado. O rosto é expressivo, suave e sensível. A sua presença é pacífica. O rosto apresenta resquícios de pigmentos brancos e vermelhos. O seu cocar é lindo, feito de pontas de madeira. A madeira está danificada em alguns lugares, os insetos atacaram-na, a madeira é sólida. Ver fotos. Vendido como está. Um lindo item de colecionador antigo e autêntico. Por volta de 1950.', 
      'Quadro Mambila, Camarões', 300, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
-     'Bianca', 15.00, 10.00, 8.00, 'Pintura', 
-     'Excelente', 'Afresco seco', 
+     'Bianca', 15.00, 10.00, 8.00, 'pintura', 
+     'excelente', 'Afresco seco', 
      'Um frenesi de formas e cores entrelaça-se neste quadro, onde sete homens, uma mulher e uma criança emergem como elementos vibrantes de uma sinfonia visual, transcendendo as fronteiras da individualidade para criar uma expressão única de coletividade', 'Convivio', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
-     'lutadéro', 15.00, 10.00, 8.00, 'Escudo', 
-     'Razoavel', 'Entalhe', 
+     'lutadéro', 15.00, 10.00, 8.00, 'outro', 
+     'bom', 'Entalhe', 
      'Um pequeno escudo tribal africano, intrincadamente entalhado, exibe uma dança caleidoscópica de padrões geométricos, simbolizando a conexão sagrada entre atradição, a comunidade e a espiritualidade.','Escudo tribal africano', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
-     'Gaby', 15.00, 10.00, 8.00, 'Pintura', 
-     'Excelente', 'Grisalha', 
+     'Gaby', 15.00, 10.00, 8.00, 'pintura', 
+     'excelente', 'Grisalha', 
      'Um homem religioso diante de um crucifixo, cercado por uma caveira, chicote e água benta, explora a complexidade entre penitência e redenção','la barranquilha', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
-     'Picollo', 15.00, 10.00, 8.00, 'Pintura', 
-     'Bom', 'Sfumato', 
+     'Picollo', 15.00, 10.00, 8.00, 'pintura', 
+     'bom', 'Sfumato', 
      'lamento silencioso, um quadro que ecoa a tristeza intemporal','la llorona', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
-     'Desconhecido', 15.00, 10.00, 8.00, 'Banco', 
-     'Bom', 'Entalhe', 
+     'Desconhecido', 15.00, 10.00, 8.00, 'outro', 
+     'bom', 'Entalhe', 
      'banco xpto','sentocu', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
-     'shinji ping', 15.00, 10.00, 8.00, 'Pintura', 
-     'Bom', 'Sumi-e', 
+     'shinji ping', 15.00, 10.00, 8.00, 'pintura', 
+     'bom', 'Sumi-e', 
      'Um quadro japonês capta a intensidade de três pássaros em luta, enquanto um terceiro espelha a passividade do zé povinho','uccellinos', 200, 1
     ),
 	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
-     'Sun Tzu', 15.00, 10.00, 8.00, 'Armadura', 
-     'Razoavel', 'Forjar', 
+     'Sun Tzu', 15.00, 10.00, 8.00, 'outro', 
+     'mau', 'Forjar', 
      'Uma armadura samurai, testemunha silenciosa de bravura e tradição','ultimo samurai', 200, 1
     );
 
