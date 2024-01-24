@@ -96,7 +96,7 @@ BEGIN
 
     SELECT @HighestBid = MAX(valor)
         FROM Licitacao As lic
-        INNER JOIN Sessao AS s ON lic.session_id = s.session_id 
+        INNER JOIN Sessao AS s ON lic.sessao_id = s.sessao_id 
             WHERE leilao_id = @IdLeilao AND s.user_id = @IdUser
     RETURN ISNULL(@HighestBid, 0)
 END;
