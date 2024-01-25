@@ -30,10 +30,15 @@ namespace DataLayer {
 
         public async Task SaveData<T>(string sql, T parameters)
         {
-            string? connectionString = _config.GetConnectionString(ConnectionStringName);
-            using (IDbConnection connection = new SqlConnection(connectionString))
-            {
-                await connection.ExecuteAsync(sql, parameters);
+            try {
+                string? connectionString = _config.GetConnectionString(ConnectionStringName);
+                using (IDbConnection connection = new SqlConnection(connectionString))
+                {
+                    await connection.ExecuteAsync(sql, parameters);
+                }
+            } catch (Exception ex) {
+                Console.WriteLine($"Error in SaveData: {ex.Message}");
+                throw;
             }
         }
 

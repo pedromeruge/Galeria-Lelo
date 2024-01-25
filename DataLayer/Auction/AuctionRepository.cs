@@ -159,10 +159,11 @@ namespace DataLayer.Auction {
 			}
 		}
 
-        public async Task<AuctionCard> Update(AuctionCard auction) {
-			const string sessionSQL = "UPDATE Auction SET estado=@Leilao_estado WHERE leilao_id=@IdLeilao";
-		    await db.SaveData(sessionSQL, auction);
-            return null; // o que é suposto isto devolver?
+        public async Task Update(AuctionCard auction) {
+            Console.WriteLine(auction.ToString());
+			const string sessionSQL = "UPDATE Leilao SET estado=@Leilao_estado WHERE leilao_id=@IdLeilao";
+            var parameters = new {Leilao_estado = auction.Leilao_estado.ToString(), IdLeilao = auction.IdLeilao};
+		    await db.SaveData(sessionSQL, parameters);
         }
 
         public Task Remove(int id) {

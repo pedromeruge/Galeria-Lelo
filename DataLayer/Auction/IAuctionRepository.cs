@@ -9,7 +9,7 @@ namespace DataLayer.Auction {
         Task<List<AuctionCard>> SearchAuctions(string inputQuery);
 
         Task<int> createAuction(AuctionCard auction, List<string> fotos);
-        Task<AuctionCard> Update(AuctionCard card);
+        Task Update(AuctionCard card);
         Task Remove(int id);
     } 
 }

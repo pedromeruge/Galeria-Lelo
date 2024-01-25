@@ -8,7 +8,7 @@
 @using app.Components.Pages.Menu
 @rendermode InteractiveServer
 
-<div class="card-component" @onclick=" () => NavigateToDetalhesLeilao(Card.IdLeilao)">
+<div class="card-component" @onclick=" () => HandleCardClick(Card.IdLeilao)">
   <div class="left-side">
     @if (UserHighestBidDiff < 0) {
       <p class="outbid-text">OUTBID</p>
@@ -61,23 +61,31 @@
   private decimal finalCost;
 
   private bool mostrarMenuPagar = false;
+  private bool cardClickAccepted = true;
   protected override void OnInitialized()
   {
       finalCost = Card.Maior_licitacao.Valor + Card.Custo_envio;
   }
 
+  private void HandleCardClick(int auctionId) {
+    if (cardClickAccepted) {
+      NavigateToDetalhesLeilao(auctionId);
+    }
+    else {
+      //do nothing
+    }
+  }
   private void NavigateToDetalhesLeilao(int auctionId) {
       NavigationManager.NavigateTo($"/AuctionDetailsFinished/{Card.IdLeilao}");
   }
 
-    private void MostrarMenuPagar() {
-       mostrarMenuPagar = true;
-    }
+  private void MostrarMenuPagar() {
+      mostrarMenuPagar = true;
+      cardClickAccepted = false;
+  }
 
-    private async void FecharMenuPagar() {
-
+  private async void FecharMenuPagar() {
 		mostrarMenuPagar = false;
-
-		StateHasChanged(); // Forçar UI a dar update do novo valor de bid
+    cardClickAccepted = true;
 	}
 }
