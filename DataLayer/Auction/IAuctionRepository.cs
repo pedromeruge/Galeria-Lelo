@@ -5,6 +5,7 @@ namespace DataLayer.Auction {
         Task<AuctionCard> Find(int id);
         Task<List<AuctionCard>> FindAll();
         Task<List<AuctionCard>> FindAllInState(AuctionStatus estado);
+        Task<List<AuctionCard>> FindAllInStateSortedByStartDate(AuctionStatus estado);
         Task<List<AuctionCard>> FindAllFromUserInState(int userId, AuctionStatus estado);
         Task<List<AuctionCard>> SearchAuctions(string inputQuery);
 

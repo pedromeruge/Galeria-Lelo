@@ -7,10 +7,6 @@
 
 <div class="header">
   <img class="logo-galeria" src="pngs/logo-galeria-horiz.png" />
-  <form id="searchForm" class="searchbar" @onsubmit="Search">
-      <img class="lupa" src="pngs/searchbar-lupa.png" />
-      <input type="search" id="searchInput" placeholder="Pesquisar artigos" @bind="searchQuery">
-  </form>
   <button class="login-button" @onclick="MostrarMenuLogin" CausesValidation="False">Iniciar Sessão</button>
   @* devia haver uma maneira de esta classe so ser criada 1 vez mas isso ultrapassa-me, nao consegui descobrir, entao fiz este if manhoso tanto aqui como no menu *@
 	@if (mostrarMenuLogin)
@@ -21,16 +17,7 @@
 </div>
 
 @code{
-  bool mostrarMenuLogin = false;
-  private string? searchQuery = string.Empty; // resultado da pesquisa
-
-//interpretar pesquisa
-	private void Search() {
-		if (searchQuery != null && searchQuery != "") {
-																						@* DESATIVADO POR AGORA *@
-			@* NavigationManager.NavigateTo($"/SearchResults/{Uri.EscapeDataString(searchQuery)}"); *@
-		}
-	}
+  	bool mostrarMenuLogin = false;
 
 	private void MostrarMenuLogin() {
 		mostrarMenuLogin = true;

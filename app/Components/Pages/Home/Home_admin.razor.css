@@ -38,24 +38,3 @@
     font-size: 30px;
     font-weight: 500;
 }
-
-.leiloes {
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 20px;
-    padding-bottom: 40px;
-}
-.texto-leiloes {
-    color: #000000;
-    text-align: left;
-    font-family: "Lato-Bold", sans-serif;
-    font-size: 30px;
-    font-weight: 500;
-    position: relative;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
-    grid-gap: 30px;
-}

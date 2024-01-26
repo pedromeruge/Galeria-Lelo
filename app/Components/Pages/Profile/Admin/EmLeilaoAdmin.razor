@@ -1,0 +1,51 @@
+
+@page "/admin/AuctionStates/EmLeilao"
+@layout LoginAdminLayout
+
+@inject NavigationManager NavigationManager
+@inject IWebHostEnvironment WebHostEnvironment
+@inject IJSRuntime JSRuntime
+@using app.Components.ClassBlocks.AuctionCard.Admin
+@rendermode InteractiveServer
+@using DataLayer.Auction
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IAuctionRepository AuctionService
+@inject IAdminService AdminService
+@using Classes.Admin
+@using Classes.AuctionCard
+
+<PageTitle>Galeria Lelo</PageTitle>
+
+@if (cards == null) {
+    <p>Loading page...</p>
+}
+
+else {
+    <div class="leiloes">
+        @if(cards.Count > 0) {
+            <p class="texto-leiloes">Leilões encontrados</p>
+            <div class="grid">
+                @foreach (var card in cards) {
+                    <AuctionCardHorizInAuctionAdminComponent Card="card" />
+                }
+            </div>
+        } else {
+            <p class="texto-leiloes">Sem leilões criados a decorrer </p>
+        }
+    </div>
+}
+
+@code {
+    private List<AuctionCard> cards = null;
+
+		protected override async Task OnAfterRenderAsync(bool firstRender) {
+		if (firstRender) {
+			// ver se user existe e ta valido
+			Admin admin = await localStorage.GetItemAsync<Admin>("Admin");
+			if (admin == null || await AdminService.checkAdminValid(admin) == false) NavigationManager.NavigateTo("/admin");
+            cards = await AuctionService.FindAllInStateSortedByStartDate(AuctionStatus.em_leilao);
+            StateHasChanged(); // só atualiza o UI, n dá refresh de tudo
+		}
+	}
+}

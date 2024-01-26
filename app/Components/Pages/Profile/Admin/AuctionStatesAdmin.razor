@@ -1,0 +1,78 @@
+@page "/admin/AuctionStates"
+@layout LoginAdminLayout
+
+@attribute [StreamRendering]
+@inherits ComponentBase
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IUserService UserService
+@using Classes.Session
+@inject IAdminService AdminService
+@using Classes.Admin
+
+<PageTitle>AuctionStates</PageTitle>
+
+<div class="page">
+  <div class="page-title">Vendas</div>
+  <div class="body">
+    <div class="row">
+        <div class="por-pagar-section" @onclick=" () => NavigateToPorPagarSection()">
+            <img class="bckg" src="pngs/por-pagar-bckg.png" />
+            <div class="por-pagar">POR PAGAR</div>
+        </div>
+        <div class="por-enviar-section" @onclick=" () => NavigateToPorEnviarSection()">
+        <img class="bckg" src="pngs/por-enviar-bckg.png" />
+        <div class="por-enviar">POR ENVIAR</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="por-entregar-section" @onclick=" () => NavigateToPorEntregarSection()">
+        <img class="bckg" src="pngs/por-entregar-bckg.png" />
+        <div class="por-entregar">POR ENTREGAR</div>
+        </div>
+        <div class="concluido-section" @onclick=" () => NavigateToConcluidoSection()">
+        <img class="bckg" src="pngs/concluido-bckg.png" />
+        <div class="concluido">CONCLUIDO</div>
+        </div>
+    </div>
+    <div class="em-leilao-section" @onclick=" () => NavigateToEmLeilaoSection()">
+        <img class="bckg" src="pngs/em-leilao-bckg.png" />
+        <div class="em-leilao">EM LEILÃO</div>
+    </div>
+  </div>
+</div>
+
+@code {
+    private void NavigateToPorPagarSection() {
+        NavigationManager.NavigateTo("/admin/AuctionStates/PorPagar"); 
+    }
+
+    private void NavigateToPorEnviarSection() {
+
+        NavigationManager.NavigateTo($"/admin/AuctionStates/PorEnviar"); 
+    }
+
+    private void NavigateToPorEntregarSection() {
+         
+        NavigationManager.NavigateTo("/admin/AuctionStates/PorEntregar"); 
+    }
+    
+    private void NavigateToConcluidoSection() {
+
+        NavigationManager.NavigateTo("/admin/AuctionStates/Concluido"); 
+    }
+
+    private void NavigateToEmLeilaoSection() {
+
+        NavigationManager.NavigateTo("/admin/AuctionStates/EmLeilao"); 
+    }
+
+	protected override async Task OnAfterRenderAsync(bool firstRender) {
+		if (firstRender) {
+			// ver se user existe e ta valido
+			Admin admin = await localStorage.GetItemAsync<Admin>("Admin");
+			if (admin == null || await AdminService.checkAdminValid(admin) == false) NavigationManager.NavigateTo("/admin");
+		}
+	}
+}

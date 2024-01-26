@@ -27,7 +27,7 @@ else {
             <p class="texto-leiloes">Leilões encontrados</p>
             <div class="grid">
                 @foreach (var card in cards) {
-                    <AuctionCardHorizontalComponent Card="card" />
+                    <AuctionCardHorizFinishedComponent Card="card" />
                 }
             </div>
         } else {
@@ -38,7 +38,6 @@ else {
 
 @code {
     public List<AuctionCard>? cards;
-    private int idUser;
 
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if (firstRender) {

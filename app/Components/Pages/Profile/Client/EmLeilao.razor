@@ -29,7 +29,7 @@ else {
             <p class="texto-leiloes">Leilões encontrados</p>
             <div class="grid">
                 @foreach (var tuple in auctions) {
-                    <AuctionCardHorizontalComponent UserHighestBidDiff="tuple.Item1" Card="tuple.Item2" />
+                    <AuctionCardHorizInAuctionComponent UserHighestBidDiff="tuple.Item1" Card="tuple.Item2" />
                 }
             </div>
         } else {
@@ -40,7 +40,6 @@ else {
 
 @code {
     private List<Tuple<decimal,AuctionCard>> auctions = new List<Tuple<decimal,AuctionCard>>();
-    private int idUser;
 
 	protected override async Task OnAfterRenderAsync(bool firstRender) {
 		if (firstRender) {
@@ -68,7 +67,6 @@ else {
                 auctions = new List<Tuple<decimal, AuctionCard>>(negativeDiffTuples.Concat(positiveDiffTuples));
             }
             StateHasChanged(); // Forçar UI update
-            }
-		}
-	}
+        }
+    }
 }

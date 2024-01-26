@@ -1,4 +1,4 @@
-@page "/AuctionStates/PorEntregar"
+@page "/AuctionStates/PorPagar"
 @layout LoginLayout
 
 @using System.Text.Json
@@ -27,28 +27,27 @@ else {
             <p class="texto-leiloes">Leilões encontrados</p>
             <div class="grid">
                 @foreach (var card in cards) {
-                    <AuctionCardHorizontalComponent Card="card" />
+                    <AuctionCardToPayHorizComponent Card="card" />
                 }
             </div>
         } else {
-            <p class="texto-leiloes">Sem leilões por entregar </p>
+            <p class="texto-leiloes">Sem leilões por pagar </p>
         }
     </div>
 }
 
 @code {
     public List<AuctionCard>? cards;
-    private int idUser;
 
-	protected override async Task OnAfterRenderAsync(bool firstRender) {
-		if (firstRender) {
-			// ver se user existe e ta valido
-			User user = await localStorage.GetItemAsync<User>("User");
-			if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
-			Session session = await localStorage.GetItemAsync<Session>("Session");
-			if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
-            cards = await db.FindAllFromUserInState(user.user_id, AuctionStatus.por_entregar);
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender) {
+            // ver se user existe e ta valido
+            User user = await localStorage.GetItemAsync<User>("User");
+            if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
+            Session session = await localStorage.GetItemAsync<Session>("Session");
+            if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
+            cards = await db.FindAllFromUserInState(user.user_id, AuctionStatus.por_pagar);
             StateHasChanged(); // Forçar UI update
-		}
-	}
+        }
+    }
 }

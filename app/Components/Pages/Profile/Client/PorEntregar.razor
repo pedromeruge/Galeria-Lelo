@@ -1,4 +1,4 @@
-@page "/AuctionStates/Concluido"
+@page "/AuctionStates/PorEntregar"
 @layout LoginLayout
 
 @using System.Text.Json
@@ -27,18 +27,17 @@ else {
             <p class="texto-leiloes">Leilões encontrados</p>
             <div class="grid">
                 @foreach (var card in cards) {
-                    <AuctionCardHorizontalComponent Card="card" />
+                    <AuctionCardHorizFinishedComponent Card="card" />
                 }
             </div>
         } else {
-            <p class="texto-leiloes">Sem leilões concluidos </p>
+            <p class="texto-leiloes">Sem leilões por entregar </p>
         }
     </div>
 }
 
 @code {
     public List<AuctionCard>? cards;
-    private int idUser;
 
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if (firstRender) {
@@ -47,7 +46,7 @@ else {
             if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
             Session session = await localStorage.GetItemAsync<Session>("Session");
             if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
-            cards = await db.FindAllFromUserInState(user.user_id, AuctionStatus.concluido);
+            cards = await db.FindAllFromUserInState(user.user_id, AuctionStatus.por_entregar);
             StateHasChanged(); // Forçar UI update
         }
     }

@@ -9,35 +9,30 @@
 @inject IUserService UserService
 @inject IAuctionRepository AuctionService
 
-@if (isVisible) {
-	<div class="menu-overlay">
-		<div class="menu">
-			<div class="menu-header">
-				<div class="menu-title">
-					<div class="menu-header-title">Pagar leilão</div>
-					<button class="close-button" @onclick:stopPropagation="true" @onclick="CloseMenu">X</button>
-				</div>
-				<div class="menu-line"></div>
-			</div>
-            <div class="menu-body">
-                <div class="meny-body-text">
-                    <div class="body-title">Licitação final (com taxa de envio):</div>
-                    <p class="body-value">@maiorLicitacao.ToString("F2") €</p>
-                    <p class="body-value">@custoFinal.ToString("F2") €</p>
-                </div>
-                <form class="inputs" @onsubmit="HandleSubmit">
-                    <p class="body-title">Simução de janela de pagamento </p>
-                    <button class="input-button" type="submit">PAGAR</button>
-                </form>
+<div class="menu-overlay">
+    <div class="menu">
+        <div class="menu-header">
+            <div class="menu-title">
+                <div class="menu-header-title">Pagar leilão</div>
+                <button class="close-button" @onclick:stopPropagation="true" @onclick="CloseMenu">X</button>
             </div>
-		</div>
-	</div>
-}
+            <div class="menu-line"></div>
+        </div>
+        <div class="menu-body">
+            <div class="meny-body-text">
+                <div class="body-title">Licitação final (com taxa de envio):</div>
+                <p class="body-value">@maiorLicitacao.ToString("F2") €</p>
+                <p class="body-value">@custoFinal.ToString("F2") €</p>
+            </div>
+            <form class="inputs" @onsubmit="HandleSubmit">
+                <p class="body-title">Simução de janela de pagamento </p>
+                <button class="input-button" type="submit">PAGAR</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 @code {
-
-	[Parameter]
-	public bool isVisible { get; set; } = true; // se menu de licitar está ou não visível 
 
 	[Parameter]
     public Action? CloseCallback { get; set; }
@@ -49,7 +44,6 @@
     private decimal custoFinal;
 
 	public void CloseMenu() {
-		isVisible = false;
 		CloseCallback?.Invoke();
 	}
 

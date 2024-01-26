@@ -1,0 +1,83 @@
+@using Classes.AuctionCard;
+@using Classes.Bids;
+@using Classes.Time;
+@using System;
+@inherits ComponentBase
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<div class="card-component" @onclick=" () => NavigateToDetalhesLeilao(Card.IdLeilao)">
+  <div class="left-side">
+    @if (Card.Images.Any()) {
+      <img src="@Card.Images.First().Path" class="auction-img" alt="@Card.Images.First().Path">
+    }
+    else {
+      <p class="auction-img">Image not found</p>
+    }
+  </div>
+  <div class="right-side">
+    <div class="top-row">
+      <div class="info-names">
+          <span class="author">
+              @Card.Nome_artista -
+          </span>
+          <span class="name">
+              @Card.Prod_nome
+          </span>
+      </div>
+        <div id="remainingTime_@Card.IdLeilao" class="time">
+          @if (Card.DataFim > DateTime.Now) { //inicialmente meter valores, javascript vai alterá-los apos o minute passar
+            <text>@Time.RemainingTimeToStringShort(Card.DataFim)</text>
+            }
+          else{
+            <text>ENCERRADO</text>
+          }
+      </div>
+    </div>
+    <div class="bottom-row">
+      <div class="left-bid-section"> 
+        <div class="licitacao-text">Licitação atual:</div>
+      </div>
+      <div class="right-bid-text"> 
+        <div class="preco-atual">@currentBid.ToString("F2") €</div>
+        <div class="preco-com-envio"> @finalCost.ToString("F2") € incl.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="JSscripts/timeUpdater.js"></script>
+
+@code {
+  [Parameter, EditorRequired]
+  public AuctionCard Card { get; set; } = default!;
+
+  private decimal finalCost;
+  private decimal currentBid;
+
+  protected override void OnInitialized()
+  {
+      if (Card.Maior_licitacao == null) {
+        currentBid = Card.Preco_base;
+      }
+      else {
+        currentBid = Card.Maior_licitacao.Valor;
+      }
+
+      finalCost = currentBid + Card.Custo_envio;
+  }
+
+  protected override async Task OnInitializedAsync() {
+    string elementId = "remainingTime_" + Card.IdLeilao;
+    int updateFrequency = Card.DataFim.Hour < 1 ? 1000 : 60000; // se tempo restante for menor de 1 hora atualizar a cada seg, senao a cada min *@
+    JSRuntime.InvokeVoidAsync("startCountdown", elementId, Card.DataFim.ToString("yyyy-MM-ddTHH:mm:ss"), updateFrequency);
+  }
+
+  private void NavigateToDetalhesLeilao(int auctionId) {
+    if (Card.Leilao_estado == AuctionStatus.em_leilao) {
+        NavigationManager.NavigateTo($"/AuctionDetails/{Card.IdLeilao}");
+    } else {
+      NavigationManager.NavigateTo($"/AuctionDetailsFinished/{Card.IdLeilao}");
+    }
+  }
+}
