@@ -10,9 +10,6 @@
 
 <div class="card-component" @onclick=" () => HandleCardClick(Card.IdLeilao)">
   <div class="left-side">
-    @if (UserHighestBidDiff < 0) {
-      <p class="outbid-text">OUTBID</p>
-    }
     @if (Card.Images.Any()) {
       <img src="@Card.Images.First().Path" class="auction-img" alt="@Card.Images.First().Path">
     }
@@ -36,7 +33,7 @@
       </div>
     <div class="bottom-row">
       <div class="left-button-section"> 
-        <button class="pagar-button" @onclick:stopPropagation="true" @onclick="MostrarMenuPagar">PAGAR</button> @*impedir propagação do efeito de clicar para o card component!!!*@
+        <button class="entregar-button" @onclick:stopPropagation="true" @onclick="MostrarMenuEntregar">ENTREGAR</button> @*impedir propagação do efeito de clicar para o card component!!!*@
       </div>
       <div class="right-bid-text"> 
         <div class="preco-atual">@Card.Maior_licitacao.Valor.ToString("F2") €</div>
@@ -44,23 +41,18 @@
       </div>
     </div>
   </div>
-  	@if (mostrarMenuPagar)
+  	@if (mostrarMenuEntregar)
 	{
-		<PagarLeilaoMenu leilao="Card" CloseCallback="FecharMenuPagar"/>
+		<EntregarLeilaoMenu leilao="Card" CloseCallback="FecharMenuEntregar"/>
 	}
 </div>
-
-<script src="JSscripts/timeUpdater.js"></script>
 
 @code {
   [Parameter, EditorRequired]
   public AuctionCard Card { get; set; } = default!;
-
-  [Parameter]
-  public decimal UserHighestBidDiff {get; set;} = 0;
   private decimal finalCost;
 
-  private bool mostrarMenuPagar = false;
+  private bool mostrarMenuEntregar = false;
   protected override void OnInitialized()
   {
       finalCost = Card.Maior_licitacao.Valor + Card.Custo_envio;
@@ -73,12 +65,12 @@
       NavigationManager.NavigateTo($"/AuctionDetailsFinished/{Card.IdLeilao}");
   }
 
-  private void MostrarMenuPagar() {
-      mostrarMenuPagar = true;
+  private void MostrarMenuEntregar() {
+      mostrarMenuEntregar = true;
   }
 
-  private void FecharMenuPagar() {
-		mostrarMenuPagar = false;
+  private void FecharMenuEntregar() {
+		mostrarMenuEntregar = false;
     NavigationManager.NavigateTo(NavigationManager.Uri,true); // dá refresh da página atual !!!!!
 	}
 }

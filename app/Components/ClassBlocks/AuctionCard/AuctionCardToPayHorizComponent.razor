@@ -10,9 +10,6 @@
 
 <div class="card-component" @onclick=" () => HandleCardClick(Card.IdLeilao)">
   <div class="left-side">
-    @if (UserHighestBidDiff < 0) {
-      <p class="outbid-text">OUTBID</p>
-    }
     @if (Card.Images.Any()) {
       <img src="@Card.Images.First().Path" class="auction-img" alt="@Card.Images.First().Path">
     }
@@ -50,14 +47,9 @@
 	}
 </div>
 
-<script src="JSscripts/timeUpdater.js"></script>
-
 @code {
   [Parameter, EditorRequired]
   public AuctionCard Card { get; set; } = default!;
-
-  [Parameter]
-  public decimal UserHighestBidDiff {get; set;} = 0;
   private decimal finalCost;
 
   private bool mostrarMenuPagar = false;

@@ -21,12 +21,11 @@
         <div class="menu-body">
             <form class="inputs" @onsubmit="HandleSubmit">
                 <div class="meny-body-text">
-                    <p class="body-title">Simulação de janela de pagamento.. </p>
-                    <div class="body-title">Licitação final</div>
-                    <p class="body-value">Sem taxa de envio: @maiorLicitacao.ToString("F2") €</p>
-                    <p class="body-value">Com taxa de envio: @custoFinal.ToString("F2") €</p>
+                    <div class="body-title">Simulação de janela de entrega...</div>
+                    <p class="body-value">Anexar comprovativo de entrega:</p>
+                    <InputFile OnChange="HandleFileSelect" class="body-value" multiple/> @* permitir anexar vários ficheiros*@
                 </div>
-                <button class="input-button" type="submit">PAGAR</button>
+                <button class="input-button" type="submit">ENTREGAR</button>
             </form>
         </div>
     </div>
@@ -40,21 +39,24 @@
 	[Parameter]
     public AuctionCard leilao {get; set;}
 
-    private decimal maiorLicitacao;
-    private decimal custoFinal;
-
 	public void CloseMenu() {
 		CloseCallback?.Invoke();
 	}
 
-    protected override async Task OnInitializedAsync() {
-        maiorLicitacao = leilao.Maior_licitacao.Valor;
-        custoFinal = leilao.Maior_licitacao.Valor + leilao.Custo_envio;
-    }
-
 	private async Task HandleSubmit() {
-        leilao.Leilao_estado = AuctionStatus.por_enviar;
+        leilao.Leilao_estado = AuctionStatus.concluido;
         AuctionService.Update(leilao);
         CloseMenu();
 	}
+
+        async Task HandleFileSelect(InputFileChangeEventArgs e)
+    {
+        var files = e.GetMultipleFiles();
+        foreach (var file in files)
+        {
+            @* var stream = file.OpenReadStream(); *@
+            Console.WriteLine($"Selected file: {file.Name}");
+            // nao se faz nada
+        }
+    }
 }
