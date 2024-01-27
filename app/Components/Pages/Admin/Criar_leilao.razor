@@ -136,13 +136,16 @@
     private string fotoInput = "";
     private List<string> fotosLeilao = new List<string>();
     private bool submetido = false;
+    private int adminId = -1;
     protected override async Task OnAfterRenderAsync(bool firstRender) {
         if (firstRender) {
             // ver se user existe e ta valido
             Admin admin = await localStorage.GetItemAsync<Admin>("Admin");
             if (admin == null || await AdminService.checkAdminValid(admin) == false) NavigationManager.NavigateTo("/admin");
+            adminId = admin.admin_id;
         }
     }
+
     private void AdicionarFoto()
     {
         if (!string.IsNullOrWhiteSpace(fotoInput))
@@ -157,7 +160,7 @@
         leilao.DataInicio = DateTime.Now;
         leilao.DataFim = leilao.DataInicio.AddHours(timeframeHours);
         leilao.Leilao_estado = AuctionStatus.em_leilao;
-        leilao.IdAdmin = 1; // como obter esta informação ????
+        leilao.IdAdmin = adminId;
         int idLeilao = await AuctionService.createAuction(leilao, fotosLeilao);
         if (idLeilao >= 0) {
             submetido = true;

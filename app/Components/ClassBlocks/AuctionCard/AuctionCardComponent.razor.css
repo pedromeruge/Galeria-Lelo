@@ -22,6 +22,17 @@
   position: relative;
 }
 
+.card-img-top-not-found {
+  display: block;
+  width:100%;
+  height:280px;
+  object-fit: cover;
+  object-position: center top;
+  background: white;
+  position: relative;
+  border: 1px solid lightgray;
+}
+
 .info-names,
 .info-bids,
 .time {

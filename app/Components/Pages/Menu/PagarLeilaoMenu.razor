@@ -9,8 +9,8 @@
 @inject IUserService UserService
 @inject IAuctionRepository AuctionService
 
-<div class="menu-overlay">
-    <div class="menu">
+<div class="menu-overlay" @onclick:stopPropagation="true">
+    <div class="menu" @onclick:stopPropagation="true">
         <div class="menu-header">
             <div class="menu-title">
                 <div class="menu-header-title">Pagar leilão</div>
