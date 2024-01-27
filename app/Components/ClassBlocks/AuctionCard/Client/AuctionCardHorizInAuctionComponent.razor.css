@@ -1,0 +1,167 @@
+.card-component, .card-component * {
+    box-sizing: border-box;
+  }
+  
+  .card-component {
+    display: flex;
+    position: relative;
+    background-color: white;
+    cursor: pointer;
+    width: 450px;
+    height: 150px;
+    /* border: 1px solid red; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .left-side {
+    flex-grow: 0;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: auto;
+    /* padding: 5px; */
+    align-items: center;
+    aspect-ratio: 1;
+  }
+
+  .auction-img {
+    display: block;
+    background: white;
+    height: 150px;
+    width: auto;
+    object-fit: cover;
+    aspect-ratio: 1;
+    object-position: 10%, 0;
+  }
+  
+  .outbid-text {
+    background-color: #FBCECE;
+    color: #CE4E4E;
+    font-family: "Lato-Bold", sans-serif;
+    font-size: 20px;
+    font-weight: 450;
+    letter-spacing: 1px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 2px 5px;
+    margin: 12px 15px;
+  }
+
+  .right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+  }
+
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bottom-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    /* margin-bottom: 10px; */
+    box-sizing: border-box;
+    bottom: 0;
+  }
+
+  .info-names,
+  .info-bids,
+  .time {
+    line-height: 20px;
+    padding: 10px 0px;
+    width:100%;
+    box-sizing: border-box;
+  }
+  
+  .info-names {
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    flex-direction: column;
+    flex: 3;
+  }
+  
+  .author {
+    color: #000000;
+    font-family: "Lato-Bold", sans-serif;
+    font-size: 16px;
+    font-weight: 510;
+  }
+  
+  .name {
+    color: #000000;
+    font-family: "Lato-Medium", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  
+  .left-bid-section {
+    text-align: left;
+    flex: 3;
+    flex-direction: column;
+  }
+  
+  .licitacao-text {
+    color: #000000;
+    font-family: "Lato-Light", sans-serif;
+    font-size: 18px;
+    font-weight: 150;
+  }
+  
+  .bid-diff-text {
+    color: #CE4E4E;
+    font-family: "Lato-Bold", sans-serif;
+    font-size: 16px;
+    font-weight: 510;
+  }
+
+  .right-bid-section {
+    text-align: right;
+    font-family: "Lato-Medium", sans-serif;
+    flex-direction: column;
+    font-size: 28px;
+    font-weight: 350;
+    flex: 2;
+    padding-left: 10px;
+  }
+  
+  .preco-atual {
+    color: #000000;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  .preco-com-envio {
+    color: #4983b4;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  
+  .time {
+    color: #3b80ba;
+    text-align: right;
+    font-family: "Lato-Medium", sans-serif;
+    font-size: 18px;
+    font-weight: 450;
+    flex: 2;
+    align-self: flex-start;
+    padding-left: 10px;
+  }
+
+  .card-component:active .auction-img {
+    opacity: 0.5;
+  }
+  
+  .card-component:hover .auction-img {
+    opacity: 0.7;
+  }
+  

@@ -1,0 +1,277 @@
+.content,
+.content * {
+  box-sizing: border-box;
+}
+.content {
+  display: flex;
+  background: #ffffff;
+  padding-top: 60px;
+  position: relative;
+  z-index: 0;
+}
+
+.background-rectangle {
+  background: #C7A2B0;
+  width: 100%;
+  /* height: 50%; */
+  top: 400px;
+  bottom: 400px;
+  position: absolute;
+  z-index: -1;
+}
+
+.left-section {
+    flex:5;
+    /* border: 1px solid blue; */
+    box-sizing: border-box;
+    overflow-y: auto;
+    padding: 40px 40px 50px 60px;
+}
+
+.right-section {
+    flex:2;
+    /* border: 1px solid red; */
+    box-sizing: border-box;
+    overflow-y: auto;
+    min-width: 330px;
+    max-width: 450px;
+    padding: 0px 20px 50px 20px;
+    text-align: center;
+}
+
+.info-names {
+  padding-bottom: 40px;
+}
+
+.author {
+    color: #000000;
+    text-align: left;
+    font-family: "Lato-Bold", sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    position: relative;
+  }
+
+.name {
+    color: #000000;
+    text-align: left;
+    font-family: "Lato-Bold", sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    position: relative;
+}
+
+.auction-photos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+}
+
+.auction-photo-wrapper {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+.auction-photo{
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: white;
+  object-fit: cover;
+  object-position: 20% 0;
+}
+
+.data-limite {
+  color: #000000;
+  text-align: center;
+  font-family: "Lato-SemiBold", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+
+.auction-rectangle {
+    background: #ffffff;
+    border: 3px solid #3d678a;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 40px 40px 40px/*top,right,bottom,left*/
+}
+
+.text-licitacao {
+  color: #000000;
+  text-align: left;
+  font-family: "Lato-Bold", sans-serif;
+  font-size: 28px;
+  font-weight: 350;
+}
+
+.precos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 40px 15px 40px 15px
+}
+
+.preco-atual {
+  color: #000000;
+  text-align: left;
+  font-family: "Lato-SemiBold", sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  margin: 0px 10px;
+}
+
+.licitacao-min {
+    color: #000000;
+    text-align: right;
+    font-family: "Lato-Light", sans-serif;
+    font-size: 18px;
+    font-weight: 130;
+  }
+
+.licitar-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 2px 7px 2px;
+    color: black;
+    font-family: "Lato-SemiBold", sans-serif;
+    font-size: 2vw;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    background: #C7A2B0;
+    height: 70px;
+    margin-top: 20px;
+
+}
+
+.parameter-info{
+  padding: 20px 0px 20px 0px;
+  text-align: right;
+}
+.artista-info, .nome-info, .tecnica-info, .estado-info, .tipo-info, .peso-info, .dimensoes-info, .descricao-info {
+  padding-top: 15px;
+  padding-bottom: auto;
+}
+
+.artista-titulo, .nome-titulo, .tecnica-titulo, .estado-titulo, .tipo-titulo, .peso-titulo, .dimensoes-titulo, .descricao-titulo {
+    color: #000000;
+    text-align: left;
+    font-family: "Lato-Bold", sans-serif;
+    font-size: 21px;
+    font-weight: 520;
+}
+
+.artista-data, .nome-data, .tecnica-data, .estado-data, .tipo-data, .peso-data, .dimensoes-data, .descricao-data {
+    color: #000000;
+    text-align: left;
+    font-family: "Lato-Light", sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+/* .descricao-data {
+  text-align: justify;
+  text-justify: inter-word;
+} */
+
+.auction-photos {
+  inset: 0;
+}
+
+.envio {
+  color: #000000;
+  text-align: left;
+  font-family: "Lato-Bold", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+.custo-de-envio {
+  color: #000000;
+  text-align: left;
+  font-family: "Lato-Medium", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.shipping-rectangle {
+  background: #ffffff;
+  border-style: solid;
+  border-color: #3d678a;
+  border-width: 3px 20px;
+  height: 110px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-top: 40px;
+  margin-bottom: auto;
+}
+
+.shipping-info {
+  display: flex;
+  align-items: center;
+}
+
+.truck-img {
+  object-fit: contain;
+}
+
+.shipping-text {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.envio-text {
+  color: #000000;
+  text-align: left;
+  font-family: "Lato-Bold", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.custo-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.custo-text {
+  color: #000000;
+  text-align: left;
+  font-family: "Lato-Medium", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  padding-right: 5px;
+}
+
+.custo-valor {
+  color: #000000;
+  text-align: left;
+  font-family: "Lato-Light", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.payment-types {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-right: 10px;
+}
+
+.MBWay, .Mastercard {
+  width: auto;
+  object-fit: contain;
+  margin: 5px;
+}
+

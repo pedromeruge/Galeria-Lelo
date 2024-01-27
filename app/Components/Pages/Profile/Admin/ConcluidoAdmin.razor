@@ -4,7 +4,7 @@
 @inject NavigationManager NavigationManager
 @inject IWebHostEnvironment WebHostEnvironment
 @inject IJSRuntime JSRuntime
-@using app.Components.ClassBlocks.AuctionCard
+@using app.Components.ClassBlocks.AuctionCard.Admin
 @rendermode InteractiveServer
 @using DataLayer.Auction
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
@@ -26,7 +26,7 @@ else {
             <p class="texto-leiloes">Leilões encontrados</p>
             <div class="grid">
                 @foreach (var card in cards) {
-                    <AuctionCardHorizFinishedComponent Card="card" />
+                    <AuctionCardHorizFinishedAdminComponent Card="card" />
                 }
             </div>
         } else {

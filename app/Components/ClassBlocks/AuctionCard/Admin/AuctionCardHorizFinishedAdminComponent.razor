@@ -8,6 +8,9 @@
 
 <div class="card-component" @onclick=" () => NavigateToDetalhesLeilao(Card.IdLeilao)">
   <div class="left-side">
+    @if (UserHighestBidDiff < 0) {
+      <p class="outbid-text">OUTBID</p>
+    }
     @if (Card.Images.Any()) {
       <img src="@Card.Images.First().Path" class="auction-img" alt="@Card.Images.First().Path">
     }
@@ -25,18 +28,16 @@
               @Card.Prod_nome
           </span>
       </div>
-        <div id="remainingTime_@Card.IdLeilao" class="time">
-          @if (Card.DataFim > DateTime.Now) { //inicialmente meter valores, javascript vai alterá-los apos o minute passar
-            <text>@Time.RemainingTimeToStringShort(Card.DataFim)</text>
-            }
-          else{
-            <text>ENCERRADO</text>
-          }
+        <div class="time">
+          <text>Fim em @Time.BetterPrintDate(Card.DataFim)</text>
       </div>
     </div>
     <div class="bottom-row">
       <div class="left-bid-section"> 
-        <div class="licitacao-text">Licitação atual:</div>
+        <div class="licitacao-text">Licitação final:</div>
+        @if (UserHighestBidDiff < 0) {
+          <div class="bid-diff-text">@UserHighestBidDiff.ToString("F2") €</div>
+        }
       </div>
       <div class="right-bid-text"> 
         <div class="preco-atual">@currentBid.ToString("F2") €</div>
@@ -52,6 +53,8 @@
   [Parameter, EditorRequired]
   public AuctionCard Card { get; set; } = default!;
 
+  [Parameter]
+  public decimal UserHighestBidDiff {get; set;} = 0;
   private decimal finalCost;
   private decimal currentBid;
 

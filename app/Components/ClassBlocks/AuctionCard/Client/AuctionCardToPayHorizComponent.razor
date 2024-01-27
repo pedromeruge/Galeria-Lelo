@@ -33,7 +33,7 @@
       </div>
     <div class="bottom-row">
       <div class="left-button-section"> 
-        <button class="entregar-button" @onclick:stopPropagation="true" @onclick="MostrarMenuEntregar">ENTREGAR</button> @*impedir propagação do efeito de clicar para o card component!!!*@
+        <button class="pagar-button" @onclick:stopPropagation="true" @onclick="MostrarMenuPagar">PAGAR</button> @*impedir propagação do efeito de clicar para o card component!!!*@
       </div>
       <div class="right-bid-text"> 
         <div class="preco-atual">@Card.Maior_licitacao.Valor.ToString("F2") €</div>
@@ -41,9 +41,9 @@
       </div>
     </div>
   </div>
-  	@if (mostrarMenuEntregar)
+  	@if (mostrarMenuPagar)
 	{
-		<EntregarLeilaoMenu leilao="Card" CloseCallback="FecharMenuEntregar"/>
+		<PagarLeilaoMenu leilao="Card" CloseCallback="FecharMenuPagar"/>
 	}
 </div>
 
@@ -52,7 +52,7 @@
   public AuctionCard Card { get; set; } = default!;
   private decimal finalCost;
 
-  private bool mostrarMenuEntregar = false;
+  private bool mostrarMenuPagar = false;
   protected override void OnInitialized()
   {
       finalCost = Card.Maior_licitacao.Valor + Card.Custo_envio;
@@ -62,15 +62,15 @@
     NavigateToDetalhesLeilao(auctionId);
   }
   private void NavigateToDetalhesLeilao(int auctionId) {
-      NavigationManager.NavigateTo($"/AuctionDetailsFinished/{Card.IdLeilao}");
+      NavigationManager.NavigateTo($"/AuctionDetails/{Card.IdLeilao}");
   }
 
-  private void MostrarMenuEntregar() {
-      mostrarMenuEntregar = true;
+  private void MostrarMenuPagar() {
+      mostrarMenuPagar = true;
   }
 
-  private void FecharMenuEntregar() {
-		mostrarMenuEntregar = false;
+  private void FecharMenuPagar() {
+		mostrarMenuPagar = false;
     NavigationManager.NavigateTo(NavigationManager.Uri,true); // dá refresh da página atual !!!!!
 	}
 }

@@ -1,5 +1,4 @@
-@page "/AuctionDetails/{IdLeilao:int}"
-@layout LoginLayout
+@layout LoginAdminLayout
 @using System.Text.Json
 @using Classes.AuctionCard
 @using Classes.Bids
@@ -10,8 +9,8 @@
 @inject IJSRuntime JSRuntime
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
-@inject IUserService UserService
-@inject IBidRepository BidService
+@inject IAdminService AdminService
+@using Classes.Session
 @inject IAuctionRepository AuctionService
 @inject IJSRuntime JSRuntime
 @using Classes.Time;
@@ -53,7 +52,7 @@
 				<div class="preco-atual">@currentBid.ToString("F2") €</div>
 				<div class="licitacao-min">Min: @Leilao.Preco_base.ToString("F2") € </div>
 			</div>
-			<button class="licitar-button" @onclick="MostrarMenuLicitar">LICITAR</button>
+			<button class="decorrer-button">EM CURSO</button>
 			
 			<div class ="parameter-info">
 				<div class="artista-info">
@@ -107,10 +106,6 @@
 			</div>
 		</div>
 	</div>
-	@if (mostrarMenuLicitar)
-	{
-		<LicitarMenu isVisible=true IdLeilao=@Leilao.IdLeilao BasePrice=@Leilao.Preco_base CloseCallback="FecharMenuLicitar"/>
-	}
 </div>
 
 } else {
@@ -119,55 +114,26 @@
 
 @code {
     [Parameter]
-    public int IdLeilao { get; set; }
     public AuctionCard? Leilao { get; set; } = default!;
     public decimal currentBid;
-    bool mostrarMenuLicitar = false;
 
 	protected override async Task OnAfterRenderAsync(bool firstRender) {
 		if (firstRender) {
 			// ver se user existe e ta valido
-			User user = await localStorage.GetItemAsync<User>("User");
-			if (user == null || await UserService.checkUserValid(user) == false) NavigationManager.NavigateTo("/");
-			Session session = await localStorage.GetItemAsync<Session>("Session");
-			if (session == null || await UserService.checkUserValidSession(user, session) == false) NavigationManager.NavigateTo("/");
+			Admin admin = await localStorage.GetItemAsync<Admin>("Admin");
+			if (admin == null || await AdminService.checkAdminValid(admin) == false) NavigationManager.NavigateTo("/admin");
 		}
 	}
 
     protected override async Task OnInitializedAsync()
     {
-		Leilao = await AuctionService.Find(IdLeilao);
-		@* if (Leilao.Leilao_estado == AuctionStatus.em_leilao) { *@ // preciso ????
-			if (Leilao.Maior_licitacao == null)
-				currentBid = Leilao.Preco_base;
-			else {
-				currentBid = Leilao.Maior_licitacao.Valor;
-			}
-		@* } else {
-			NavigationManager.NavigateTo($"/AuctionDetailsFinished/{IdLeilao}");
-		} *@
+		if (Leilao.Maior_licitacao == null)
+			currentBid = Leilao.Preco_base;
+		else {
+			currentBid = Leilao.Maior_licitacao.Valor;
+		}
 		string elementId = "remainingTime_" + Leilao.IdLeilao;
     	int updateFrequency = Leilao.DataFim.Hour < 1 ? 1000 : 1000; // se tempo restante for menor de 1 hora atualizar a cada seg, senao a cada min *@
     	JSRuntime.InvokeVoidAsync("startCountdown", elementId, Leilao.DataFim.ToString("yyyy-MM-ddTHH:mm:ss"), updateFrequency);
     }
-
-    private void MostrarMenuLicitar() {
-        @* Console.WriteLine("Calling MostrarMenuLicitar"); *@
-       mostrarMenuLicitar = true;
-    }
-
-    private async void FecharMenuLicitar() {
-		//get updated biggest bid
-		Bid latestBid = await BidService.FindHighestBid(IdLeilao);
-
-		//código igual à funcao de cima, meio nheca
-		if (latestBid == null)
-			currentBid = Leilao.Preco_base;
-		else {
-			currentBid = latestBid.Valor;
-		}
-		mostrarMenuLicitar = false;
-
-		StateHasChanged(); // Forçar UI a dar update do novo valor de bid
-	}
 }

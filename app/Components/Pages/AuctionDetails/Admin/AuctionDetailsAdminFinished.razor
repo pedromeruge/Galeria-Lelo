@@ -1,0 +1,132 @@
+@layout LoginAdminLayout
+@using System.Text.Json
+@using Classes.AuctionCard
+@using Classes.Bids
+@using Classes.Session
+@using Classes.Time
+@using app.Components.Pages.Menu
+@rendermode InteractiveServer
+@inject IWebHostEnvironment WebHostEnvironment
+@inject IJSRuntime JSRuntime
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject IAdminService AdminService
+@using Classes.Session
+@inject IAuctionRepository AuctionService
+
+@if (Leilao != null) {
+<div class="content">
+	<div class="background-rectangle"></div>
+	<div class="left-section">
+		<div class="info-names">
+			<span>
+			<span class="author">
+				@Leilao!.Nome_artista -
+			</span>
+			<span class="name">
+				@Leilao!.Prod_nome
+			</span>
+			</span>
+		</div>
+		<div class="auction-photos-container">
+			@foreach (var foto in @Leilao.Images!) {
+				<div class="auction-photo-wrapper">
+					<img src=@foto.Path class="auction-photo" alt="foto">
+				</div>
+			}
+		</div>
+	</div>
+	<div class="right-section">
+		<div class="data-limite">Terminado em @EndDateOcurred</div>
+		<div class="auction-rectangle">
+			<div class="text-licitacao">Licitação atual</div>
+			<div class="precos">
+				<div class="preco-atual">@currentBid.ToString("F2") €</div>
+				<div class="licitacao-min">Min: @Leilao.Preco_base.ToString("F2") € </div>
+			</div>
+			<button class="licitar-button" disabled>ENCERRADO</button>
+			
+			<div class ="parameter-info">
+				<div class="artista-info">
+					<div class="artista-titulo">Artista</div>
+					<div class="artista-data">@Leilao.Nome_artista</div>
+				</div>
+				<div class="nome-info">
+					<div class="nome-titulo">Nome</div>
+					<div class="nome-data">@Leilao.Prod_nome</div>
+				</div>
+				<div class="tecnica-info">
+					<div class="tecnica-titulo">Técnica</div>
+					<div class="tecnica-data">@Leilao.Prod_tecnica</div>
+				</div>
+				<div class="estado-info">
+					<div class="estado-titulo">Estado</div>
+					<div class="estado-data">@Leilao.Prod_estado</div>
+				</div>
+				<div class="tipo-info">
+					<div class="tipo-titulo">Tipo</div>
+					<div class="tipo-data">@Leilao.Prod_tipo</div>
+				</div>
+				<div class="peso-info">
+					<div class="peso-titulo">Peso</div>
+					<div class="peso-data">@Leilao.Prod_peso.ToString("F3") g</div>
+				</div>
+				<div class="dimensoes-info">
+					<div class="dimensoes-titulo">Dimensões</div>
+					<div class="dimensoes-data">@Leilao.Prod_comprimento.ToString("F3") x @Leilao.Prod_altura.ToString("F3") x @Leilao.Prod_largura.ToString("F3") cm</div>
+				</div>
+				<div class="descricao-info">
+					<div class="descricao-titulo">Descrição</div>
+					<div class="descricao-data">@Leilao.Prod_descricao</div>
+				</div>
+			</div>
+		</div>
+		<div class="shipping-rectangle">
+			<div class="shipping-info">
+				<img class="truck-img" src="pngs/van.png" />
+				<div class="shipping-text">
+					<div class="envio-text">Envio</div>
+					<div class="custo-container">
+						<div class="custo-text">Custo: </div>
+						<div class="custo-valor">@Leilao.Custo_envio.ToString("F2") €</div>
+					</div>
+				</div>
+			</div>
+			<div class="payment-types">
+				<img class="MBWay" src="pngs/mbway.png" />
+				<img class="Mastercard" src="pngs/mastercard.png" />
+			</div>
+		</div>
+	</div>
+</div>
+
+} else {
+	<p>Auction not found</p>
+}
+
+@code {
+    [Parameter]
+    public AuctionCard? Leilao { get; set; } = default!;
+    public decimal currentBid;
+    bool mostrarMenuLicitar = false;
+
+	private string EndDateOcurred;
+
+	protected override async Task OnAfterRenderAsync(bool firstRender) {
+		if (firstRender) {
+			// ver se user existe e ta valido
+			Admin admin = await localStorage.GetItemAsync<Admin>("Admin");
+			if (admin == null || await AdminService.checkAdminValid(admin) == false) NavigationManager.NavigateTo("/admin");
+		}
+	}
+
+    protected override async Task OnInitializedAsync()
+    {
+		if (Leilao.Maior_licitacao == null)
+			currentBid = Leilao.Preco_base;
+		else {
+			currentBid = Leilao.Maior_licitacao.Valor;
+		}
+		EndDateOcurred = Time.BetterPrintDate(Leilao.DataFim);
+    }
+}

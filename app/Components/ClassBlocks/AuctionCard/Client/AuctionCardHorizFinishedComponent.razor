@@ -77,10 +77,6 @@
   }
 
   private void NavigateToDetalhesLeilao(int auctionId) {
-    if (Card.Leilao_estado == AuctionStatus.em_leilao) {
-        NavigationManager.NavigateTo($"/AuctionDetails/{Card.IdLeilao}");
-    } else {
-      NavigationManager.NavigateTo($"/AuctionDetailsFinished/{Card.IdLeilao}");
-    }
+    NavigationManager.NavigateTo($"/AuctionDetails/{Card.IdLeilao}");
   }
 }
