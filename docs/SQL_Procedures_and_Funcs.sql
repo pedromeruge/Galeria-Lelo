@@ -179,4 +179,52 @@ BEGIN
 END;
 GO
 
+--obter o tipo de artigo mais vendido entre duas datas
+CREATE FUNCTION dbo.GetTipoMaisPopularEntre
+(
+    @DataInicio DATETIME,
+    @DataFim DATETIME
+)
+RETURNS VARCHAR(10)
+AS
+BEGIN
+    DECLARE @TipoResultado VARCHAR(10)
+
+    SELECT TOP 1 @TipoResultado = prod_tipo
+    FROM Leilao
+    WHERE estado = 'concluido'
+        AND Data_hora_fim >= @DataInicio
+        AND Data_hora_fim <= @DataFim
+        GROUP BY prod_tipo
+        ORDER BY COUNT(*) DESC
+    RETURN ISNULL(@TipoResultado,'');
+END;
+GO
+
+--obter o estado de artigo mais vendido entre duas datas
+CREATE FUNCTION dbo.GetEstadoMaisPopularEntre
+(
+    @DataInicio DATETIME,
+    @DataFim DATETIME
+)
+RETURNS VARCHAR(10)
+AS
+BEGIN
+    DECLARE @EstadoResultado VARCHAR(10)
+
+    SELECT TOP 1 @EstadoResultado = prod_estado
+    FROM Leilao
+    WHERE estado = 'concluido'
+        AND Data_hora_fim >= @DataInicio
+        AND Data_hora_fim <= @DataFim
+        GROUP BY prod_estado
+        ORDER BY COUNT(*) DESC
+    RETURN ISNULL(@EstadoResultado,'');
+END;
+GO
+
 -- EXEC SearchAuctionsWithInput 'grito';
+
+-- Select * FROM Leilao; WHERE estado='concluido';
+-- UPDATE Leilao SET estado='concluido' WHERE leilao_id=15;
+-- SELECT * FROM Leilao WHERE estado='concluido';
