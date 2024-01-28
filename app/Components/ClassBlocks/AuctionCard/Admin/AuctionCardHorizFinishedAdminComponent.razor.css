@@ -33,21 +33,7 @@
     aspect-ratio: 1;
     object-position: 10%, 0;
   }
-  
-  .outbid-text {
-    background-color: #FBCECE;
-    color: #CE4E4E;
-    font-family: "Lato-Bold", sans-serif;
-    font-size: 20px;
-    font-weight: 450;
-    letter-spacing: 1px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    padding: 2px 5px;
-    margin: 12px 15px;
-  }
+
 
   .right-side {
     flex: 1;
@@ -116,13 +102,6 @@
     font-size: 18px;
     font-weight: 150;
   }
-  
-  .bid-diff-text {
-    color: #CE4E4E;
-    font-family: "Lato-Bold", sans-serif;
-    font-size: 16px;
-    font-weight: 510;
-  }
 
   .right-bid-section {
     text-align: right;
@@ -146,6 +125,17 @@
     font-weight: 500;
   }
   
+  .sem-licitacoes {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    align-items: center;
+    color: #CE4E4E;
+    font-family: "Lato-Medium", sans-serif;
+    font-size: 16px;
+    font-weight: 450;
+    flex: 2;
+  }
   .time {
     color: #3b80ba;
     text-align: right;

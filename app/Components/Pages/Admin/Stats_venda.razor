@@ -48,6 +48,25 @@
 		<p class="stats_text">
 			Licitação final média: @LicitacaoFinalMedia €
 		</p>
+		@if(TipoArtigo != null) {
+			<p class="stats_text">
+			Tipo de artigo mais vendido: @TipoArtigo.ToString()
+			</p>
+		} else {
+			<p class="stats_text">
+			Tipo de artigo mais vendido: nenhum artigo vendido
+			</p>
+		}
+		
+		@if(EstadoArtigo != null) {
+		<p class="stats_text"> 
+			Estado de artigo mais vendido: @EstadoArtigo.ToString()
+		</p>
+		} else {
+		<p class="stats_text"> 
+			Estado de artigo mais vendido: nenhum artigo vendido
+		</p>
+		}
 	</div>
 </div>
 
@@ -58,6 +77,9 @@
 	private int LeiloesIniciados = 0;
 	private float LucroMedio = 0;
 	private float LicitacaoFinalMedia = 0;
+	private ProdTipo? TipoArtigo;
+	private ProdEstado? EstadoArtigo;
+
 	private DateTime DataInicio = DateTime.Now;
 	private DateTime DataFim = DateTime.Now;
 
@@ -80,5 +102,7 @@
 		LeiloesIniciados = await AdminService.getNumeroLeiloesIniciadosEntre(DataInicio, DataFim);
 		LucroMedio = await AdminService.getLucroMedioEntre(DataInicio, DataFim);
 		LicitacaoFinalMedia = await AdminService.getMediaLicitacaoFinalEntre(DataInicio, DataFim);
+		TipoArtigo = await AdminService.getTipoMaisPopularEntre(DataInicio, DataFim);
+		EstadoArtigo = await AdminService.getEstadoMaisPopularEntre(DataInicio, DataFim);
 	}
 }

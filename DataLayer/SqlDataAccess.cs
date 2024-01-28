@@ -61,6 +61,21 @@ namespace DataLayer {
             }
         }
 
+        public async Task<U> ExecuteScalar3<T,U>(string sql, T parameters)
+        {
+            try {
+                string? connectionString = _config.GetConnectionString(ConnectionStringName);
+                using (IDbConnection connection = new SqlConnection(connectionString))
+                {
+                    return await connection.ExecuteScalarAsync<U>(sql, parameters);
+                }
+            } catch (Exception ex)
+            {
+                Console.WriteLine($"Error in ExecuteScalar: {ex.Message}");
+                throw;
+            }
+        }
+
         public async Task<List<T>> ExecuteProcedure<T, U>(string procedureName, U parameters) 
         {
             try {

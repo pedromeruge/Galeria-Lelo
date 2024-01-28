@@ -46,11 +46,11 @@
         <div class="form-group">
             <label>Tipo da obra:</label>
             <InputSelect @bind-Value="leilao.Prod_tipo" class="form-control">
-                <option value="Desenho">Desenho</option>
-                <option value="Escultura">Escultura</option>
-                <option value="Pintura">Pintura</option>
-                <option value="Fotografia">Fotografia</option>
-                <option value="Outro">Outro</option>
+                <option value="desenho">Desenho</option>
+                <option value="escultura">Escultura</option>
+                <option value="pintura">Pintura</option>
+                <option value="fotografia">Fotografia</option>
+                <option value="outro">Outro</option>
             </InputSelect>
             <ValidationMessage For="@(() => leilao.Prod_tipo)" />
         </div>
@@ -58,10 +58,10 @@
         <div class="form-group">
             <label>Estado da obra:</label>
             <InputSelect @bind-Value="leilao.Prod_estado" class="form-control">
-                <option value="Excelente">Excelente</option>
-                <option value="Bom">Bom</option>
-                <option value="Mau">Mau</option>
-                <option value="Pessimo">Péssimo</option>
+                <option value="excelente">Excelente</option>
+                <option value="bom">Bom</option>
+                <option value="mau">Mau</option>
+                <option value="pessimo">Péssimo</option>
             </InputSelect>
             <ValidationMessage For="@(() => leilao.Prod_estado)" />
         </div>

@@ -2,6 +2,7 @@ using Classes.Admin;
 using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using Classes.AuctionCard;
 
 namespace DataLayer.AdminService {
 
@@ -65,8 +66,41 @@ namespace DataLayer.AdminService {
 
 		public async Task<float> getMediaLicitacaoFinalEntre(DateTime start, DateTime end) {
 			string functionName = "DECLARE @Result DECIMAL(10, 2); SET @Result = dbo.GetMediaLicitacoesEntre(@DataInicio, @DataFim); SELECT @Result AS TotalProfit;";
-			// esta funcao funciona mas vai truncar para um int, nao sei resolver nao vejo onde esta a API que retorna float, por agora tbm nao interessa
             return (float)await db.ExecuteScalar2<dynamic>(functionName, new {DataInicio = start, DataFim = end});
+		}
+
+		public async Task<ProdTipo?> getTipoMaisPopularEntre(DateTime start, DateTime end) {
+			try {
+				string functionName = "DECLARE @Result VARCHAR(10); SET @Result = dbo.GetTipoMaisPopularEntre(@DataInicio, @DataFim); SELECT @Result;";
+				string result = await db.ExecuteScalar3<dynamic,string>(functionName, new {DataInicio = start, DataFim = end});
+				Console.WriteLine("got tipoMaisPopular:" + result);
+				if (string.IsNullOrEmpty(result)) {
+					return null;
+				}
+				Enum.TryParse<ProdTipo>(result, out ProdTipo tipo);
+				return tipo;
+            } catch (Exception ex)
+            {
+                Console.WriteLine($"Error in ExecuteScalar: {ex.Message}");
+                throw;
+            }
+		}
+
+		public async Task<ProdEstado?> getEstadoMaisPopularEntre(DateTime start, DateTime end) {
+			try {
+				string functionName = "DECLARE @Result VARCHAR(10); SET @Result = dbo.GetEstadoMaisPopularEntre(@DataInicio, @DataFim); SELECT @Result;";
+				string result = await db.ExecuteScalar3<dynamic,string>(functionName, new {DataInicio = start, DataFim = end});
+				Console.WriteLine("got estadoMaisPopular:" + result);
+				if (string.IsNullOrEmpty(result)) {
+					return null;
+				}
+				Enum.TryParse<ProdEstado>(result, out ProdEstado tipo);
+				return tipo;
+            } catch (Exception ex)
+            {
+                Console.WriteLine($"Error in ExecuteScalar: {ex.Message}");
+                throw;
+            }
 		}
 	}
 }

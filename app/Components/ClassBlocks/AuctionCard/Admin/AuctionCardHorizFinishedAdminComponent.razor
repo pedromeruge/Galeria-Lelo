@@ -8,9 +8,6 @@
 
 <div class="card-component" @onclick=" () => NavigateToDetalhesLeilao(Card.IdLeilao)">
   <div class="left-side">
-    @if (UserHighestBidDiff < 0) {
-      <p class="outbid-text">OUTBID</p>
-    }
     @if (Card.Images.Any()) {
       <img src="@Card.Images.First().Path" class="auction-img" alt="@Card.Images.First().Path">
     }
@@ -35,14 +32,15 @@
     <div class="bottom-row">
       <div class="left-bid-section"> 
         <div class="licitacao-text">Licitação final:</div>
-        @if (UserHighestBidDiff < 0) {
-          <div class="bid-diff-text">@UserHighestBidDiff.ToString("F2") €</div>
-        }
       </div>
+        @if (finalCost != -1) {
       <div class="right-bid-text"> 
-        <div class="preco-atual">@currentBid.ToString("F2") €</div>
-        <div class="preco-com-envio"> @finalCost.ToString("F2") € incl.</div>
+          <div class="preco-atual">@currentBid.ToString("F2") €</div>
+          <div class="preco-com-envio"> @finalCost.ToString("F2") € incl.</div>
       </div>
+        } else {
+          <div class="sem-licitacoes">SEM LICITAÇÕES</div>
+        }
     </div>
   </div>
 </div>
@@ -53,8 +51,6 @@
   [Parameter, EditorRequired]
   public AuctionCard Card { get; set; } = default!;
 
-  [Parameter]
-  public decimal UserHighestBidDiff {get; set;} = 0;
   private decimal finalCost;
   private decimal currentBid;
 
@@ -62,18 +58,12 @@
   {
       if (Card.Maior_licitacao == null) {
         currentBid = Card.Preco_base;
+        finalCost = -1;
       }
       else {
         currentBid = Card.Maior_licitacao.Valor;
+        finalCost = currentBid + Card.Custo_envio;
       }
-
-      finalCost = currentBid + Card.Custo_envio;
-  }
-
-  protected override async Task OnInitializedAsync() {
-    string elementId = "remainingTime_" + Card.IdLeilao;
-    int updateFrequency = Card.DataFim.Hour < 1 ? 1000 : 60000; // se tempo restante for menor de 1 hora atualizar a cada seg, senao a cada min *@
-    JSRuntime.InvokeVoidAsync("startCountdown", elementId, Card.DataFim.ToString("yyyy-MM-ddTHH:mm:ss"), updateFrequency);
   }
 
   private void NavigateToDetalhesLeilao(int auctionId) {

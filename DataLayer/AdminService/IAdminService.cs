@@ -1,5 +1,6 @@
 using System.Diagnostics.Contracts;
 using Classes.Admin;
+using Classes.AuctionCard;
 
 namespace DataLayer.AdminService {
     public interface IAdminService {
@@ -12,6 +13,9 @@ namespace DataLayer.AdminService {
 		Task<int> getNumeroLeiloesIniciadosEntre(DateTime start, DateTime end);
 		Task<float> getLucroMedioEntre(DateTime start, DateTime end);
 		Task<float> getMediaLicitacaoFinalEntre(DateTime start, DateTime end);
+		Task<ProdTipo?> getTipoMaisPopularEntre(DateTime start, DateTime end);
+		Task<ProdEstado?> getEstadoMaisPopularEntre(DateTime start, DateTime end);
+
 
 		// estatísticas de crescimento
 		Task<int> getNumeroNovosUsersEntre(DateTime start, DateTime end);

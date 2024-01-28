@@ -13,18 +13,27 @@ namespace Classes.AuctionCard
 
     public enum ProdTipo
     {
-        Desenho,
-        Escultura,
-        Pintura,
-        Fotografia,
-        Outro
+        desenho,
+        escultura,
+        pintura,
+        fotografia,
+        outro
     }
 
     public enum ProdEstado
     {
-        Excelente,
-        Bom,
-        Mau,
-        Pessimo
+        excelente,
+        bom,
+        mau,
+        pessimo
+    }
+    
+    public static class EnumExtensions
+    {
+        public static string ToTitleCase(this Enum enumValue)
+        {
+            string value = enumValue.ToString().ToLower();
+            return char.ToUpper(value[0]) + value.Substring(1);
+        }
     }
 }
