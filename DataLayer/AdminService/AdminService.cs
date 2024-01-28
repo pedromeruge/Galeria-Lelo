@@ -73,7 +73,6 @@ namespace DataLayer.AdminService {
 			try {
 				string functionName = "DECLARE @Result VARCHAR(10); SET @Result = dbo.GetTipoMaisPopularEntre(@DataInicio, @DataFim); SELECT @Result;";
 				string result = await db.ExecuteScalar3<dynamic,string>(functionName, new {DataInicio = start, DataFim = end});
-				Console.WriteLine("got tipoMaisPopular:" + result);
 				if (string.IsNullOrEmpty(result)) {
 					return null;
 				}
@@ -90,7 +89,6 @@ namespace DataLayer.AdminService {
 			try {
 				string functionName = "DECLARE @Result VARCHAR(10); SET @Result = dbo.GetEstadoMaisPopularEntre(@DataInicio, @DataFim); SELECT @Result;";
 				string result = await db.ExecuteScalar3<dynamic,string>(functionName, new {DataInicio = start, DataFim = end});
-				Console.WriteLine("got estadoMaisPopular:" + result);
 				if (string.IsNullOrEmpty(result)) {
 					return null;
 				}
