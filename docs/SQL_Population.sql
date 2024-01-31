@@ -98,12 +98,12 @@ VALUES
      'bom', 'Entalhe', 
      'banco xpto','sentocu', 200, 1
     ),
-	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'por_pagar', 87.00, 20.00, 
      'shinji ping', 15.00, 10.00, 8.00, 'pintura', 
      'bom', 'Sumi-e', 
      'Um quadro japonês capta a intensidade de três pássaros em luta, enquanto um terceiro espelha a passividade do zé povinho','uccellinos', 200, 1
     ),
-	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'por_entregar', 87.00, 20.00, 
      'Sun Tzu', 15.00, 10.00, 8.00, 'outro', 
      'mau', 'Forjar', 
      'Uma armadura samurai, testemunha silenciosa de bravura e tradição','ultimo samurai', 200, 1
