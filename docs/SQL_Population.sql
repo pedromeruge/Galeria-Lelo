@@ -38,7 +38,8 @@ VALUES
     ('2024-01-12T07:05:37', '2024-01-12T17:23:42', 6),
 	('2024-01-13T09:13:12', '2024-01-13T19:47:33', 2),
 	('2024-01-13T07:21:22', '2024-01-13T17:47:54', 5),
-    ('2024-01-14T05:15:37', '2024-01-14T17:51:17', 4);
+    ('2024-01-14T05:15:37', '2024-01-14T17:51:17', 4),
+    ('2024-01-31T09:00:31', '2024-01-31T09:05:27', 1);
 
 INSERT INTO Administrador (email, pass_hash)
 VALUES
@@ -52,13 +53,13 @@ INSERT INTO Leilao (
 )
 VALUES
     ('2024-01-05T08:30:00', '2024-02-12T20:30:00', 'em_leilao', 100.00, 10.00, 
-     'Leonardo Da Vinki', 15.00, 10.00, 8.00, 'pintura', 
-     'excelente', 'Sfumato', 'Seu sorriso sutil e olhar cativante convidam à reflexão em meio à técnica sfumato, criando uma aura de mistério atemporal', 'Mona Grossa', 
+     'Leonardo Da Vinci', 15.00, 10.00, 8.00, 'pintura', 
+     'excelente', 'Sfumato', 'O seu sorriso subtil e olhar cativante convidam à reflexão em meio à técnica sfumato, criando uma aura de mistério atemporal', 'Mona Lisa', 
         200, 2
     ),
     ('2024-01-09T08:30:00', '2024-02-10T18:30:00', 'em_leilao', 100.00, 15.00, 
-     'Eduardo Muncha muito', 18.00, 20.00, 4.00, 'pintura', 
-     'excelente', 'Têmpera', 'Uma explosão de angústia capturada em cores vibrantes e formas distorcidas, refletindo a intensidade da condição humana', 'O grito louco', 
+     'Edvard Munch', 18.00, 20.00, 4.00, 'pintura', 
+     'excelente', 'Têmpera', 'Uma explosão de angústia capturada em cores vibrantes e formas distorcidas, refletindo a intensidade da condição humana', 'O grito', 
         140, 1
     ),
     ('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
@@ -107,6 +108,12 @@ VALUES
      'Sun Tzu', 15.00, 10.00, 8.00, 'outro', 
      'mau', 'Forjar', 
      'Uma armadura samurai, testemunha silenciosa de bravura e tradição','ultimo samurai', 200, 1
+    ),
+    ('2024-01-09T08:30:00', '2024-01-31T10:30:00', 'por_pagar', 2025, 25.00, 
+     'Pablo Picasso', 5.00, 25.00, 10.00, 'escultura', 
+     'excelente', 'cerâmica envidraçada e inciscada', 
+     'Este trabalho é da edição de 500 produzidas pela Madoura Pottery, Vallauris, França',
+     'Chouetton', 575, 2
     );
 
 INSERT INTO Foto_leilao (foto, leilao_id)
@@ -123,7 +130,12 @@ VALUES
 	('AuctionPhotos/la_llorona_foto1.png',8),
 	('AuctionPhotos/sentocu_foto1.png',9),
     ('AuctionPhotos/uccellinos_foto1.png',10),
-    ('AuctionPhotos/ultimo_samurai_foto1.png',11);
+    ('AuctionPhotos/ultimo_samurai_foto1.png',11),
+    ('AuctionPhotos/coruja_foto1.png',12),
+    ('AuctionPhotos/coruja_foto2.png',12),
+    ('AuctionPhotos/coruja_foto3.png',12),
+    ('AuctionPhotos/coruja_foto4.png',12),
+    ('AuctionPhotos/coruja_foto5.png',12);
 
 INSERT INTO Licitacao (valor, data_hora, sessao_id, leilao_id)
 VALUES
@@ -146,4 +158,5 @@ VALUES
     (270.00, '2024-01-12T11:03:02', 5, 6),
     (280.00, '2024-01-14T10:31:23', 4, 7),
     (115.20, '2024-01-13T11:04:00', 5, 9),
-    (130.20,'2024-01-14T11:04:00', 4, 4);
+    (130.20,'2024-01-14T11:04:00', 4, 4),
+    (2030.00,'2024-01-31T09:04:00',10,12);

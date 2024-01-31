@@ -33,7 +33,7 @@ namespace DataLayer.AuctionUpdateService
                 object parameters = null;
 
                 var result = await db.ExecuteProcedure<object, object>(storedProcedureName, parameters);
-                Console.WriteLine($"Ocorreu update, resultados > number: {result.Count}");
+                Console.WriteLine($"Ocorreu update, resultados -> number: {result.Count}");
             }
             catch (Exception ex)
             {
