@@ -62,7 +62,7 @@ VALUES
      'excelente', 'Têmpera', 'Uma explosão de angústia capturada em cores vibrantes e formas distorcidas, refletindo a intensidade da condição humana', 'O grito', 
         140, 1
     ),
-    ('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+    ('2024-01-09T08:30:00', '2024-02-05T18:30:00', 'em_leilao', 87.00, 20.00, 
      'Desconhecido', 40.00, 20.01, 15.2, 'escultura', 
      'bom', 'Entalhe', 
      'Bela escultura de Mambila dos Camarões. O estilo é dominado, os volumes são bem tratados. O corpo é compacto e atarracado. O rosto é expressivo, suave e sensível. A sua presença é pacífica. O rosto apresenta resquícios de pigmentos brancos e vermelhos. O seu cocar é lindo, feito de pontas de madeira. A madeira está danificada em alguns lugares, os insetos atacaram-na, a madeira é sólida. Ver fotos. Vendido como está. Um lindo item de colecionador antigo e autêntico. Por volta de 1950.', 
@@ -74,37 +74,37 @@ VALUES
      'Bela escultura de Mambila dos Camarões. O estilo é dominado, os volumes são bem tratados. O corpo é compacto e atarracado. O rosto é expressivo, suave e sensível. A sua presença é pacífica. O rosto apresenta resquícios de pigmentos brancos e vermelhos. O seu cocar é lindo, feito de pontas de madeira. A madeira está danificada em alguns lugares, os insetos atacaram-na, a madeira é sólida. Ver fotos. Vendido como está. Um lindo item de colecionador antigo e autêntico. Por volta de 1950.', 
      'Quadro Mambila, Camarões', 300, 1
     ),
-	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+	('2024-01-09T08:30:00', '2024-02-05T18:30:00', 'em_leilao', 87.00, 20.00, 
      'Bianca', 15.00, 10.00, 8.00, 'pintura', 
      'excelente', 'Afresco seco', 
      'Um frenesi de formas e cores entrelaça-se neste quadro, onde sete homens, uma mulher e uma criança emergem como elementos vibrantes de uma sinfonia visual, transcendendo as fronteiras da individualidade para criar uma expressão única de coletividade', 'Convivio', 200, 1
     ),
-	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+	('2024-01-09T08:30:00', '2024-02-05T18:30:00', 'em_leilao', 87.00, 20.00, 
      'lutadéro', 15.00, 10.00, 8.00, 'outro', 
      'bom', 'Entalhe', 
      'Um pequeno escudo tribal africano, intrincadamente entalhado, exibe uma dança caleidoscópica de padrões geométricos, simbolizando a conexão sagrada entre atradição, a comunidade e a espiritualidade.','Escudo tribal africano', 200, 1
     ),
-	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+	('2024-01-09T08:30:00', '2024-02-05T18:30:00', 'em_leilao', 87.00, 20.00, 
      'Gaby', 15.00, 10.00, 8.00, 'pintura', 
      'excelente', 'Grisalha', 
      'Um homem religioso diante de um crucifixo, cercado por uma caveira, chicote e água benta, explora a complexidade entre penitência e redenção','la barranquilha', 200, 1
     ),
-	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+	('2024-01-09T08:30:00', '2024-02-05T18:30:00', 'em_leilao', 87.00, 20.00, 
      'Picollo', 15.00, 10.00, 8.00, 'pintura', 
      'bom', 'Sfumato', 
      'lamento silencioso, um quadro que ecoa a tristeza intemporal','la llorona', 200, 1
     ),
-	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'em_leilao', 87.00, 20.00, 
+	('2024-01-09T08:30:00', '2024-02-05T18:30:00', 'em_leilao', 87.00, 20.00, 
      'Desconhecido', 15.00, 10.00, 8.00, 'outro', 
      'bom', 'Entalhe', 
      'banco xpto','sentocu', 200, 1
     ),
-	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'por_pagar', 87.00, 20.00, 
+	('2024-01-09T08:30:00', '2024-02-05T18:30:00', 'por_pagar', 87.00, 20.00, 
      'shinji ping', 15.00, 10.00, 8.00, 'pintura', 
      'bom', 'Sumi-e', 
      'Um quadro japonês capta a intensidade de três pássaros em luta, enquanto um terceiro espelha a passividade do zé povinho','uccellinos', 200, 1
     ),
-	('2024-01-09T08:30:00', '2024-01-31T18:30:00', 'por_entregar', 87.00, 20.00, 
+	('2024-01-09T08:30:00', '2024-02-05T18:30:00', 'por_entregar', 87.00, 20.00, 
      'Sun Tzu', 15.00, 10.00, 8.00, 'outro', 
      'mau', 'Forjar', 
      'Uma armadura samurai, testemunha silenciosa de bravura e tradição','ultimo samurai', 200, 1
@@ -131,11 +131,11 @@ VALUES
 	('AuctionPhotos/sentocu_foto1.png',9),
     ('AuctionPhotos/uccellinos_foto1.png',10),
     ('AuctionPhotos/ultimo_samurai_foto1.png',11),
-    ('AuctionPhotos/coruja_foto1.png',12),
-    ('AuctionPhotos/coruja_foto2.png',12),
-    ('AuctionPhotos/coruja_foto3.png',12),
-    ('AuctionPhotos/coruja_foto4.png',12),
-    ('AuctionPhotos/coruja_foto5.png',12);
+    ('AuctionPhotos/coruja_foto1.jpg',12),
+    ('AuctionPhotos/coruja_foto2.jpg',12),
+    ('AuctionPhotos/coruja_foto3.jpg',12),
+    ('AuctionPhotos/coruja_foto4.jpg',12),
+    ('AuctionPhotos/coruja_foto5.jpg',12);
 
 INSERT INTO Licitacao (valor, data_hora, sessao_id, leilao_id)
 VALUES
