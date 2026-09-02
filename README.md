@@ -4,9 +4,10 @@
 
 ## 1. Overview
 
-This project implements a **full-stack online art auction platform**, allowing users to browse and search active auctions, place bids, and track their bidding history, while administrators can create and manage auctions, monitor sales, and access platform statistics.
+This project implements a **full-stack art auction platform**, allowing users to browse and search active auctions, place bids, and track their bidding history, while administrators can create and manage auctions, monitor sales, and access platform statistics.
 
-The application was developed using **C# and .NET 8 with Blazor's Interactive Server rendering model**, with data persisted using **Microsoft SQL Server**. 
+The application was developed using **C# and .NET 8 with Blazor's Interactive Server rendering model**, with data persisted using **Microsoft SQL Server**, as part of a university course project.
+The project only runs **locally** and does not include Docker or external deployment configuration.
 
 The purpose of the project was to learn and practice the main stages of the **software development lifecycle**, following a **waterfall methodology**: 
 - **System Definition**: Defined the project context, motivation, objectives, viability, required resources, team organization, and development schedule.
@@ -69,8 +70,6 @@ The application separates presentation, application/domain logic, and data acces
 ---
 
 ## 4. Setup
-
-The project was designed to run **locally** only and does not include Docker or external deployment configuration.
 
 ### Requirements
 Before starting, make sure that:
