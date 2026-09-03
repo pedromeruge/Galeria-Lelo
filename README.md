@@ -140,7 +140,7 @@ The application can then be accessed through the local address provided by the .
 * Project Report: [Galeria Lelo Report](repo_description/report.pdf)
 * Presentation Deck: [Galeria Lelo Presentation](repo_description/presentation.pdf)
 * Figma UI Mockups: [Figma UI Mockups](https://www.figma.com/design/6TiVVrgYxVS5dgtatf3tLO/Mockups-LI4?node-id=0-1&t=jPh50GPfLyWG8PPC-1)
-* UI Mockups (PDF): [UI Mockups](repo_description/ui_Mockups.pdf)
+* UI Mockups (PDF): [UI Mockups](repo_description/ui_mockups.pdf)
 ---
 
 # 7. Authors
